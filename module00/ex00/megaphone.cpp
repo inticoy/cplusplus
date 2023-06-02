@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 14:44:27 by inticoy           #+#    #+#             */
-/*   Updated: 2023/06/02 17:25:49 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/02 17:26:57 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 using std::cout;
 using std::endl;
 using std::string;
-using std::toupper;
 
 int main(int argc, char *argv[]) {
   for (int i = 1; i < argc; i++) {
