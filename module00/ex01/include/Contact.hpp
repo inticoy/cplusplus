@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Contact.hpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 14:44:27 by inticoy           #+#    #+#             */
-/*   Updated: 2023/06/03 16:37:34 by gyoon            ###   ########.fr       */
+/*   Created: 2023/06/03 15:22:05 by gyoon             #+#    #+#             */
+/*   Updated: 2023/06/03 20:55:48 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef CONTACT_HPP
+#define CONTACT_HPP
+
 #include <string>
 
-using std::cout;
-using std::endl;
 using std::string;
 
-int main(int argc, char *argv[])
+class Contact
 {
-    if (argc == 1)
-        cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-    else
-    {
-        for (int i = 1; i < argc; i++)
-        {
-            string str = string(argv[i]);
-            for (int j = 0; j < str.length(); j++)
-                str[j] = toupper(str[j]);
-            cout << str;
-        }
-    }
-    cout << endl;
-    return 0;
-}
+private:
+public:
+    string firstName;
+    string lastName;
+    string nickName;
+    string phoneNumber;
+    string darkestSecret;
+    Contact();
+    ~Contact();
+    void setInput(string input);
+};
+
+#endif

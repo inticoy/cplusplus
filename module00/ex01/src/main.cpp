@@ -1,36 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/30 14:44:27 by inticoy           #+#    #+#             */
-/*   Updated: 2023/06/03 16:37:34 by gyoon            ###   ########.fr       */
+/*   Created: 2023/06/03 15:49:16 by gyoon             #+#    #+#             */
+/*   Updated: 2023/06/03 20:32:35 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "Contact.hpp"
+#include "PhoneBook.hpp"
 #include <iostream>
 #include <string>
 
+using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
 
-int main(int argc, char *argv[])
+int main(void)
 {
-    if (argc == 1)
-        cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *";
-    else
+    PhoneBook phoneBook;
+    string input;
+    while (true)
     {
-        for (int i = 1; i < argc; i++)
-        {
-            string str = string(argv[i]);
-            for (int j = 0; j < str.length(); j++)
-                str[j] = toupper(str[j]);
-            cout << str;
-        }
+        cin >> input;
+        if (!input.compare("ADD"))
+            phoneBook.addNewContact();
+        else if (!input.compare("SEARCH"))
+            phoneBook.search();
+        else if (!input.compare("EXIT"))
+            break;
+        else
+            cout << "error : command should be ADD or SEARCH or EXIT" << endl;
     }
-    cout << endl;
-    return 0;
+    return (0);
 }

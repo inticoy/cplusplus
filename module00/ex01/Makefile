@@ -6,11 +6,11 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/06/03 17:50:44 by gyoon            ###   ########.fr        #
+#    Updated: 2023/06/03 18:00:45 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= megaphone
+NAME		= PhoneBook
 
 # **************************************************************************** #
 #                                                                              #
@@ -28,7 +28,7 @@ RM		= rm -rf
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		= megaphone.cpp
+SRCS		= src/Contact.cpp src/PhoneBook.cpp src/main.cpp
 OBJS		= ${SRCS:.cpp=.o}
 INC			= ./include
 
@@ -64,7 +64,7 @@ version = "mandatory version"
 all : $(NAME)
 
 $(NAME) : $(LIBFT) $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $@ 
+	@$(CC) $(CFLAGS) $(OBJS) -o $@ -I $(INC)
 	@printf "\rCompiling source files... "
 	@printf "%.$(shell printf "%d" 64)s" $(bar_done)
 	@printf "%7.2f%%\n" 100
@@ -87,7 +87,7 @@ $(LIBFT) :
 	@printf "%.$(shell printf "%d" $(len_done))s" $(bar_done)
 	@printf "%.$(shell printf "%d" $(len_ready))s" $(bar_ready)
 	@printf "%7.2f%%" $(percent)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ -I $(INC)
 
 clean :
 	@$(RM) $(OBJS)
