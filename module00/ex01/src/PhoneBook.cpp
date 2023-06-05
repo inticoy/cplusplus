@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:51:33 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/05 17:14:29 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/05 17:33:30 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,11 +81,10 @@ void PhoneBook::add()
     cin.ignore();
     while (true)
     {
-        cout
-            << C_YEL "[ADD]" C_END << " Enter a new contact infos to add. "
-            << endl
-            << "format : firstName lastName nickName phoneNumber darkestSecrest"
-            << endl;
+        cout << C_YEL "[ADD]" C_END << " Enter a new contact infos to add. "
+             << endl;
+        cout << "format: firstName lastName nickName phoneNumber darkestSecrest"
+             << endl;
         getline(cin, input);
         if (!input.compare("EXIT"))
         {
@@ -93,7 +92,7 @@ void PhoneBook::add()
             return;
         }
         else if (!isValidInput(input))
-            cout << C_RED "error" C_END << " : invalid input " << endl;
+            cout << C_RED "error" C_END << ": invalid input " << endl;
         else
             break;
     }

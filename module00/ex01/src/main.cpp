@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:49:16 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/05 17:28:25 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/05 17:33:47 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int main(void)
             phoneBook.printListAdmin();
         else
             cout << C_RED "error" C_END
-                 << " : command should be ADD or SEARCH or EXIT" << endl;
+                 << ": command should be ADD or SEARCH or EXIT" << endl;
     }
     cout << C_BLU "[Phone Book App]" C_END << " Exit" << endl;
     return (0);
