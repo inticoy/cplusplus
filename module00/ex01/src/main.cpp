@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:49:16 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/05 17:33:47 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/05 17:40:08 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,11 @@ int main(void)
         cout << C_BLU "[Phone Book App]" C_END
              << " Enter ADD or SEARCH or EXIT to Use." << endl;
         cin >> input;
+        if (cin.eof())
+        {
+            cin.clear();
+            clearerr(stdin);
+        }
         if (!input.compare("ADD"))
             phoneBook.add();
         else if (!input.compare("SEARCH"))
