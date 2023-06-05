@@ -6,36 +6,49 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:49:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/03 20:30:05 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/05 16:57:42 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
-Contact::Contact() {}
+bool Contact::isSpace(int c)
+{
+    if (c == ' ' || c == '\t' || c == '\n')
+        return (true);
+    else
+        return (false);
+}
 
+Contact::Contact() {}
 Contact::~Contact() {}
 
 void Contact::setInput(string input)
 {
+    bool wasSpace = true;
     int startIdx = 0;
-    string infos[5] = {""};
-    for (int i = 0; i < 5; i++)
+    int infoIdx = 0;
+    for (int i = 0; i < input.length(); i++)
     {
-        if (i < 4)
+        if (isSpace(input[i]))
         {
-            infos[i] = input.substr(startIdx, input.find(' '));
-            startIdx = input.find(' ') + 1;
-            input = input.substr(startIdx, input.length() - infos[i].length());
+            if (!wasSpace)
+                infos[infoIdx++] = input.substr(startIdx, i - startIdx);
+            wasSpace = true;
         }
         else
         {
-            infos[i] = input;
+            if (wasSpace)
+                startIdx = i;
+            wasSpace = false;
         }
     }
-    this->firstName = infos[0];
-    this->lastName = infos[1];
-    this->nickName = infos[2];
-    this->phoneNumber = infos[3];
-    this->darkestSecret = infos[4];
+    if (infoIdx == 4)
+        infos[infoIdx] = input.substr(startIdx, input.length() - startIdx);
 }
+
+string Contact::getFirstName() { return (infos[FirstName]); }
+string Contact::getLastName() { return (infos[LastName]); }
+string Contact::getNickname() { return (infos[Nickname]); }
+string Contact::getPhoneNumber() { return (infos[PhoneNumber]); }
+string Contact::getDarkestSecret() { return (infos[DarkestSecret]); }

@@ -6,13 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:15:51 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/03 20:33:35 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/05 17:11:49 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHONE_BOOK_HPP
 #define PHONE_BOOK_HPP
 
+#include "Color.hpp"
 #include "Contact.hpp"
 #include <iostream>
 #include <string>
@@ -21,21 +22,26 @@ using std::cin;
 using std::cout;
 using std::endl;
 using std::string;
+using std::to_string;
 
 class PhoneBook
 {
 private:
     Contact contacts[8];
     int numContacts;
-    int oldestContactIndex;
+    int oldestIdx;
 
     bool isValidInput(string input);
+    void printList(void);
+    void printInfoFormatted(string str, int width = 10);
 
 public:
     PhoneBook();
     ~PhoneBook();
-    void addNewContact();
+    void add();
     void search();
+    bool isSpace(int c);
+    void printListAdmin(void);
 };
 
 #endif
