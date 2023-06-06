@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:49:16 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/05 17:40:08 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/06 15:52:36 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int main(void)
         else if (!input.compare("EXIT"))
             break;
         else if (!input.compare("ADMIN"))
-            phoneBook.printListAdmin();
+            phoneBook.admin();
         else
             cout << C_RED "error" C_END
                  << ": command should be ADD or SEARCH or EXIT" << endl;

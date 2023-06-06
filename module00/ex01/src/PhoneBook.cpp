@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:51:33 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/05 17:33:30 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/06 15:59:25 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,14 @@ void PhoneBook::printList(void)
     {
         printInfoFormatted(to_string(i));
         cout << "|";
-        printInfoFormatted(contacts[i].getFirstName());
+        printInfoFormatted(
+            contacts[(oldestIdx + i) % maxContacts].getFirstName());
         cout << "|";
-        printInfoFormatted(contacts[i].getLastName());
+        printInfoFormatted(
+            contacts[(oldestIdx + i) % maxContacts].getLastName());
         cout << "|";
-        printInfoFormatted(contacts[i].getNickname());
+        printInfoFormatted(
+            contacts[(oldestIdx + i) % maxContacts].getNickname());
         cout << endl;
     }
 }
@@ -96,10 +99,10 @@ void PhoneBook::add()
         else
             break;
     }
-    if (numContacts == 8)
+    if (numContacts == maxContacts)
     {
         contacts[oldestIdx].setInput(input);
-        oldestIdx = (oldestIdx + 1) % 8;
+        oldestIdx = (oldestIdx + 1) % maxContacts;
     }
     else
     {
@@ -113,10 +116,27 @@ void PhoneBook::add()
 void PhoneBook::search()
 {
     printList();
-    cout << C_YEL "SEARCH" C_END << endl;
-};
+    cout << C_YEL "[SEARCH]" C_END;
+    cout << "Enter a index to check informations" << endl;
 
-void PhoneBook::printListAdmin(void)
+    string input;
+    cin.ignore();
+    while (true)
+    {
+        getline(cin, input);
+        // if input has wrong character
+        if (atoi(input.c_str()) < numContacts)
+        {
+            contacts[(oldestIdx + atoi(input.c_str())) % maxContacts]
+                .printInfos();
+            break;
+        }
+        else
+            cout << C_RED "error: invalid index" C_END << endl;
+    }
+}
+
+void PhoneBook::admin(void)
 {
     printInfoFormatted("index");
     cout << "|";

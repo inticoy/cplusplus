@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:49:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/05 16:57:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/06 15:46:29 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,14 @@ bool Contact::isSpace(int c)
 Contact::Contact() {}
 Contact::~Contact() {}
 
+void Contact::printInfos(void)
+{
+    cout << "First Name : " << infos[FirstName] << endl;
+    cout << "LastName : " << infos[LastName] << endl;
+    cout << "Nickname : " << infos[Nickname] << endl;
+    cout << "Phone Number : " << infos[PhoneNumber] << endl;
+    cout << "Darkest Secret : " << infos[DarkestSecret] << endl;
+}
 void Contact::setInput(string input)
 {
     bool wasSpace = true;

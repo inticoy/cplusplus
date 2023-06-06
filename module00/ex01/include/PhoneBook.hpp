@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:15:51 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/05 17:11:49 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/06 15:53:16 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ using std::to_string;
 class PhoneBook
 {
 private:
+    const static int maxContacts = 8;
     Contact contacts[8];
     int numContacts;
     int oldestIdx;
@@ -38,10 +39,10 @@ private:
 public:
     PhoneBook();
     ~PhoneBook();
+    bool isSpace(int c);
     void add();
     void search();
-    bool isSpace(int c);
-    void printListAdmin(void);
+    void admin(void);
 };
 
 #endif
