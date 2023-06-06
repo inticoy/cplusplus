@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:15:51 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/06 15:53:16 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/06 17:22:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,14 +32,16 @@ private:
     int numContacts;
     int oldestIdx;
 
-    bool isValidInput(string input);
+    bool hasFiveFields(string str);
+    bool hasDigitsOnly(string str);
     void printList(void);
     void printInfoFormatted(string str, int width = 10);
 
 public:
+    static bool getLine(string *input);
+    static bool isSpace(int c);
     PhoneBook();
     ~PhoneBook();
-    bool isSpace(int c);
     void add();
     void search();
     void admin(void);

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:49:16 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/06 15:52:36 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/06 17:05:21 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,29 +23,28 @@ using std::string;
 
 int main(void)
 {
-    PhoneBook phoneBook;
-    string input;
+    PhoneBook phoneBook = PhoneBook();
+    string input = "";
     while (true)
     {
         cout << C_BLU "[Phone Book App]" C_END
              << " Enter ADD or SEARCH or EXIT to Use." << endl;
-        cin >> input;
-        if (cin.eof())
+        if (PhoneBook::getLine(&input))
         {
-            cin.clear();
-            clearerr(stdin);
+            if (!input.compare("ADD"))
+                phoneBook.add();
+            else if (!input.compare("SEARCH"))
+                phoneBook.search();
+            else if (!input.compare("ADMIN"))
+                phoneBook.admin();
+            else if (!input.compare("EXIT"))
+                break;
+            else
+                cout << C_RED "error" C_END
+                     << ": command should be ADD or SEARCH or EXIT" << endl;
         }
-        if (!input.compare("ADD"))
-            phoneBook.add();
-        else if (!input.compare("SEARCH"))
-            phoneBook.search();
-        else if (!input.compare("EXIT"))
-            break;
-        else if (!input.compare("ADMIN"))
-            phoneBook.admin();
         else
-            cout << C_RED "error" C_END
-                 << ": command should be ADD or SEARCH or EXIT" << endl;
+            cout << C_RED "error" C_END << ": unexpected input (eof)" << endl;
     }
     cout << C_BLU "[Phone Book App]" C_END << " Exit" << endl;
     return (0);

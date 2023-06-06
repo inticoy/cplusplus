@@ -6,27 +6,19 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:51:33 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/06 15:59:25 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/06 17:30:01 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-bool PhoneBook::isSpace(int c)
-{
-    if (c == ' ' || c == '\t' || c == '\n')
-        return (true);
-    else
-        return (false);
-}
-
-bool PhoneBook::isValidInput(string input)
+bool PhoneBook::hasFiveFields(string str)
 {
     int fieldCnt = 0;
     bool wasSpace = true;
-    for (int i = 0; i < input.length(); i++)
+    for (int i = 0; i < str.length(); i++)
     {
-        if (isSpace(input[i]))
+        if (isSpace(str[i]))
             wasSpace = true;
         else
         {
@@ -36,6 +28,23 @@ bool PhoneBook::isValidInput(string input)
         }
     }
     if (fieldCnt == 5)
+        return (true);
+    else
+        return (false);
+}
+
+bool PhoneBook::hasDigitsOnly(string str)
+{
+    bool hasDigits = false;
+    bool hasWrongChar = false;
+    for (int i = 0; i < str.length(); i++)
+    {
+        if ('0' <= str[i] && str[i] <= '9')
+            hasDigits = true;
+        else
+            hasWrongChar = true;
+    }
+    if (hasDigits && !hasWrongChar)
         return (true);
     else
         return (false);
@@ -75,29 +84,53 @@ void PhoneBook::printInfoFormatted(string str, int width)
         cout << string(width - str.length(), ' ') << str;
 }
 
-PhoneBook::PhoneBook() : numContacts(0), oldestIdx(-1) {}
+bool PhoneBook::getLine(string *input)
+{
+    getline(cin, *input);
+    if (cin.eof())
+    {
+        cin.clear();
+        clearerr(stdin);
+        return (false);
+    }
+    else
+        return (true);
+}
+
+bool PhoneBook::isSpace(int c)
+{
+    if (c == ' ' || c == '\t' || c == '\n')
+        return (true);
+    else
+        return (false);
+}
+
+PhoneBook::PhoneBook() : numContacts(0), oldestIdx(0) {}
 PhoneBook::~PhoneBook() {}
 
 void PhoneBook::add()
 {
-    string input;
-    cin.ignore();
+    string input = "";
     while (true)
     {
-        cout << C_YEL "[ADD]" C_END << " Enter a new contact infos to add. "
-             << endl;
+        cout << C_YEL "[ADD]" C_END;
+        cout << " Enter a new contact infos to add. " << endl;
         cout << "format: firstName lastName nickName phoneNumber darkestSecrest"
              << endl;
-        getline(cin, input);
-        if (!input.compare("EXIT"))
+        if (getLine(&input))
         {
-            cout << "[ADD] Operation cancaled." << endl;
-            return;
+            if (!input.compare("EXIT"))
+            {
+                cout << "[ADD] Operation cancaled." << endl;
+                return;
+            }
+            else if (!hasFiveFields(input))
+                cout << C_RED "error" C_END << ": invalid input " << endl;
+            else
+                break;
         }
-        else if (!isValidInput(input))
-            cout << C_RED "error" C_END << ": invalid input " << endl;
         else
-            break;
+            cout << C_RED "error" C_END << ": unexpected input (eof)" << endl;
     }
     if (numContacts == maxContacts)
     {
@@ -105,34 +138,48 @@ void PhoneBook::add()
         oldestIdx = (oldestIdx + 1) % maxContacts;
     }
     else
-    {
-        if (numContacts == 0)
-            oldestIdx = 0;
-        contacts[numContacts].setInput(input);
-        numContacts++;
-    }
+        contacts[numContacts++].setInput(input);
+    cout << contacts[(oldestIdx + numContacts - 1) % maxContacts].getFirstName()
+         << " "
+         << contacts[(oldestIdx + numContacts - 1) % maxContacts].getLastName()
+         << " added successfully." << endl;
 }
 
 void PhoneBook::search()
 {
-    printList();
-    cout << C_YEL "[SEARCH]" C_END;
-    cout << "Enter a index to check informations" << endl;
-
-    string input;
-    cin.ignore();
+    if (!numContacts)
+    {
+        cout << C_YEL "[SEARCH] " C_END;
+        cout << "PhoneBook is empty. Please retry after adding a new contact."
+             << endl;
+        return;
+    }
+    string input = "";
     while (true)
     {
-        getline(cin, input);
-        // if input has wrong character
-        if (atoi(input.c_str()) < numContacts)
+        printList();
+        cout << C_YEL "[SEARCH] " C_END;
+        cout << "Enter a index to check informations" << endl;
+        if (getLine(&input))
         {
-            contacts[(oldestIdx + atoi(input.c_str())) % maxContacts]
-                .printInfos();
-            break;
+            if (!input.compare("EXIT"))
+            {
+                cout << "[SEARCH] Operation cancaled." << endl;
+                return;
+            }
+            else if (!hasDigitsOnly(input))
+                cout << C_RED "error: invalid input" C_END << endl;
+            else if (atoi(input.c_str()) < numContacts)
+            {
+                contacts[(oldestIdx + atoi(input.c_str())) % maxContacts]
+                    .printInfos();
+                break;
+            }
+            else
+                cout << C_RED "error: invalid index" C_END << endl;
         }
         else
-            cout << C_RED "error: invalid index" C_END << endl;
+            cout << C_RED "error" C_END << ": unexpected input (eof)" << endl;
     }
 }
 
