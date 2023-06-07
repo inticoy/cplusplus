@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:30:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/07 14:35:40 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/07 16:00:03 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ public:
     Zombie();
     Zombie(string name);
     ~Zombie();
-    void announce(void);
+    void announce();
 };
 
 Zombie *newZombie(string name);

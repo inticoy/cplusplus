@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:36:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/07 15:18:50 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/07 15:59:57 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Zombie::Zombie(string name) : name(name)
 }
 Zombie::~Zombie() { cout << "Zombie " << name << " destroyed." << endl; }
 
-void Zombie::announce(void)
+void Zombie::announce()
 {
     cout << name << ": ";
     cout << "BraiiiiiiinnnzzzZ..." << endl;

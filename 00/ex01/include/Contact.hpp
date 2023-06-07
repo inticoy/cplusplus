@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:22:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/06 15:45:01 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/07 15:54:29 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ private:
 public:
     Contact();
     ~Contact();
-    void printInfos(void);
+    void printInfos();
     void setInput(string input);
     string getFirstName();
     string getLastName();

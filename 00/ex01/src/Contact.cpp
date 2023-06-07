@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:49:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/06 15:46:29 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/07 15:55:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,15 @@
 bool Contact::isSpace(int c)
 {
     if (c == ' ' || c == '\t' || c == '\n')
-        return (true);
+        return true;
     else
-        return (false);
+        return false;
 }
 
 Contact::Contact() {}
 Contact::~Contact() {}
 
-void Contact::printInfos(void)
+void Contact::printInfos()
 {
     cout << "First Name : " << infos[FirstName] << endl;
     cout << "LastName : " << infos[LastName] << endl;
@@ -55,8 +55,8 @@ void Contact::setInput(string input)
         infos[infoIdx] = input.substr(startIdx, input.length() - startIdx);
 }
 
-string Contact::getFirstName() { return (infos[FirstName]); }
-string Contact::getLastName() { return (infos[LastName]); }
-string Contact::getNickname() { return (infos[Nickname]); }
-string Contact::getPhoneNumber() { return (infos[PhoneNumber]); }
-string Contact::getDarkestSecret() { return (infos[DarkestSecret]); }
+string Contact::getFirstName() { return infos[FirstName]; }
+string Contact::getLastName() { return infos[LastName]; }
+string Contact::getNickname() { return infos[Nickname]; }
+string Contact::getPhoneNumber() { return infos[PhoneNumber]; }
+string Contact::getDarkestSecret() { return infos[DarkestSecret]; }

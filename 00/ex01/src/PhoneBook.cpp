@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:51:33 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/06 17:30:01 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/07 15:56:43 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ bool PhoneBook::hasFiveFields(string str)
         }
     }
     if (fieldCnt == 5)
-        return (true);
+        return true;
     else
-        return (false);
+        return false;
 }
 
 bool PhoneBook::hasDigitsOnly(string str)
@@ -45,12 +45,12 @@ bool PhoneBook::hasDigitsOnly(string str)
             hasWrongChar = true;
     }
     if (hasDigits && !hasWrongChar)
-        return (true);
+        return true;
     else
-        return (false);
+        return false;
 }
 
-void PhoneBook::printList(void)
+void PhoneBook::printList()
 {
     printInfoFormatted("index");
     cout << "|";
@@ -91,18 +91,18 @@ bool PhoneBook::getLine(string *input)
     {
         cin.clear();
         clearerr(stdin);
-        return (false);
+        return false;
     }
     else
-        return (true);
+        return true;
 }
 
 bool PhoneBook::isSpace(int c)
 {
     if (c == ' ' || c == '\t' || c == '\n')
-        return (true);
+        return true;
     else
-        return (false);
+        return false;
 }
 
 PhoneBook::PhoneBook() : numContacts(0), oldestIdx(0) {}
@@ -183,7 +183,7 @@ void PhoneBook::search()
     }
 }
 
-void PhoneBook::admin(void)
+void PhoneBook::admin()
 {
     printInfoFormatted("index");
     cout << "|";

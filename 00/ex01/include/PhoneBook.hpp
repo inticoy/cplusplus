@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:15:51 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/06 17:22:38 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/07 15:54:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ private:
 
     bool hasFiveFields(string str);
     bool hasDigitsOnly(string str);
-    void printList(void);
+    void printList();
     void printInfoFormatted(string str, int width = 10);
 
 public:
@@ -44,7 +44,7 @@ public:
     ~PhoneBook();
     void add();
     void search();
-    void admin(void);
+    void admin();
 };
 
 #endif

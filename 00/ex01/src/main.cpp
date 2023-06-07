@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:49:16 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/06 17:05:21 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/07 15:56:51 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ using std::cout;
 using std::endl;
 using std::string;
 
-int main(void)
+int main()
 {
     PhoneBook phoneBook = PhoneBook();
     string input = "";
@@ -47,5 +47,5 @@ int main(void)
             cout << C_RED "error" C_END << ": unexpected input (eof)" << endl;
     }
     cout << C_BLU "[Phone Book App]" C_END << " Exit" << endl;
-    return (0);
+    return 0;
 }
