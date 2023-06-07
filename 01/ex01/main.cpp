@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Zombie.cpp                                         :+:      :+:    :+:   */
+/*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/06 18:36:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/07 15:18:50 by gyoon            ###   ########.fr       */
+/*   Created: 2023/06/07 14:36:05 by gyoon             #+#    #+#             */
+/*   Updated: 2023/06/07 15:29:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie::Zombie() : name("") { cout << "Zombie created with no name." << endl; }
-Zombie::Zombie(string name) : name(name)
+int main(void)
 {
-    cout << "Zombie " << name << " created." << endl;
-}
-Zombie::~Zombie() { cout << "Zombie " << name << " destroyed." << endl; }
-
-void Zombie::announce(void)
-{
-    cout << name << ": ";
-    cout << "BraiiiiiiinnnzzzZ..." << endl;
+    cout << "[zombieHorde] Allocate 10 zombies in a single allocation." << endl;
+    Zombie *zombie = zombieHorde(10, "zombieHorde");
+    for (int i = 0; i < 10; i++)
+        zombie[i].announce();
+    delete[] zombie;
+    return (0);
 }
