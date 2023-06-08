@@ -6,23 +6,20 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:12:54 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/07 16:54:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/08 17:16:54 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "HumanB.hpp"
+
 #include <iostream>
 
-using std::cout;
-using std::endl;
-
-HumanB::HumanB(string name) : name(name), weapon(NULL) {}
+HumanB::HumanB(std::string name) : name_(name), weapon_(NULL) {}
 HumanB::~HumanB() {}
 
-void HumanB::attack()
-{
-    cout << name << " attacks with their ";
-    cout << ((weapon) ? weapon->getType() : "fist") << endl;
+void HumanB::attack() {
+  std::cout << name_ << " attacks with their ";
+  std::cout << ((weapon_) ? weapon_->get_type() : "fist") << std::endl;
 }
 
-void HumanB::setWeapon(Weapon &weapon) { this->weapon = &weapon; }
+void HumanB::set_weapon(Weapon &weapon) { this->weapon_ = &weapon; }

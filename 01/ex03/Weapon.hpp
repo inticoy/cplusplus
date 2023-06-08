@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 15:44:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/07 16:27:44 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/08 17:15:59 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,19 +15,16 @@
 
 #include <string>
 
-using std::string;
-
-class Weapon
-{
-private:
-    string type;
-
+class Weapon {
 public:
-    Weapon();
-    Weapon(string type);
-    ~Weapon();
-    void setType(string type);
-    string const &getType() const;
+  Weapon();
+  Weapon(std::string type);
+  ~Weapon();
+  void set_type(std::string type);
+  const std::string &get_type() const;
+
+private:
+  std::string type_;
 };
 
 #endif

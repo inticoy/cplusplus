@@ -6,30 +6,25 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:36:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/07 16:00:47 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/08 17:11:17 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 #include <string>
 
-using std::cout;
-using std::endl;
-using std::string;
+int main() {
+  std::string brain = "HI THIS IS BRAIN";
 
-int main()
-{
-    string brain = "HI THIS IS BRAIN";
+  std::string *stringPTR = &brain;
+  std::string &stringREF = brain;
 
-    string *stringPTR = &brain;
-    string &stringREF = brain;
+  std::cout << "string address : " << &brain << std::endl;
+  std::cout << "*string address : " << stringPTR << std::endl;
+  std::cout << "&string address : " << &stringREF << std::endl;
 
-    cout << "string address : " << &brain << endl;
-    cout << "*string address : " << stringPTR << endl;
-    cout << "&string address : " << &stringREF << endl;
-
-    cout << "string value : " << brain << endl;
-    cout << "*string value : " << *stringPTR << endl;
-    cout << "&string value : " << stringREF << endl;
-    return 0;
+  std::cout << "string value : " << brain << std::endl;
+  std::cout << "*string value : " << *stringPTR << std::endl;
+  std::cout << "&string value : " << stringREF << std::endl;
+  return 0;
 }

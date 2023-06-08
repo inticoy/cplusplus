@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:36:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/08 17:06:15 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/08 17:10:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,5 @@ void Zombie::announce() {
   std::cout << "BraiiiiiiinnnzzzZ..." << std::endl;
 }
 
-void Zombie::setName(std::string name) { this->name_ = name; }
-const std::string &Zombie::getName() const { return this->name_; }
+void Zombie::set_name(std::string name) { this->name_ = name; }
+const std::string &Zombie::get_name() const { return this->name_; }
