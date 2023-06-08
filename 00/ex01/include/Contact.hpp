@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:22:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/08 14:42:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/09 00:06:51 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ public:
 private:
   enum { kFirstName = 0, kLastName, kNickname, kPhoneNumber, kDarkestSecret };
   std::string infos_[5];
-
-  bool is_space(int c);
 };
 
 #endif

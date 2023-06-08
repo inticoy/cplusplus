@@ -6,12 +6,13 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:51:33 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/08 17:00:35 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/09 00:07:56 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
+#include <cctype>
 #include <iostream>
 
 #include "Color.hpp"
@@ -20,7 +21,7 @@ bool PhoneBook::has_five_fields(std::string str) {
   int fieldCnt = 0;
   bool wasSpace = true;
   for (int i = 0; i < str.length(); i++) {
-    if (is_space(str[i]))
+    if (std::isspace(str[i]))
       wasSpace = true;
     else {
       if (wasSpace) fieldCnt++;
@@ -91,14 +92,6 @@ bool PhoneBook::get_line(std::string *input) {
   }
 }
 
-bool PhoneBook::is_space(int c) {
-  if (c == ' ' || c == '\t' || c == '\n') {
-    return true;
-  } else {
-    return false;
-  }
-}
-
 PhoneBook::PhoneBook() : num_contacts_(0), oldest_idx_(0) {}
 PhoneBook::~PhoneBook() {}
 
@@ -159,7 +152,8 @@ void PhoneBook::search() {
       std::cout << color::kRed << "error" << color::kEnd;
       std::cout << ": invalid input" << std::endl;
     } else if (atoi(input.c_str()) < num_contacts_) {
-      contacts_[(oldest_idx_ + atoi(input.c_str())) % kMaxContacts].print_infos();
+      contacts_[(oldest_idx_ + atoi(input.c_str())) % kMaxContacts]
+          .print_infos();
       break;
     } else {
       std::cout << color::kRed << "error" << color::kEnd;

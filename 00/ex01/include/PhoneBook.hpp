@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:15:51 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/08 17:00:35 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/09 00:07:21 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@
 class PhoneBook {
 public:
   static bool get_line(std::string *input);
-  static bool is_space(int c);
   PhoneBook();
   ~PhoneBook();
   void add();

@@ -6,20 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:49:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/08 14:52:05 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/09 00:07:13 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Contact.hpp"
 
+#include <cctype>
 #include <iostream>
-
-bool Contact::is_space(int c) {
-  if (c == ' ' || c == '\t' || c == '\n')
-    return true;
-  else
-    return false;
-}
 
 Contact::Contact() {}
 Contact::~Contact() {}
@@ -36,7 +30,7 @@ void Contact::set_input(std::string input) {
   int startIdx = 0;
   int infoIdx = 0;
   for (int i = 0; i < input.length(); i++) {
-    if (is_space(input[i])) {
+    if (std::isspace(input[i])) {
       if (!wasSpace) infos_[infoIdx++] = input.substr(startIdx, i - startIdx);
       wasSpace = true;
     } else {
