@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:12:54 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/08 17:16:54 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/09 00:11:47 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,4 @@ void HumanB::attack() {
   std::cout << ((weapon_) ? weapon_->get_type() : "fist") << std::endl;
 }
 
-void HumanB::set_weapon(Weapon &weapon) { this->weapon_ = &weapon; }
+void HumanB::set_weapon(Weapon &weapon) { weapon_ = &weapon; }
