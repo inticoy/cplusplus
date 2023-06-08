@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:15:51 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/08 15:10:21 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/08 17:00:35 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ public:
 
 private:
   const static int kMaxContacts = 8;
-  int num_contacts;
-  int oldest_idx;
-  Contact contacts[8];
+  int num_contacts_;
+  int oldest_idx_;
+  Contact contacts_[8];
 
   bool has_five_fields(std::string str);
   bool has_digits_only(std::string str);

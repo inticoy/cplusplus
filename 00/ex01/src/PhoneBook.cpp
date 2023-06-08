@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:51:33 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/08 15:13:07 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/08 17:00:35 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,17 +57,17 @@ void PhoneBook::print_list() {
   std::cout << "|";
   print_info_formatted("nickname");
   std::cout << std::endl;
-  for (int i = 0; i < num_contacts; i++) {
+  for (int i = 0; i < num_contacts_; i++) {
     print_info_formatted(std::to_string(i));
     std::cout << "|";
     print_info_formatted(
-        contacts[(oldest_idx + i) % kMaxContacts].get_first_name());
+        contacts_[(oldest_idx_ + i) % kMaxContacts].get_first_name());
     std::cout << "|";
     print_info_formatted(
-        contacts[(oldest_idx + i) % kMaxContacts].get_last_name());
+        contacts_[(oldest_idx_ + i) % kMaxContacts].get_last_name());
     std::cout << "|";
     print_info_formatted(
-        contacts[(oldest_idx + i) % kMaxContacts].get_nickname());
+        contacts_[(oldest_idx_ + i) % kMaxContacts].get_nickname());
     std::cout << std::endl;
   }
 }
@@ -99,7 +99,7 @@ bool PhoneBook::is_space(int c) {
   }
 }
 
-PhoneBook::PhoneBook() : num_contacts(0), oldest_idx(0) {}
+PhoneBook::PhoneBook() : num_contacts_(0), oldest_idx_(0) {}
 PhoneBook::~PhoneBook() {}
 
 void PhoneBook::add() {
@@ -123,22 +123,22 @@ void PhoneBook::add() {
       break;
     }
   }
-  if (num_contacts == kMaxContacts) {
-    contacts[oldest_idx].set_input(input);
-    oldest_idx = (oldest_idx + 1) % kMaxContacts;
+  if (num_contacts_ == kMaxContacts) {
+    contacts_[oldest_idx_].set_input(input);
+    oldest_idx_ = (oldest_idx_ + 1) % kMaxContacts;
   } else {
-    contacts[num_contacts++].set_input(input);
+    contacts_[num_contacts_++].set_input(input);
   }
-  std::cout << contacts[(oldest_idx + num_contacts - 1) % kMaxContacts]
+  std::cout << contacts_[(oldest_idx_ + num_contacts_ - 1) % kMaxContacts]
                    .get_first_name()
             << " "
-            << contacts[(oldest_idx + num_contacts - 1) % kMaxContacts]
+            << contacts_[(oldest_idx_ + num_contacts_ - 1) % kMaxContacts]
                    .get_last_name()
             << " added successfully." << std::endl;
 }
 
 void PhoneBook::search() {
-  if (!num_contacts) {
+  if (!num_contacts_) {
     std::cout << color::kYellow << "[SEARCH] " << color::kEnd;
     std::cout << "PhoneBook is empty. Please retry after adding a new contact.";
     std::cout << std::endl;
@@ -158,8 +158,8 @@ void PhoneBook::search() {
     } else if (!has_digits_only(input)) {
       std::cout << color::kRed << "error" << color::kEnd;
       std::cout << ": invalid input" << std::endl;
-    } else if (atoi(input.c_str()) < num_contacts) {
-      contacts[(oldest_idx + atoi(input.c_str())) % kMaxContacts].print_infos();
+    } else if (atoi(input.c_str()) < num_contacts_) {
+      contacts_[(oldest_idx_ + atoi(input.c_str())) % kMaxContacts].print_infos();
       break;
     } else {
       std::cout << color::kRed << "error" << color::kEnd;
@@ -181,18 +181,18 @@ void PhoneBook::admin() {
   std::cout << "|";
   print_info_formatted("secret");
   std::cout << std::endl;
-  for (int i = 0; i < num_contacts; i++) {
+  for (int i = 0; i < num_contacts_; i++) {
     print_info_formatted(std::to_string(i));
     std::cout << "|";
-    print_info_formatted(contacts[i].get_first_name());
+    print_info_formatted(contacts_[i].get_first_name());
     std::cout << "|";
-    print_info_formatted(contacts[i].get_last_name());
+    print_info_formatted(contacts_[i].get_last_name());
     std::cout << "|";
-    print_info_formatted(contacts[i].get_nickname());
+    print_info_formatted(contacts_[i].get_nickname());
     std::cout << "|";
-    print_info_formatted(contacts[i].get_phone_number());
+    print_info_formatted(contacts_[i].get_phone_number());
     std::cout << "|";
-    print_info_formatted(contacts[i].get_darkest_secret());
+    print_info_formatted(contacts_[i].get_darkest_secret());
     std::cout << std::endl;
   }
 }
