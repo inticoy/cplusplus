@@ -6,21 +6,25 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:36:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/07 15:59:57 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/08 17:03:05 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Zombie.hpp"
 
-Zombie::Zombie() : name("") { cout << "Zombie created with no name." << endl; }
-Zombie::Zombie(string name) : name(name)
-{
-    cout << "Zombie " << name << " created." << endl;
-}
-Zombie::~Zombie() { cout << "Zombie " << name << " destroyed." << endl; }
+#include <iostream>
 
-void Zombie::announce()
-{
-    cout << name << ": ";
-    cout << "BraiiiiiiinnnzzzZ..." << endl;
+Zombie::Zombie() : name_("") {
+  std::cout << "Zombie created with no name." << std::endl;
+}
+Zombie::Zombie(std::string name) : name_(name) {
+  std::cout << "Zombie " << name << " created." << std::endl;
+}
+Zombie::~Zombie() {
+  std::cout << "Zombie " << name_ << " destroyed." << std::endl;
+}
+
+void Zombie::announce() {
+  std::cout << name_ << ": ";
+  std::cout << "BraiiiiiiinnnzzzZ..." << std::endl;
 }

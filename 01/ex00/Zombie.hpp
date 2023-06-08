@@ -6,33 +6,27 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/06 18:30:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/07 16:00:03 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/08 17:04:09 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef ZOMBIE_HPP
 #define ZOMBIE_HPP
 
-#include <iostream>
 #include <string>
 
-using std::cout;
-using std::endl;
-using std::string;
-
-class Zombie
-{
-private:
-    string name;
-
+class Zombie {
 public:
-    Zombie();
-    Zombie(string name);
-    ~Zombie();
-    void announce();
+  Zombie();
+  Zombie(std::string name);
+  ~Zombie();
+  void announce();
+
+private:
+  std::string name_;
 };
 
-Zombie *newZombie(string name);
-void randomChump(string name);
+Zombie *newZombie(std::string name);
+void randomChump(std::string name);
 
 #endif
