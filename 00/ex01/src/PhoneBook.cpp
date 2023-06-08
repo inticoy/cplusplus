@@ -6,210 +6,198 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:51:33 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/07 15:56:43 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/08 15:13:07 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
 
-bool PhoneBook::hasFiveFields(string str)
-{
-    int fieldCnt = 0;
-    bool wasSpace = true;
-    for (int i = 0; i < str.length(); i++)
-    {
-        if (isSpace(str[i]))
-            wasSpace = true;
-        else
-        {
-            if (wasSpace)
-                fieldCnt++;
-            wasSpace = false;
-        }
+#include <iostream>
+
+#include "Color.hpp"
+
+bool PhoneBook::has_five_fields(std::string str) {
+  int fieldCnt = 0;
+  bool wasSpace = true;
+  for (int i = 0; i < str.length(); i++) {
+    if (is_space(str[i]))
+      wasSpace = true;
+    else {
+      if (wasSpace) fieldCnt++;
+      wasSpace = false;
     }
-    if (fieldCnt == 5)
-        return true;
+  }
+  if (fieldCnt == 5)
+    return true;
+  else
+    return false;
+}
+
+bool PhoneBook::has_digits_only(std::string str) {
+  bool hasDigits = false;
+  bool hasWrongChar = false;
+  for (int i = 0; i < str.length(); i++) {
+    if ('0' <= str[i] && str[i] <= '9')
+      hasDigits = true;
     else
-        return false;
+      hasWrongChar = true;
+  }
+  if (hasDigits && !hasWrongChar)
+    return true;
+  else
+    return false;
 }
 
-bool PhoneBook::hasDigitsOnly(string str)
-{
-    bool hasDigits = false;
-    bool hasWrongChar = false;
-    for (int i = 0; i < str.length(); i++)
-    {
-        if ('0' <= str[i] && str[i] <= '9')
-            hasDigits = true;
-        else
-            hasWrongChar = true;
-    }
-    if (hasDigits && !hasWrongChar)
-        return true;
-    else
-        return false;
+void PhoneBook::print_list() {
+  print_info_formatted("index");
+  std::cout << "|";
+  print_info_formatted("first name");
+  std::cout << "|";
+  print_info_formatted("last name");
+  std::cout << "|";
+  print_info_formatted("nickname");
+  std::cout << std::endl;
+  for (int i = 0; i < num_contacts; i++) {
+    print_info_formatted(std::to_string(i));
+    std::cout << "|";
+    print_info_formatted(
+        contacts[(oldest_idx + i) % kMaxContacts].get_first_name());
+    std::cout << "|";
+    print_info_formatted(
+        contacts[(oldest_idx + i) % kMaxContacts].get_last_name());
+    std::cout << "|";
+    print_info_formatted(
+        contacts[(oldest_idx + i) % kMaxContacts].get_nickname());
+    std::cout << std::endl;
+  }
 }
 
-void PhoneBook::printList()
-{
-    printInfoFormatted("index");
-    cout << "|";
-    printInfoFormatted("first name");
-    cout << "|";
-    printInfoFormatted("last name");
-    cout << "|";
-    printInfoFormatted("nickname");
-    cout << endl;
-    for (int i = 0; i < numContacts; i++)
-    {
-        printInfoFormatted(to_string(i));
-        cout << "|";
-        printInfoFormatted(
-            contacts[(oldestIdx + i) % maxContacts].getFirstName());
-        cout << "|";
-        printInfoFormatted(
-            contacts[(oldestIdx + i) % maxContacts].getLastName());
-        cout << "|";
-        printInfoFormatted(
-            contacts[(oldestIdx + i) % maxContacts].getNickname());
-        cout << endl;
-    }
+void PhoneBook::print_info_formatted(std::string str, int width) {
+  if (str.length() > width) {
+    std::cout << str.substr(0, width - 1) << ".";
+  } else {
+    std::cout << std::string(width - str.length(), ' ') << str;
+  }
 }
 
-void PhoneBook::printInfoFormatted(string str, int width)
-{
-    if (str.length() > width)
-        cout << str.substr(0, width - 1) << ".";
-    else
-        cout << string(width - str.length(), ' ') << str;
+bool PhoneBook::get_line(std::string *input) {
+  getline(std::cin, *input);
+  if (std::cin.eof()) {
+    std::cin.clear();
+    clearerr(stdin);
+    return false;
+  } else {
+    return true;
+  }
 }
 
-bool PhoneBook::getLine(string *input)
-{
-    getline(cin, *input);
-    if (cin.eof())
-    {
-        cin.clear();
-        clearerr(stdin);
-        return false;
-    }
-    else
-        return true;
+bool PhoneBook::is_space(int c) {
+  if (c == ' ' || c == '\t' || c == '\n') {
+    return true;
+  } else {
+    return false;
+  }
 }
 
-bool PhoneBook::isSpace(int c)
-{
-    if (c == ' ' || c == '\t' || c == '\n')
-        return true;
-    else
-        return false;
-}
-
-PhoneBook::PhoneBook() : numContacts(0), oldestIdx(0) {}
+PhoneBook::PhoneBook() : num_contacts(0), oldest_idx(0) {}
 PhoneBook::~PhoneBook() {}
 
-void PhoneBook::add()
-{
-    string input = "";
-    while (true)
-    {
-        cout << C_YEL "[ADD]" C_END;
-        cout << " Enter a new contact infos to add. " << endl;
-        cout << "format: firstName lastName nickName phoneNumber darkestSecrest"
-             << endl;
-        if (getLine(&input))
-        {
-            if (!input.compare("EXIT"))
-            {
-                cout << "[ADD] Operation cancaled." << endl;
-                return;
-            }
-            else if (!hasFiveFields(input))
-                cout << C_RED "error" C_END << ": invalid input " << endl;
-            else
-                break;
-        }
-        else
-            cout << C_RED "error" C_END << ": unexpected input (eof)" << endl;
+void PhoneBook::add() {
+  std::string input = "";
+  while (true) {
+    std::cout << color::kYellow << "[ADD]" << color::kEnd;
+    std::cout << " Enter a new contact infos to add. " << std::endl;
+    std::cout << "format:";
+    std::cout << " firstName lastName nickName phoneNumber darkestSecrest ";
+    std::cout << std::endl;
+    if (!get_line(&input)) {
+      std::cout << color::kRed << "error" << color::kEnd;
+      std::cout << ": unexpected input (eof)" << std::endl;
+    } else if (input == "EXIT") {
+      std::cout << "[ADD] Operation cancaled." << std::endl;
+      return;
+    } else if (!has_five_fields(input)) {
+      std::cout << color::kRed << "error" << color::kEnd;
+      std::cout << ": invalid input " << std::endl;
+    } else {
+      break;
     }
-    if (numContacts == maxContacts)
-    {
-        contacts[oldestIdx].setInput(input);
-        oldestIdx = (oldestIdx + 1) % maxContacts;
-    }
-    else
-        contacts[numContacts++].setInput(input);
-    cout << contacts[(oldestIdx + numContacts - 1) % maxContacts].getFirstName()
-         << " "
-         << contacts[(oldestIdx + numContacts - 1) % maxContacts].getLastName()
-         << " added successfully." << endl;
+  }
+  if (num_contacts == kMaxContacts) {
+    contacts[oldest_idx].set_input(input);
+    oldest_idx = (oldest_idx + 1) % kMaxContacts;
+  } else {
+    contacts[num_contacts++].set_input(input);
+  }
+  std::cout << contacts[(oldest_idx + num_contacts - 1) % kMaxContacts]
+                   .get_first_name()
+            << " "
+            << contacts[(oldest_idx + num_contacts - 1) % kMaxContacts]
+                   .get_last_name()
+            << " added successfully." << std::endl;
 }
 
-void PhoneBook::search()
-{
-    if (!numContacts)
-    {
-        cout << C_YEL "[SEARCH] " C_END;
-        cout << "PhoneBook is empty. Please retry after adding a new contact."
-             << endl;
-        return;
+void PhoneBook::search() {
+  if (!num_contacts) {
+    std::cout << color::kYellow << "[SEARCH] " << color::kEnd;
+    std::cout << "PhoneBook is empty. Please retry after adding a new contact.";
+    std::cout << std::endl;
+    return;
+  }
+  std::string input = "";
+  while (true) {
+    print_list();
+    std::cout << color::kYellow << "[SEARCH] " << color::kEnd;
+    std::cout << "Enter a index to check informations" << std::endl;
+    if (!get_line(&input)) {
+      std::cout << color::kRed << "error" << color::kEnd;
+      std::cout << ": unexpected input (eof)" << std::endl;
+    } else if (input == "EXIT") {
+      std::cout << "[SEARCH] Operation cancaled." << std::endl;
+      return;
+    } else if (!has_digits_only(input)) {
+      std::cout << color::kRed << "error" << color::kEnd;
+      std::cout << ": invalid input" << std::endl;
+    } else if (atoi(input.c_str()) < num_contacts) {
+      contacts[(oldest_idx + atoi(input.c_str())) % kMaxContacts].print_infos();
+      break;
+    } else {
+      std::cout << color::kRed << "error" << color::kEnd;
+      std::cout << " invalid index" << std::endl;
     }
-    string input = "";
-    while (true)
-    {
-        printList();
-        cout << C_YEL "[SEARCH] " C_END;
-        cout << "Enter a index to check informations" << endl;
-        if (getLine(&input))
-        {
-            if (!input.compare("EXIT"))
-            {
-                cout << "[SEARCH] Operation cancaled." << endl;
-                return;
-            }
-            else if (!hasDigitsOnly(input))
-                cout << C_RED "error: invalid input" C_END << endl;
-            else if (atoi(input.c_str()) < numContacts)
-            {
-                contacts[(oldestIdx + atoi(input.c_str())) % maxContacts]
-                    .printInfos();
-                break;
-            }
-            else
-                cout << C_RED "error: invalid index" C_END << endl;
-        }
-        else
-            cout << C_RED "error" C_END << ": unexpected input (eof)" << endl;
-    }
+  }
 }
 
-void PhoneBook::admin()
-{
-    printInfoFormatted("index");
-    cout << "|";
-    printInfoFormatted("first name");
-    cout << "|";
-    printInfoFormatted("last name");
-    cout << "|";
-    printInfoFormatted("nickname");
-    cout << "|";
-    printInfoFormatted("phone num");
-    cout << "|";
-    printInfoFormatted("secret");
-    cout << endl;
-    for (int i = 0; i < numContacts; i++)
-    {
-        printInfoFormatted(to_string(i));
-        cout << "|";
-        printInfoFormatted(contacts[i].getFirstName());
-        cout << "|";
-        printInfoFormatted(contacts[i].getLastName());
-        cout << "|";
-        printInfoFormatted(contacts[i].getNickname());
-        cout << "|";
-        printInfoFormatted(contacts[i].getPhoneNumber());
-        cout << "|";
-        printInfoFormatted(contacts[i].getDarkestSecret());
-        cout << endl;
-    }
+void PhoneBook::admin() {
+  print_info_formatted("index");
+  std::cout << "|";
+  print_info_formatted("first name");
+  std::cout << "|";
+  print_info_formatted("last name");
+  std::cout << "|";
+  print_info_formatted("nickname");
+  std::cout << "|";
+  print_info_formatted("phone num");
+  std::cout << "|";
+  print_info_formatted("secret");
+  std::cout << std::endl;
+  for (int i = 0; i < num_contacts; i++) {
+    print_info_formatted(std::to_string(i));
+    std::cout << "|";
+    print_info_formatted(contacts[i].get_first_name());
+    std::cout << "|";
+    print_info_formatted(contacts[i].get_last_name());
+    std::cout << "|";
+    print_info_formatted(contacts[i].get_nickname());
+    std::cout << "|";
+    print_info_formatted(contacts[i].get_phone_number());
+    std::cout << "|";
+    print_info_formatted(contacts[i].get_darkest_secret());
+    std::cout << std::endl;
+  }
+}
+
+void PhoneBook::raise_error() {
+  std::cout << color::kRed << "error" << color::kEnd;
+  std::cout << ": command should be ADD or SEARCH or EXIT" << std::endl;
 }

@@ -6,46 +6,41 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:49:16 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/07 15:56:51 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/08 15:15:44 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <iostream>
+#include <string>
 
 #include "Color.hpp"
 #include "Contact.hpp"
 #include "PhoneBook.hpp"
-#include <iostream>
-#include <string>
 
-using std::cin;
-using std::cout;
-using std::endl;
-using std::string;
+const std::string kPhoneBookApp = "[Phone Book App]";
 
-int main()
-{
-    PhoneBook phoneBook = PhoneBook();
-    string input = "";
-    while (true)
-    {
-        cout << C_BLU "[Phone Book App]" C_END
-             << " Enter ADD or SEARCH or EXIT to Use." << endl;
-        if (PhoneBook::getLine(&input))
-        {
-            if (!input.compare("ADD"))
-                phoneBook.add();
-            else if (!input.compare("SEARCH"))
-                phoneBook.search();
-            else if (!input.compare("ADMIN"))
-                phoneBook.admin();
-            else if (!input.compare("EXIT"))
-                break;
-            else
-                cout << C_RED "error" C_END
-                     << ": command should be ADD or SEARCH or EXIT" << endl;
-        }
-        else
-            cout << C_RED "error" C_END << ": unexpected input (eof)" << endl;
+int main() {
+  PhoneBook phone_book = PhoneBook();
+  std::string input = "";
+  while (true) {
+    std::cout << color::kBlue << kPhoneBookApp << color::kEnd;
+    std::cout << " Enter ADD or SEARCH or EXIT to Use." << std::endl;
+    if (!PhoneBook::get_line(&input)) {
+      std::cout << color::kRed + "error" + color::kEnd;
+      std::cout << ": unexpected input (eof)" << std::endl;
+    } else if (input == "ADD") {
+      phone_book.add();
+    } else if (input == "SEARCH") {
+      phone_book.search();
+    } else if (input == "ADMIN") {
+      phone_book.admin();
+    } else if (input == "EXIT") {
+      break;
+    } else {
+      phone_book.raise_error();
     }
-    cout << C_BLU "[Phone Book App]" C_END << " Exit" << endl;
-    return 0;
+  }
+  std::cout << color::kBlue << kPhoneBookApp << color::kEnd;
+  std::cout << " Exit" << std::endl;
+  return 0;
 }
