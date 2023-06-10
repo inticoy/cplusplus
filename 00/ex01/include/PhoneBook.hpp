@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:15:51 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/09 00:07:21 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/10 21:14:28 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ public:
   void raise_error();
 
 private:
-  const static int kMaxContacts = 8;
+  const int kMaxContacts;
   int num_contacts_;
   int oldest_idx_;
   Contact contacts_[8];

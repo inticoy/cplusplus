@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:51:33 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/09 00:07:56 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/10 21:14:37 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ bool PhoneBook::get_line(std::string *input) {
   }
 }
 
-PhoneBook::PhoneBook() : num_contacts_(0), oldest_idx_(0) {}
+PhoneBook::PhoneBook() : kMaxContacts(8), num_contacts_(0), oldest_idx_(0) {}
 PhoneBook::~PhoneBook() {}
 
 void PhoneBook::add() {
