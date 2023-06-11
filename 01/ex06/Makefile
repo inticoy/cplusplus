@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/06/11 15:53:28 by gyoon            ###   ########.fr        #
+#    Updated: 2023/06/11 16:16:31 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -68,7 +68,7 @@ $(NAME) : $(LIBFT) $(OBJS)
 	@printf "\rCompiling source files... "
 	@printf "%.$(shell printf "%d" 64)s" $(bar_done)
 	@printf "%7.2f%%\n" 100
-	@printf "🐚 Now you can execute ${bold}$(NAME).${end}"
+	@printf "🤖 Now you can execute ${bold}$(NAME).${end}"
 	@printf " (%s)\n" $(version)
 
 $(LIBFT) :
