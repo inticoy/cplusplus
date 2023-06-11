@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:14:31 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/11 15:52:55 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/11 19:34:55 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,10 +27,12 @@ void Harl::complain(std::string level) {
     found = level.find(kLevels[lvl_idx++]);
   }
 
-  typedef void (Harl::*fp)();
-  fp fp_arr[5] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error,
-                  &Harl::undefined};
-  (this->*(fp_arr[--lvl_idx]))();
+  // typedef void (Harl::*fp)();
+  void (Harl::*fp[5])() = {&Harl::debug, &Harl::info, &Harl::warning,
+                           &Harl::error, &Harl::undefined};
+  // fp fp_arr[5] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error,
+  //                 &Harl::undefined};
+  (this->*(fp[--lvl_idx]))();
 }
 
 void Harl::debug() {
