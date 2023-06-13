@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:51:33 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/13 16:50:10 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/13 17:05:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,21 @@ void PhoneBook::add() {
       i--;
       continue;
     } else {
-      infos[i] = std::string(input);
+      int startIdx = 0;
+      int len = input.length();
+      for (startIdx = 0; startIdx < len; startIdx++) {
+        if (!std::isspace(input[startIdx])) {
+          break;
+        }
+      }
+      len = input.length() - startIdx;
+      while (len > 0) {
+        if (!std::isspace(input[startIdx + len - 1])) {
+          break;
+        }
+        len--;
+      }
+      infos[i] = input.substr(startIdx, len);
     }
   }
   if (num_contacts_ == kMaxContacts) {
