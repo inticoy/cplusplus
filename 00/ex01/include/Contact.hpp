@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:22:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/09 00:06:51 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/13 16:39:58 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,17 @@
 
 class Contact {
 public:
+  const static int num_infos_ = 5;
+  static std::string info_categories_[5];
+
   Contact();
   ~Contact();
   void print_infos();
-  void set_input(std::string input);
+  void set_first_name(std::string);
+  void set_last_name(std::string);
+  void set_nickname(std::string);
+  void set_phone_number(std::string);
+  void set_darkest_secret(std::string);
   const std::string &get_first_name() const;
   const std::string &get_last_name() const;
   const std::string &get_nickname() const;

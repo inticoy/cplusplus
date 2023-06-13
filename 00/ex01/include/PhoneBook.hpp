@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:15:51 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/10 21:14:28 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/13 16:43:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ private:
   int oldest_idx_;
   Contact contacts_[8];
 
-  bool has_five_fields(std::string str);
+  bool has_one_field(std::string str);
   bool has_digits_only(std::string str);
   void print_list();
   void print_info_formatted(std::string str, int width = 10);

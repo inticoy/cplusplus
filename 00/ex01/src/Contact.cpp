@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 15:49:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/09 00:07:13 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/13 16:48:26 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,31 +15,32 @@
 #include <cctype>
 #include <iostream>
 
+std::string Contact::info_categories_[5] = {
+    "First Name", "Last Name", "Nickname", "Phone Number", "Darkest Secret"};
+
 Contact::Contact() {}
 Contact::~Contact() {}
 
 void Contact::print_infos() {
-  std::cout << "First Name : " << infos_[kFirstName] << std::endl;
-  std::cout << "LastName : " << infos_[kLastName] << std::endl;
-  std::cout << "Nickname : " << infos_[kNickname] << std::endl;
-  std::cout << "Phone Number : " << infos_[kPhoneNumber] << std::endl;
-  std::cout << "Darkest Secret : " << infos_[kDarkestSecret] << std::endl;
-}
-void Contact::set_input(std::string input) {
-  bool wasSpace = true;
-  int startIdx = 0;
-  int infoIdx = 0;
-  for (int i = 0; i < input.length(); i++) {
-    if (std::isspace(input[i])) {
-      if (!wasSpace) infos_[infoIdx++] = input.substr(startIdx, i - startIdx);
-      wasSpace = true;
-    } else {
-      if (wasSpace) startIdx = i;
-      wasSpace = false;
-    }
+  for (int i = 0; i < num_infos_; i++) {
+    std::cout << info_categories_[i] << " : " << infos_[i] << std::endl;
   }
-  if (infoIdx == 4)
-    infos_[infoIdx] = input.substr(startIdx, input.length() - startIdx);
+}
+
+void Contact::set_first_name(std::string first_name) {
+  infos_[kFirstName] = first_name;
+}
+void Contact::set_last_name(std::string last_name) {
+  infos_[kLastName] = last_name;
+}
+void Contact::set_nickname(std::string nickname) {
+  infos_[kNickname] = nickname;
+}
+void Contact::set_phone_number(std::string phone_number) {
+  infos_[kPhoneNumber] = phone_number;
+}
+void Contact::set_darkest_secret(std::string darkest_secret) {
+  infos_[kDarkestSecret] = darkest_secret;
 }
 
 const std::string &Contact::get_first_name() const {

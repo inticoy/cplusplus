@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/03 14:51:33 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/10 21:14:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/13 16:50:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 
 #include "Color.hpp"
 
-bool PhoneBook::has_five_fields(std::string str) {
+bool PhoneBook::has_one_field(std::string str) {
   int fieldCnt = 0;
   bool wasSpace = true;
   for (int i = 0; i < str.length(); i++) {
@@ -28,7 +28,7 @@ bool PhoneBook::has_five_fields(std::string str) {
       wasSpace = false;
     }
   }
-  if (fieldCnt == 5)
+  if (fieldCnt == 1)
     return true;
   else
     return false;
@@ -51,12 +51,10 @@ bool PhoneBook::has_digits_only(std::string str) {
 
 void PhoneBook::print_list() {
   print_info_formatted("index");
-  std::cout << "|";
-  print_info_formatted("first name");
-  std::cout << "|";
-  print_info_formatted("last name");
-  std::cout << "|";
-  print_info_formatted("nickname");
+  for (int i = 0; i < 3; i++) {
+    std::cout << "|";
+    print_info_formatted(Contact::info_categories_[i]);
+  }
   std::cout << std::endl;
   for (int i = 0; i < num_contacts_; i++) {
     print_info_formatted(std::to_string(i));
@@ -97,30 +95,43 @@ PhoneBook::~PhoneBook() {}
 
 void PhoneBook::add() {
   std::string input = "";
-  while (true) {
-    std::cout << color::kYellow << "[ADD]" << color::kEnd;
-    std::cout << " Enter a new contact infos to add. " << std::endl;
-    std::cout << "format:";
-    std::cout << " firstName lastName nickName phoneNumber darkestSecrest ";
-    std::cout << std::endl;
+  std::string infos[5] = {};
+  std::cout << color::kYellow << "[ADD]" << color::kEnd;
+  std::cout << " Enter a new contact infos to add. " << std::endl;
+  for (int i = 0; i < Contact::num_infos_; i++) {
+    std::cout << Contact::info_categories_[i] << " : ";
     if (!get_line(&input)) {
+      std::cout << std::endl;
       std::cout << color::kRed << "error" << color::kEnd;
       std::cout << ": unexpected input (eof)" << std::endl;
+      i--;
+      continue;
     } else if (input == "EXIT") {
       std::cout << "[ADD] Operation cancaled." << std::endl;
       return;
-    } else if (!has_five_fields(input)) {
+    } else if (!has_one_field(input)) {
       std::cout << color::kRed << "error" << color::kEnd;
-      std::cout << ": invalid input " << std::endl;
+      std::cout << ": enter one field at once " << std::endl;
+      i--;
+      continue;
     } else {
-      break;
+      infos[i] = std::string(input);
     }
   }
   if (num_contacts_ == kMaxContacts) {
-    contacts_[oldest_idx_].set_input(input);
+    contacts_[oldest_idx_].set_first_name(infos[0]);
+    contacts_[oldest_idx_].set_last_name(infos[1]);
+    contacts_[oldest_idx_].set_nickname(infos[2]);
+    contacts_[oldest_idx_].set_phone_number(infos[3]);
+    contacts_[oldest_idx_].set_darkest_secret(infos[4]);
     oldest_idx_ = (oldest_idx_ + 1) % kMaxContacts;
   } else {
-    contacts_[num_contacts_++].set_input(input);
+    contacts_[num_contacts_].set_first_name(infos[0]);
+    contacts_[num_contacts_].set_last_name(infos[1]);
+    contacts_[num_contacts_].set_nickname(infos[2]);
+    contacts_[num_contacts_].set_phone_number(infos[3]);
+    contacts_[num_contacts_].set_darkest_secret(infos[4]);
+    num_contacts_++;
   }
   std::cout << contacts_[(oldest_idx_ + num_contacts_ - 1) % kMaxContacts]
                    .get_first_name()
