@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 14:36:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/08 17:11:17 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/14 21:59:14 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 #include <string>
 
 int main() {
-  std::string brain = "HI THIS IS BRAIN";
-
-  std::string *stringPTR = &brain;
-  std::string &stringREF = brain;
+  std::string brain = "HI THIS IS BRAIN";  // variable
+  std::string *stringPTR = &brain;         // pointer
+  std::string &stringREF = brain;          // reference
 
   std::cout << "string address : " << &brain << std::endl;
   std::cout << "*string address : " << stringPTR << std::endl;
