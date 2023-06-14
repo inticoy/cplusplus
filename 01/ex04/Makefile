@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/06/11 16:16:09 by gyoon            ###   ########.fr        #
+#    Updated: 2023/06/14 23:08:26 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -96,6 +96,7 @@ clean :
 fclean :
 	@make clean
 	@$(RM) $(NAME)
+	@$(RM) *.replace
 	@printf "make fclean ${bold}$(NAME).${end}\n"
 
 re :
