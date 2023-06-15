@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:49:30 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/15 16:44:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/15 17:20:08 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,14 @@ Fixed::Fixed() : value_(0) {
 }
 Fixed::Fixed(const int value) {
   std::cout << "Int constructor called" << std::endl;
-  int sign_bit = value > 0 ? 0 : 1;
+
+  int sign_bit = value >= 0 ? 0 : 1;
   int int_bits = value >= 0 ? value : -value;
-  value_ = (sign_bit << 31) | (int_bits << kFractionalBit);
+  value_ = (sign_bit << 31) | ((int_bits << kFractionalBit) & ~(1 << 31));
 }
 Fixed::Fixed(const float value) {
   std::cout << "Float constructor called" << std::endl;
-  // int bits = static_cast<int>(roundf(value * 256.f));
-  // value_ = (bits);
+
   int sign_bit = value >= 0 ? 0 : 1;
   float v = value >= 0 ? value : -value;
   int bits = static_cast<int>(roundf(v * 256.f));
@@ -45,17 +45,18 @@ Fixed& Fixed::operator=(const Fixed& f) {
 }
 
 float Fixed::toFloat() const {
-  int sign = value_ >> 31 ? -1 : 1;
-  float v = (value_ & ~(1 << 31)) / 256.f;
-  float f_value = sign * v;
-  // float f_value = value_ / 256.f;
-  return f_value;
+  if (value_ & ~(1 << kFractionalBit)) {
+    int sign = value_ >> 31 ? -1 : 1;
+    float float_part = (value_ & ~(1 << 31)) / 256.f;
+    return sign * float_part;
+  } else {
+    return static_cast<float>(toInt());
+  }
 }
 int Fixed::toInt() const {
   int sign = value_ >> 31 ? -1 : 1;
   int int_part = (value_ & ~(1 << 31)) >> kFractionalBit;
-  int d_value = sign * int_part;
-  return d_value;
+  return sign * int_part;
 }
 
 void Fixed::setRawBits(int const raw) {
