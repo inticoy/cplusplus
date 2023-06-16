@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:49:30 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/15 17:20:08 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/16 13:14:42 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,13 +45,9 @@ Fixed& Fixed::operator=(const Fixed& f) {
 }
 
 float Fixed::toFloat() const {
-  if (value_ & ~(1 << kFractionalBit)) {
-    int sign = value_ >> 31 ? -1 : 1;
-    float float_part = (value_ & ~(1 << 31)) / 256.f;
-    return sign * float_part;
-  } else {
-    return static_cast<float>(toInt());
-  }
+  int sign = value_ >> 31 ? -1 : 1;
+  float float_part = (value_ & ~(1 << 31)) / 256.f;
+  return sign * float_part;
 }
 int Fixed::toInt() const {
   int sign = value_ >> 31 ? -1 : 1;
