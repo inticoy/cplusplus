@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:49:30 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/16 13:14:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/17 16:28:14 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,22 @@ Fixed::Fixed() : value_(0) {
 Fixed::Fixed(const int value) {
   std::cout << "Int constructor called" << std::endl;
 
-  int sign_bit = value >= 0 ? 0 : 1;
-  int int_bits = value >= 0 ? value : -value;
-  value_ = (sign_bit << 31) | ((int_bits << kFractionalBit) & ~(1 << 31));
+  value_ = value << kFractionalBit;
+  if (value >= 0) {
+    value_ &= ~(1 << 31);  // turn off most significant bit (postivive)
+  } else {
+    value_ |= 1 << 31;  // turn on most significant bit (negative)
+  }
 }
 Fixed::Fixed(const float value) {
   std::cout << "Float constructor called" << std::endl;
 
-  int sign_bit = value >= 0 ? 0 : 1;
-  float v = value >= 0 ? value : -value;
-  int bits = static_cast<int>(roundf(v * 256.f));
-  value_ = (sign_bit << 31) | (bits & ~(1 << 31));
+  value_ = static_cast<int>(roundf(value * 256.f));
+  if (value >= 0) {
+    value_ &= ~(1 << 31);  // turn off most significant bit (postivive)
+  } else {
+    value_ |= 1 << 31;  // turn on most significant bit (negative)
+  }
 }
 Fixed::Fixed(const Fixed& f) {
   std::cout << "Copy constructor called" << std::endl;
@@ -44,16 +49,8 @@ Fixed& Fixed::operator=(const Fixed& f) {
   return *this;
 }
 
-float Fixed::toFloat() const {
-  int sign = value_ >> 31 ? -1 : 1;
-  float float_part = (value_ & ~(1 << 31)) / 256.f;
-  return sign * float_part;
-}
-int Fixed::toInt() const {
-  int sign = value_ >> 31 ? -1 : 1;
-  int int_part = (value_ & ~(1 << 31)) >> kFractionalBit;
-  return sign * int_part;
-}
+float Fixed::toFloat() const { return (value_ / 256.f); }
+int Fixed::toInt() const { return static_cast<int>(value_ / 256); }
 
 void Fixed::setRawBits(int const raw) {
   std::cout << "setRawBits member function called" << std::endl;
