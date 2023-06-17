@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:49:30 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/16 15:27:23 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/17 16:27:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,40 +44,28 @@ const Fixed& Fixed::max(const Fixed& f1, const Fixed& f2) {
   }
 }
 
-Fixed::Fixed() : value_(0) {
-  // std::cout << "Default constructor called" << std::endl;
-}
+Fixed::Fixed() : value_(0) {}
 Fixed::Fixed(const int value) {
-  // std::cout << "Int constructor called" << std::endl;
-
-  int positive_value = value >= 0 ? value : -value;
+  value_ = value << kFractionalBit;
   if (value >= 0) {
-    value_ = (positive_value << kFractionalBit) & ~(1 << 31);
+    value_ &= ~(1 << 31);  // turn off most significant bit (postivive)
   } else {
-    value_ = ~(positive_value << kFractionalBit) | (1 << 31);
+    value_ |= 1 << 31;  // turn on most significant bit (negative)
   }
-  // value_ = (sign_bit << 31) | ((int_bits << kFractionalBit) & ~(1 << 31));
 }
 Fixed::Fixed(const float value) {
-  // std::cout << "Float constructor called" << std::endl;
-
-  int sign_bit = value >= 0 ? 0 : 1;
-  float v = value >= 0 ? value : -value;
+  value_ = static_cast<int>(roundf(value * 256.f));
   if (value >= 0) {
-    value_ = static_cast<int>(roundf(v * 256.f)) & ~(1 << 31);
+    value_ &= ~(1 << 31);  // turn off most significant bit (postivive)
   } else {
-    value_ = ~static_cast<int>(roundf(v * 256.f)) | (1 << 31);
+    value_ |= 1 << 31;  // turn on most significant bit (negative)
   }
 }
 Fixed::Fixed(const Fixed& f) {
-  // std::cout << "Copy constructor called" << std::endl;
   value_ = f.getRawBits();  // *this = f;
 }
-Fixed::~Fixed() {
-  // std::cout << "Destructor called" << std::endl;
-}
+Fixed::~Fixed() {}
 Fixed& Fixed::operator=(const Fixed& f) {
-  // std::cout << "Copy assignment operator called" << std::endl;
   value_ = f.getRawBits();
   return *this;
 }
@@ -129,25 +117,11 @@ Fixed& Fixed::operator--(int) {
   return *this;
 }
 
-float Fixed::toFloat() const {
-  return value_ / 256.f;
-  // int sign = value_ >> 31 ? -1 : 1;
-  // float float_part = (value_ & ~(1 << 31)) / 256.f;
-  // return sign * float_part;
-}
-int Fixed::toInt() const {
-  ;
-  return value_ / 256;
-}
+float Fixed::toFloat() const { return (value_ / 256.f); }
+int Fixed::toInt() const { return static_cast<int>(value_ / 256); }
 
-void Fixed::setRawBits(int const raw) {
-  // std::cout << "setRawBits member function called" << std::endl;
-  value_ = raw;
-}
-int Fixed::getRawBits(void) const {
-  // std::cout << "getRawBits member function called" << std::endl;
-  return value_;
-}
+void Fixed::setRawBits(int const raw) { value_ = raw; }
+int Fixed::getRawBits(void) const { return value_; }
 
 std::ostream& operator<<(std::ostream& os, const Fixed& f) {
   os << f.toFloat();
