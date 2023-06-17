@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/06/15 17:18:48 by gyoon            ###   ########.fr        #
+#    Updated: 2023/06/17 16:49:11 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -63,18 +63,13 @@ version = "mandatory version"
 
 all : $(NAME)
 
-$(NAME) : $(LIBFT) $(OBJS)
+$(NAME) : $(OBJS)
 	@$(CC) $(CFLAGS) $(OBJS) -o $@
 	@printf "\rCompiling source files... "
 	@printf "%.$(shell printf "%d" 64)s" $(bar_done)
 	@printf "%7.2f%%\n" 100
 	@printf "⅓ Now you can execute ${bold}$(NAME).${end}"
 	@printf " (%s)\n" $(version)
-
-$(LIBFT) :
-	@printf "make ${bold}LIBFT.${end}\n"
-	@make -C ./lib/libft
-	@cp ./lib/libft/libft.a ./lib/libft.a
 
 %.o : %.cpp
 	@$(eval cnt=$(shell printf $$(($(cnt)+1))))
