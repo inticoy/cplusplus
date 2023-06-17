@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/07 16:56:19 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/10 19:57:44 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/17 14:10:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ int main(int argc, char *argv[]) {
     std::cout << "error: file does not exist." << std::endl;
   } else {
     fed.read_file();
-    int replacement_cnt = fed.replace();
-    std::cout << "total " << replacement_cnt << " replacement executed.";
-    std::cout << std::endl;
+    fed.replace();
     fed.close_file();
     fed.write_file();
     fed.close_file();

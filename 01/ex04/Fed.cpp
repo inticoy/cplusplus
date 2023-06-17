@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:45 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/14 23:10:51 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/17 14:22:18 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,18 +54,22 @@ void Fed::read_file() {
   }
 }
 
-int Fed::replace() {
+void Fed::replace() {
   int cnt = 0;
-  for (int i = 0; i < content_.length(); i++) {
-    if (content_.substr(i, from_.length()) == from_) {
-      result_ += to_;
-      i += from_.length() - 1;
-      cnt++;
+  int pos = 0;
+  int found = 0;
+  while (true) {
+    found = content_.substr(pos).find(from_);
+    if (found == std::string::npos) {
+      result_ += content_.substr(pos);
+      break;
     } else {
-      result_ += content_[i];
+      result_ += content_.substr(pos, found) + to_;
+      pos = pos + found + from_.length();
+      cnt++;
     }
   }
-  return cnt;
+  std::cout << "total " << cnt << " replacement executed." << std::endl;
 }
 
 void Fed::write_file() {
