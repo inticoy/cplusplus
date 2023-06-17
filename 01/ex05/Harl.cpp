@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/11 14:14:31 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/15 00:23:04 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/17 14:37:36 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,13 @@ Harl::~Harl() { std::cout << "Harl destoryed." << std::endl; }
  * fp fp_arr[5] = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error,
  *                 &Harl::undefined}; */
 void Harl::complain(std::string level) {
-  int lvl_idx = 0;
-  size_t found = std::string::npos;
-  while (lvl_idx < LVLS && found == std::string::npos) {
-    found = level.find(kLevels[lvl_idx++]);
+  int idx;
+  for (idx = 0; idx < LVLS - 1; idx++) {
+    if (level == kLevels[idx]) {
+      break;
+    }
   }
-  (this->*(fp[--lvl_idx]))();
+  (this->*(fp[idx]))();
 }
 
 void Harl::complain(const char *level) {
