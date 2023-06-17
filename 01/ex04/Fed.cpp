@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/10 22:16:45 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/17 14:22:18 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/17 14:25:00 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,17 +58,12 @@ void Fed::replace() {
   int cnt = 0;
   int pos = 0;
   int found = 0;
-  while (true) {
-    found = content_.substr(pos).find(from_);
-    if (found == std::string::npos) {
-      result_ += content_.substr(pos);
-      break;
-    } else {
-      result_ += content_.substr(pos, found) + to_;
-      pos = pos + found + from_.length();
-      cnt++;
-    }
+  while ((found = content_.substr(pos).find(from_)) != std::string::npos) {
+    result_ += content_.substr(pos, found) + to_;
+    pos = pos + found + from_.length();
+    cnt++;
   }
+  result_ += content_.substr(pos);
   std::cout << "total " << cnt << " replacement executed." << std::endl;
 }
 
