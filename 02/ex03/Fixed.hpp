@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:49:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/16 15:18:28 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/18 19:57:22 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,18 @@ public:
   Fixed& operator=(const Fixed& f);  // overload copy assignment operator
 
   // overload comparison operators
-  bool operator>(const Fixed& f);
-  bool operator<(const Fixed& f);
-  bool operator>=(const Fixed& f);
-  bool operator<=(const Fixed& f);
-  bool operator==(const Fixed& f);
-  bool operator!=(const Fixed& f);
+  bool operator>(const Fixed& f) const;
+  bool operator<(const Fixed& f) const;
+  bool operator>=(const Fixed& f) const;
+  bool operator<=(const Fixed& f) const;
+  bool operator==(const Fixed& f) const;
+  bool operator!=(const Fixed& f) const;
 
   // overload arithmetic operators
-  Fixed operator+(const Fixed& f);
-  Fixed operator-(const Fixed& f);
-  Fixed operator*(const Fixed& f);
-  Fixed operator/(const Fixed& f);
+  Fixed operator+(const Fixed& f) const;
+  Fixed operator-(const Fixed& f) const;
+  Fixed operator*(const Fixed& f) const;
+  Fixed operator/(const Fixed& f) const;
 
   // overload increment/decrement operators
   Fixed& operator++();     // ++f;

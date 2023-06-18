@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/13 22:49:30 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/17 16:27:06 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/18 19:57:50 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,31 +70,33 @@ Fixed& Fixed::operator=(const Fixed& f) {
   return *this;
 }
 
-bool Fixed::operator>(const Fixed& f) { return getRawBits() > f.getRawBits(); }
-bool Fixed::operator<(const Fixed& f) { return !(*this >= f); }
-bool Fixed::operator>=(const Fixed& f) { return *this > f || *this == f; }
-bool Fixed::operator<=(const Fixed& f) { return *this < f || *this == f; }
-bool Fixed::operator==(const Fixed& f) {
+bool Fixed::operator>(const Fixed& f) const {
+  return getRawBits() > f.getRawBits();
+}
+bool Fixed::operator<(const Fixed& f) const { return !(*this >= f); }
+bool Fixed::operator>=(const Fixed& f) const { return *this > f || *this == f; }
+bool Fixed::operator<=(const Fixed& f) const { return *this < f || *this == f; }
+bool Fixed::operator==(const Fixed& f) const {
   return getRawBits() == f.getRawBits();
 }
-bool Fixed::operator!=(const Fixed& f) { return !(*this == f); }
+bool Fixed::operator!=(const Fixed& f) const { return !(*this == f); }
 
-Fixed Fixed::operator+(const Fixed& f) {
+Fixed Fixed::operator+(const Fixed& f) const {
   Fixed result;
   result.setRawBits(value_ + f.getRawBits());
   return result;
 }
-Fixed Fixed::operator-(const Fixed& f) {
+Fixed Fixed::operator-(const Fixed& f) const {
   Fixed result;
   result.setRawBits(value_ - f.getRawBits());
   return result;
 }
-Fixed Fixed::operator*(const Fixed& f) {
+Fixed Fixed::operator*(const Fixed& f) const {
   Fixed result;
   result.setRawBits(value_ * f.getRawBits() / 256);
   return result;
 }
-Fixed Fixed::operator/(const Fixed& f) {
+Fixed Fixed::operator/(const Fixed& f) const {
   Fixed result;
   result.setRawBits(value_ * 256 / f.getRawBits());
   return result;
