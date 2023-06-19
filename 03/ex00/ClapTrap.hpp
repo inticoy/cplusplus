@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:33:23 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/18 21:51:13 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/19 16:00:09 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 class ClapTrap {
 public:
   ClapTrap();
-  ClapTrap(std::string name, int hit, int energy, int attack_damage);
+  ClapTrap(std::string name);
   ClapTrap(const ClapTrap &ct);
   ~ClapTrap();
   ClapTrap &operator=(const ClapTrap &ct);
