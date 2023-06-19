@@ -60,6 +60,11 @@
 		"variant": "cpp",
 		"vector": "cpp",
 		"algorithm": "cpp",
-		"fstream": "cpp"
+		"fstream": "cpp",
+		"__verbose_abort": "cpp",
+		"bit": "cpp",
+		"deque": "cpp",
+		"iomanip": "cpp",
+		"stack": "cpp"
 	}
 }
