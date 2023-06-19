@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:38:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/19 16:00:33 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/19 16:03:26 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@ ClapTrap::ClapTrap() : name_(""), hit_(10), energy_(10), attack_damage_(0) {
   std::cout << std::endl;
 }
 ClapTrap::ClapTrap(std::string name)
-    : name_(name), hit_(10), energy_(10), attack_damage_(0) {}
+    : name_(name), hit_(10), energy_(10), attack_damage_(0) {
+  std::cout << "ClapTrap " << name << " created." << std::endl;
+}
 ClapTrap::ClapTrap(const ClapTrap &ct) {
   name_ = ct.name_;
   hit_ = ct.hit_;
