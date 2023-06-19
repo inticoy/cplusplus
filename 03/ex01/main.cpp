@@ -6,25 +6,44 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 21:39:21 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/18 21:49:27 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/19 16:58:09 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <iostream>
 
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
 
 int main() {
-  ClapTrap clap_trap;
-  clap_trap.attack("gyoon");
-  clap_trap.takeDamage(10);
-  clap_trap.beRepaired(10);
+  {
+    ScavTrap scav_trap;
+    scav_trap.attack("gyoon");
+    scav_trap.takeDamage(4);
+    scav_trap.beRepaired(9);
+    scav_trap.guardGate();
+  }
 
   std::cout << std::endl;
+  {
+    ScavTrap scav_trap2("inticoy");
+    scav_trap2.attack("gyoon");
+    scav_trap2.takeDamage(5);
+    scav_trap2.beRepaired(8);
+    scav_trap2.guardGate();
 
-  ClapTrap clap_trap2("inticoy", 100, 50, 20);
-  clap_trap2.attack("gyoon");
-  clap_trap2.takeDamage(10);
-  clap_trap2.beRepaired(10);
+    std::cout << std::endl;
+
+    std::cout << "convert ScavTrap into ClapTrap" << std::endl;
+    ClapTrap clap_trap = scav_trap2;
+    clap_trap.attack("gyoon");
+    clap_trap.takeDamage(6);
+    clap_trap.beRepaired(7);
+    // clap_trap.guardGate();  // can't be done
+  }
+
+  // ScavTrap scav_trap2 = clap_trap; // can't be done;
+  // ScavTrap scav_trap2 = static_cast<ScavTrap>(clap_trap); // can't be done;
+
   return 0;
 }

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:38:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/18 21:51:23 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/19 16:32:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,15 +18,20 @@ ClapTrap::ClapTrap() : name_(""), hit_(10), energy_(10), attack_damage_(0) {
   std::cout << "ClapTrap with no name created.";
   std::cout << std::endl;
 }
-ClapTrap::ClapTrap(std::string name, int hit, int energy, int attack_damage)
-    : name_(name), hit_(hit), energy_(energy), attack_damage_(attack_damage) {}
+ClapTrap::ClapTrap(std::string name)
+    : name_(name), hit_(10), energy_(10), attack_damage_(0) {
+  std::cout << "ClapTrap " << name << " created." << std::endl;
+}
 ClapTrap::ClapTrap(const ClapTrap &ct) {
   name_ = ct.name_;
   hit_ = ct.hit_;
   energy_ = ct.energy_;
   attack_damage_ = ct.attack_damage_;
 }
-ClapTrap::~ClapTrap() {}
+ClapTrap::~ClapTrap() {
+  std::cout << "ClapTrap " << (name_.empty() ? "no name" : name_);
+  std::cout << " destroyed." << std::endl;
+}
 ClapTrap &ClapTrap::operator=(const ClapTrap &ct) {
   name_ = ct.name_;
   hit_ = ct.hit_;
