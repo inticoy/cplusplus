@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:38:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/19 16:32:31 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/19 21:11:16 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,8 @@ ClapTrap::ClapTrap(std::string name)
   std::cout << "ClapTrap " << name << " created." << std::endl;
 }
 ClapTrap::ClapTrap(const ClapTrap &ct) {
+  std::cout << "ClapTrap " << (ct.name_.empty() ? "no name" : name_);
+  std::cout << " destroyed." << std::endl;
   name_ = ct.name_;
   hit_ = ct.hit_;
   energy_ = ct.energy_;

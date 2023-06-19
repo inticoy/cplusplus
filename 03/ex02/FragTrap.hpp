@@ -1,21 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FrogTrap.cpp                                       :+:      :+:    :+:   */
+/*   FragTrap.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/19 17:25:30 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/19 17:27:09 by gyoon            ###   ########.fr       */
+/*   Created: 2023/06/19 17:04:52 by gyoon             #+#    #+#             */
+/*   Updated: 2023/06/19 21:06:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FrogTrap.hpp"
+#ifndef FROGTRAP_HPP
+#define FROGTRAP_HPP
 
-FrogTrap::FrogTrap() {
-  std::cout << "FrogTrap with no name created." << std::endl;
-}
-FrogTrap::FrogTrap(std::string name) {}
-FrogTrap::FrogTrap(const FrogTrap &ft) {}
-FrogTrap::~FrogTrap() {}
-FrogTrap &FrogTrap::operator=(const FrogTrap &ft) {}
+#include "ClapTrap.hpp"
+
+class FragTrap : public ClapTrap {
+public:
+  FragTrap();
+  FragTrap(std::string name);
+  FragTrap(const FragTrap &ft);
+  ~FragTrap();
+  FragTrap &operator=(const FragTrap &ft);
+
+  void highFivesGuys();
+};
+
+#endif
