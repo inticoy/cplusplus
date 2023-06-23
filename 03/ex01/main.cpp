@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 21:39:21 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/19 16:58:09 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/23 16:41:50 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,9 @@ int main() {
     clap_trap.takeDamage(6);
     clap_trap.beRepaired(7);
     // clap_trap.guardGate();  // can't be done
+
+    // ScavTrap scav_trap2 = clap_trap; // can't be done;
+    // ScavTrap scav_trap2 = static_cast<ScavTrap>(clap_trap); // can't be done;
   }
-
-  // ScavTrap scav_trap2 = clap_trap; // can't be done;
-  // ScavTrap scav_trap2 = static_cast<ScavTrap>(clap_trap); // can't be done;
-
   return 0;
 }

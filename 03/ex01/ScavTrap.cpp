@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 22:14:21 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/19 21:12:15 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/23 16:41:20 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,43 +15,44 @@
 #include <iostream>
 
 ScavTrap::ScavTrap() : ClapTrap(), is_guard_(false) {
-  std::cout << "ScavTrap with no name created." << std::endl;
+  std::cout << "ScavTrap with no name created.\n";
 }
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name), is_guard_(false) {
-  std::cout << "ScavTrap " << name << " created." << std::endl;
-  hit_ = 100;
-  energy_ = 50;
-  attack_damage_ = 20;
+  set_hit(100);
+  set_energy(50);
+  set_attack_damage(20);
+  std::cout << "ScavTrap " << get_name_for_display() << " created.\n";
 }
-ScavTrap::ScavTrap(const ScavTrap &st) : ClapTrap(st.name_) {
-  std::cout << "ScavTrap " << (st.name_.empty() ? "no name" : name_);
-  std::cout << " created." << std::endl;
-  hit_ = st.hit_;
-  energy_ = st.energy_;
-  attack_damage_ = st.attack_damage_;
+ScavTrap::ScavTrap(const ScavTrap &st) : ClapTrap(st.get_name()) {
+  set_hit(st.get_hit());
+  set_energy(st.get_energy());
+  set_attack_damage(st.get_attack_damage());
   is_guard_ = st.is_guard_;
+  std::cout << "ScavTrap " << get_name_for_display() << " created.\n";
 }
 ScavTrap::~ScavTrap() {
-  std::cout << "ScavTrap " << (name_.empty() ? "no name" : name_);
-  std::cout << " destroyed." << std::endl;
+  std::cout << "ScavTrap " << get_name_for_display() << " destroyed.\n";
 }
 ScavTrap &ScavTrap::operator=(const ScavTrap &st) {
-  name_ = st.name_;
-  hit_ = st.hit_;
-  energy_ = st.energy_;
-  attack_damage_ = st.attack_damage_;
+  set_name(st.get_name());
+  set_hit(st.get_hit());
+  set_energy(st.get_energy());
+  set_attack_damage(st.get_attack_damage());
   is_guard_ = st.is_guard_;
   return *this;
 }
 
 void ScavTrap::attack(const std::string &target) {
-  std::cout << "ScavTrap " << (name_.empty() ? "no name" : name_) << " ";
+  std::cout << "ScavTrap " << get_name_for_display() << " ";
   std::cout << "attacks " << target << ", ";
-  std::cout << "causing " << attack_damage_ << " ";
-  std::cout << "points of damage!" << std::endl;
+  std::cout << "causing " << get_attack_damage() << " ";
+  std::cout << "points of damage!\n";
 }
 void ScavTrap::guardGate() {
-  std::cout << "ScavTrap " << (name_.empty() ? "no name" : name_) << " ";
-  std::cout << (is_guard_ ? "is in a" : "is not in a") << " Gate Keeper mode.";
-  std::cout << std::endl;
+  std::cout << "ScavTrap " << get_name_for_display() << " ";
+  std::cout << (is_guard_ ? "is in a" : "is not in a")
+            << " Gate Keeper mode.\n";
 }
+
+void ScavTrap::set_is_guard(bool is_guard) { is_guard_ = is_guard; }
+const bool &ScavTrap::get_is_guard() const { return is_guard_; }
