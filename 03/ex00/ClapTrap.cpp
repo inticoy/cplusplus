@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:38:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/23 16:21:45 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/23 16:32:20 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,8 +57,17 @@ void ClapTrap::beRepaired(unsigned int amount) {
   std::cout << "is repaired " << amount << ", ";
   std::cout << "now health is " << hit_ << ".\n";
 }
-
-const std::string &ClapTrap::get_name() const { return name_; }
 const std::string ClapTrap::get_name_for_display() const {
   return name_.empty() ? "with no name" : "[" + name_ + "]";
 }
+
+void ClapTrap::set_name(std::string name) { name_ = name; }
+void ClapTrap::set_hit(int hit) { hit_ = hit; }
+void ClapTrap::set_energy(int energy) { energy_ = energy; }
+void ClapTrap::set_attack_damage(int attack_damage) {
+  attack_damage_ = attack_damage;
+}
+const std::string &ClapTrap::get_name() const { return name_; }
+const int &ClapTrap::get_hit() const { return hit_; }
+const int &ClapTrap::get_energy() const { return energy_; }
+const int &ClapTrap::get_attack_damage() const { return attack_damage_; }
