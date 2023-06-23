@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:04:52 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/19 21:06:31 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/23 21:57:21 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "ClapTrap.hpp"
 
-class FragTrap : public ClapTrap {
+class FragTrap : virtual public ClapTrap {
 public:
   FragTrap();
   FragTrap(std::string name);

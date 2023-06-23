@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:49:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/23 14:32:10 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/23 21:47:36 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ public:
   ~DiamondTrap();
   DiamondTrap &operator=(const DiamondTrap &dt);
 
+  void attack(const std::string &target);
   void whoAmI();
 
 private:

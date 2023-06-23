@@ -6,11 +6,11 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/06/19 21:13:56 by gyoon            ###   ########.fr        #
+#    Updated: 2023/06/23 21:38:53 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= test_frag_trap
+NAME		= test_diamond_trap
 
 # **************************************************************************** #
 #                                                                              #
@@ -28,7 +28,7 @@ RM		= rm -rf
 #                                                                              #
 # **************************************************************************** #
 
-SRCS		= main.cpp ClapTrap.cpp ScavTrap.cpp
+SRCS		= main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 OBJS		= ${SRCS:.cpp=.o}
 INC			= ./
 

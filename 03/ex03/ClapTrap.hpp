@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:33:23 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/19 16:13:07 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/23 16:31:34 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,18 @@ public:
   void attack(const std::string &target);
   void takeDamage(unsigned int amount);
   void beRepaired(unsigned int amount);
+  const std::string get_name_for_display() const;
 
-protected:
+  void set_name(std::string name);
+  void set_hit(int hit);
+  void set_energy(int energy);
+  void set_attack_damage(int attack_damage);
+  const std::string &get_name() const;
+  const int &get_hit() const;
+  const int &get_energy() const;
+  const int &get_attack_damage() const;
+
+private:
   std::string name_;
   int hit_;
   int energy_;
