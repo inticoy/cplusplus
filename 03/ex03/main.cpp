@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 21:39:21 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/24 14:50:59 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/24 18:16:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ int main() {
     diamond_trap.takeDamage(4);
     diamond_trap.beRepaired(9);
     diamond_trap.guardGate();
+    diamond_trap.highFivesGuys();
+
+    diamond_trap.whoAmI();
   }
   return 0;
 }
