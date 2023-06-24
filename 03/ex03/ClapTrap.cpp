@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:38:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/23 16:34:25 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/24 14:32:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 #include <iostream>
 
-ClapTrap::ClapTrap() : name_(""), hit_(10), energy_(10), attack_damage_(0) {
+ClapTrap::ClapTrap()
+    : name_(""), hit_(kHit), energy_(kEnergy), attack_damage_(kAttackDamage) {
   std::cout << "ClapTrap with no name created.\n";
 }
 ClapTrap::ClapTrap(std::string name)
-    : name_(name), hit_(10), energy_(10), attack_damage_(0) {
+    : name_(name), hit_(kHit), energy_(kEnergy), attack_damage_(kAttackDamage) {
   std::cout << "ClapTrap " << get_name_for_display() << " created.\n";
 }
 ClapTrap::ClapTrap(const ClapTrap &ct) {

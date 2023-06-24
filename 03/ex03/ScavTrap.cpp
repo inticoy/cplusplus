@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 22:14:21 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/23 21:19:29 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/24 14:47:02 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 #include <iostream>
 
 ScavTrap::ScavTrap() : ClapTrap(), is_guard_(false) {
+  set_hit(kHit);
+  set_energy(kEnergy);
+  set_attack_damage(kAttackDamage);
   std::cout << "ScavTrap with no name created.\n";
 }
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name), is_guard_(false) {
-  set_hit(100);
-  set_energy(50);
-  set_attack_damage(20);
+  set_hit(kHit);
+  set_energy(kEnergy);
+  set_attack_damage(kAttackDamage);
   std::cout << "ScavTrap " << get_name_for_display() << " created.\n";
 }
 ScavTrap::ScavTrap(const ScavTrap &st) : ClapTrap(st.get_name()) {

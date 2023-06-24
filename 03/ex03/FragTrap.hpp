@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:04:52 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/23 21:57:21 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/24 14:47:26 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 
 class FragTrap : virtual public ClapTrap {
 public:
+  static const int kHit = 100;
+  static const int kEnergy = 100;
+  static const int kAttackDamage = 30;
+
   FragTrap();
   FragTrap(std::string name);
   FragTrap(const FragTrap &ft);

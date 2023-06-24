@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:33:23 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/23 16:31:34 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/24 14:32:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@
 
 class ClapTrap {
 public:
+  static const int kHit = 10;
+  static const int kEnergy = 10;
+  static const int kAttackDamage = 0;
+
   ClapTrap();
   ClapTrap(std::string name);
   ClapTrap(const ClapTrap &ct);

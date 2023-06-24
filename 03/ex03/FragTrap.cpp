@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/19 17:25:30 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/23 21:25:13 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/24 14:47:41 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,15 @@
 #include <iostream>
 
 FragTrap::FragTrap() {
+  set_hit(kHit);
+  set_energy(kEnergy);
+  set_attack_damage(kAttackDamage);
   std::cout << "FragTrap with no name created." << std::endl;
 }
 FragTrap::FragTrap(std::string name) : ClapTrap(name) {
-  set_hit(100);
-  set_energy(100);
-  set_attack_damage(30);
+  set_hit(kHit);
+  set_energy(kEnergy);
+  set_attack_damage(kAttackDamage);
   std::cout << "FragTrap " << get_name_for_display() << " created.\n";
 }
 FragTrap::FragTrap(const FragTrap &ft) : ClapTrap(ft.get_name()) {
