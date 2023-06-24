@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 22:14:21 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/23 16:41:20 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/24 14:44:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,9 @@
 #include <iostream>
 
 ScavTrap::ScavTrap() : ClapTrap(), is_guard_(false) {
+  set_hit(100);
+  set_energy(50);
+  set_attack_damage(20);
   std::cout << "ScavTrap with no name created.\n";
 }
 ScavTrap::ScavTrap(std::string name) : ClapTrap(name), is_guard_(false) {
