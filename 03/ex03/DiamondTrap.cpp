@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:33:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/24 14:51:36 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/24 18:32:17 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,6 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &dt) {
   return *this;
 }
 
-void DiamondTrap::attack(const std::string &target) {
-  ScavTrap::attack(target);
-}
 void DiamondTrap::whoAmI() {
   std::cout << "I want to introduce myself.\n";
   std::cout << "DiamondTrap name is " << get_name_for_display() << "\n";
