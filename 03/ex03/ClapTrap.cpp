@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:38:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/24 14:32:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/25 15:17:54 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,40 @@ ClapTrap &ClapTrap::operator=(const ClapTrap &ct) {
 }
 
 void ClapTrap::attack(const std::string &target) {
-  std::cout << "ClapTrap " << get_name_for_display() << " ";
-  std::cout << "attacks " << target << ", ";
-  std::cout << "causing " << attack_damage_ << " ";
-  std::cout << "points of damage!\n";
+  if (hit_ > 0 && energy_ > 0) {
+    --energy_;
+    std::cout << "ClapTrap " << get_name_for_display() << " ";
+    std::cout << "attacks " << target << ", ";
+    std::cout << "causing " << attack_damage_ << " ";
+    std::cout << "points of damage!\n";
+  } else if (hit_ <= 0) {
+    std::cout << "ClapTrap " << get_name_for_display() << " ";
+    std::cout << "cannot attack " << target << " because of hit point.\n";
+  } else {
+    std::cout << "ClapTrap " << get_name_for_display() << " ";
+    std::cout << "cannot attack " << target << " because of energy point.\n";
+  }
 }
 void ClapTrap::takeDamage(unsigned int amount) {
   hit_ -= amount;
+  if (hit_ < 0) {
+    hit_ = 0;
+  }
   std::cout << "ClapTrap " << get_name_for_display() << " ";
   std::cout << "take " << amount << " of damage, ";
   std::cout << "now health is " << hit_ << ".\n";
 }
 void ClapTrap::beRepaired(unsigned int amount) {
-  hit_ += amount;
-  std::cout << "ClapTrap " << get_name_for_display() << " ";
-  std::cout << "is repaired " << amount << ", ";
-  std::cout << "now health is " << hit_ << ".\n";
+  if (energy_ > 0) {
+    --energy_;
+    hit_ += amount;
+    std::cout << "ClapTrap " << get_name_for_display() << " ";
+    std::cout << "is repaired " << amount << ", ";
+    std::cout << "now health is " << hit_ << ".\n";
+  } else {
+    std::cout << "ClapTrap " << get_name_for_display() << " ";
+    std::cout << "cannot be repaired because it has no energy point.\n";
+  }
 }
 const std::string ClapTrap::get_name_for_display() const {
   return name_.empty() ? "with no name" : "[" + name_ + "]";

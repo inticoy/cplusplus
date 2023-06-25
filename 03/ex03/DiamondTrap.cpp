@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:33:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/24 18:32:17 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/25 15:20:36 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ DiamondTrap::DiamondTrap(const DiamondTrap &dt) {
   set_hit(dt.get_hit());
   set_energy(dt.get_energy());
   set_attack_damage(dt.get_attack_damage());
-  set_is_guard(dt.get_is_guard());
   std::cout << "DiamondTrap " << get_name_for_display() << " created.\n";
 }
 DiamondTrap::~DiamondTrap() {
@@ -48,7 +47,6 @@ DiamondTrap &DiamondTrap::operator=(const DiamondTrap &dt) {
   set_hit(dt.get_hit());
   set_energy(dt.get_energy());
   set_attack_damage(dt.get_attack_damage());
-  set_is_guard(dt.get_is_guard());
   return *this;
 }
 
