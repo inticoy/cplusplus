@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 22:14:21 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/25 15:03:31 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/25 15:14:19 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,19 @@ ScavTrap &ScavTrap::operator=(const ScavTrap &st) {
 }
 
 void ScavTrap::attack(const std::string &target) {
-  std::cout << "ScavTrap " << get_name_for_display() << " ";
-  std::cout << "attacks " << target << ", ";
-  std::cout << "causing " << get_attack_damage() << " ";
-  std::cout << "points of damage!\n";
+  if (get_hit() > 0 && get_energy() > 0) {
+    set_energy(get_energy() - 1);
+    std::cout << "ScavTrap " << get_name_for_display() << " ";
+    std::cout << "attacks " << target << ", ";
+    std::cout << "causing " << get_attack_damage() << " ";
+    std::cout << "points of damage!\n";
+  } else if (get_hit() <= 0) {
+    std::cout << "ScavTrap " << get_name_for_display() << " ";
+    std::cout << "cannot attack " << target << " because of hit point.\n";
+  } else {
+    std::cout << "ScavTrap " << get_name_for_display() << " ";
+    std::cout << "cannot attack " << target << " because of energy point.\n";
+  }
 }
 void ScavTrap::guardGate() {
   std::cout << "ScavTrap " << get_name_for_display() << " ";

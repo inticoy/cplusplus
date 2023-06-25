@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 21:39:21 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/23 16:41:50 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/25 15:14:47 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 int main() {
   {
     ScavTrap scav_trap;
+    scav_trap.ClapTrap::attack("gyoon");
     scav_trap.attack("gyoon");
     scav_trap.takeDamage(4);
     scav_trap.beRepaired(9);
