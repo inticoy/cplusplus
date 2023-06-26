@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 21:39:21 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/26 15:13:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/26 15:22:32 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,33 +18,33 @@
 int main()
 {
     {
-        ScavTrap scav_trap;
-        scav_trap.ClapTrap::attack("gyoon");
-        scav_trap.attack("gyoon");
-        scav_trap.takeDamage(4);
-        scav_trap.beRepaired(9);
-        scav_trap.guardGate();
+        ScavTrap scavTrap;
+        scavTrap.ClapTrap::attack("gyoon");
+        scavTrap.attack("gyoon");
+        scavTrap.takeDamage(4);
+        scavTrap.beRepaired(9);
+        scavTrap.guardGate();
     }
 
     std::cout << std::endl;
     {
-        ScavTrap scav_trap2("inticoy");
-        scav_trap2.attack("gyoon");
-        scav_trap2.takeDamage(5);
-        scav_trap2.beRepaired(8);
-        scav_trap2.guardGate();
+        ScavTrap scavTrap2("inticoy");
+        scavTrap2.attack("gyoon");
+        scavTrap2.takeDamage(5);
+        scavTrap2.beRepaired(8);
+        scavTrap2.guardGate();
 
         std::cout << std::endl;
 
         std::cout << "convert ScavTrap into ClapTrap" << std::endl;
-        ClapTrap clap_trap = scav_trap2;
-        clap_trap.attack("gyoon");
-        clap_trap.takeDamage(6);
-        clap_trap.beRepaired(7);
-        // clap_trap.guardGate();  // can't be done
+        ClapTrap clapTrap = scavTrap2;
+        clapTrap.attack("gyoon");
+        clapTrap.takeDamage(6);
+        clapTrap.beRepaired(7);
+        // clapTrap.guardGate();  // can't be done
 
-        // ScavTrap scav_trap2 = clap_trap; // can't be done;
-        // ScavTrap scav_trap2 = static_cast<ScavTrap>(clap_trap); // can't be done;
+        // ScavTrap scavTrap2 = clapTrap; // can't be done;
+        // ScavTrap scavTrap2 = static_cast<ScavTrap>(clapTrap); // can't be done;
     }
     return 0;
 }
