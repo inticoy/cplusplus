@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:33:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/26 15:45:55 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/26 15:56:21 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap(), name("")
     std::cout << "DiamondTrap with no name created." << std::endl;
 }
 DiamondTrap::DiamondTrap(std::string name)
-    : ClapTrap(name + "_clap_name"), ScavTrap(name + "_clap_name"), FragTrap(name + "_clap_name"), name(name)
+    : ClapTrap(name + "_clap_name"), ScavTrap(name + "_clap_name"),
+      FragTrap(name + "_clap_name"), name(name)
 {
     hit = kHit;
     energy = kEnergy;

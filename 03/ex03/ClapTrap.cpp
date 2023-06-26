@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:38:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/26 15:07:27 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/26 15:56:16 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,8 @@ ClapTrap::ClapTrap() : name(""), hit(10), energy(10), attackDamage(0)
     std::cout << "ClapTrap with no name created.\n";
 }
 
-ClapTrap::ClapTrap(std::string name) : name(name), hit(10), energy(10), attackDamage(0)
+ClapTrap::ClapTrap(std::string name)
+    : name(name), hit(10), energy(10), attackDamage(0)
 {
     std::cout << "ClapTrap " << getNameForDisplay() << " created.\n";
 }
@@ -61,12 +62,14 @@ void ClapTrap::attack(const std::string &target)
     else if (hit <= 0)
     {
         std::cout << "ClapTrap " << getNameForDisplay() << " ";
-        std::cout << "cannot attack " << target << " because it has no hit point.\n";
+        std::cout << "cannot attack " << target << " ";
+        std::cout << "because it has no hit point.\n";
     }
     else
     {
         std::cout << "ClapTrap " << getNameForDisplay() << " ";
-        std::cout << "cannot attack " << target << " because it has no energy point.\n";
+        std::cout << "cannot attack " << target << " ";
+        std::cout << "because it has no energy point.\n";
     }
 }
 void ClapTrap::takeDamage(unsigned int amount)

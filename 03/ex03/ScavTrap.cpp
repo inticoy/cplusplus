@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 22:14:21 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/26 15:42:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/26 15:57:22 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,8 @@ void ScavTrap::attack(const std::string &target)
     else
     {
         std::cout << "ScavTrap " << getNameForDisplay() << " ";
-        std::cout << "cannot attack " << target << " because of energy point.\n";
+        std::cout << "cannot attack " << target << " ";
+        std::cout << "because of energy point.\n";
     }
 }
 
