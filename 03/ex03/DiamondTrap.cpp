@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 14:33:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/25 15:20:36 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/26 15:45:55 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,50 +14,51 @@
 
 #include <iostream>
 
-DiamondTrap::DiamondTrap() : ClapTrap(""), ScavTrap(""), FragTrap("") {
-  set_hit(kHit);
-  set_energy(kEnergy);
-  set_attack_damage(kAttackDamage);
-  std::cout << "DiamondTrap with no name created." << std::endl;
+DiamondTrap::DiamondTrap() : ClapTrap(), ScavTrap(), FragTrap(), name("")
+{
+    hit = kHit;
+    energy = kEnergy;
+    attackDamage = kAttackDamage;
+    std::cout << "DiamondTrap with no name created." << std::endl;
 }
 DiamondTrap::DiamondTrap(std::string name)
-    : ClapTrap(name + "_clap_name"),
-      ScavTrap(name + "_clap_name"),
-      FragTrap(name + "_clap_name"),
-      name_(name) {
-  set_hit(kHit);
-  set_energy(kEnergy);
-  set_attack_damage(kAttackDamage);
-  std::cout << "DiamondTrap " << get_name_for_display() << " created.\n";
+    : ClapTrap(name + "_clap_name"), ScavTrap(name + "_clap_name"), FragTrap(name + "_clap_name"), name(name)
+{
+    hit = kHit;
+    energy = kEnergy;
+    attackDamage = kAttackDamage;
+    std::cout << "DiamondTrap " << getNameForDisplay() << " created.\n";
 }
-DiamondTrap::DiamondTrap(const DiamondTrap &dt) {
-  ClapTrap::set_name(dt.ClapTrap::get_name());
-  set_name(dt.get_name());
-  set_hit(dt.get_hit());
-  set_energy(dt.get_energy());
-  set_attack_damage(dt.get_attack_damage());
-  std::cout << "DiamondTrap " << get_name_for_display() << " created.\n";
+DiamondTrap::DiamondTrap(const DiamondTrap &diamondTrap)
+{
+    ClapTrap::name = diamondTrap.ClapTrap::name;
+    name = diamondTrap.name;
+    hit = diamondTrap.hit;
+    energy = diamondTrap.energy;
+    attackDamage = diamondTrap.attackDamage;
+    std::cout << "DiamondTrap " << getNameForDisplay() << " created.\n";
 }
-DiamondTrap::~DiamondTrap() {
-  std::cout << "DiamondTrap " << get_name_for_display() << " destroyed.\n";
+DiamondTrap::~DiamondTrap()
+{
+    std::cout << "DiamondTrap " << getNameForDisplay() << " destroyed.\n";
 }
-DiamondTrap &DiamondTrap::operator=(const DiamondTrap &dt) {
-  ClapTrap::set_name(dt.ClapTrap::get_name());
-  set_name(dt.get_name());
-  set_hit(dt.get_hit());
-  set_energy(dt.get_energy());
-  set_attack_damage(dt.get_attack_damage());
-  return *this;
-}
-
-void DiamondTrap::whoAmI() {
-  std::cout << "I want to introduce myself.\n";
-  std::cout << "DiamondTrap name is " << get_name_for_display() << "\n";
-  std::cout << "ClapTrap name is " << ClapTrap::get_name_for_display() << "\n";
-}
-const std::string DiamondTrap::get_name_for_display() const {
-  return name_.empty() ? "with no name" : "[" + name_ + "]";
+DiamondTrap &DiamondTrap::operator=(const DiamondTrap &diamondTrap)
+{
+    ClapTrap::name = diamondTrap.ClapTrap::name;
+    name = diamondTrap.name;
+    hit = diamondTrap.hit;
+    energy = diamondTrap.energy;
+    attackDamage = diamondTrap.attackDamage;
+    return *this;
 }
 
-void DiamondTrap::set_name(std::string name) { name_ = name; }
-const std::string &DiamondTrap::get_name() const { return name_; }
+void DiamondTrap::whoAmI()
+{
+    std::cout << "I want to introduce myself.\n";
+    std::cout << "DiamondTrap name is " << getNameForDisplay() << "\n";
+    std::cout << "ClapTrap name is " << ClapTrap::getNameForDisplay() << "\n";
+}
+const std::string DiamondTrap::getNameForDisplay() const
+{
+    return name.empty() ? "with no name" : "[" + name + "]";
+}

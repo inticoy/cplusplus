@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/18 20:38:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/25 15:17:54 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/26 15:07:27 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,79 +14,94 @@
 
 #include <iostream>
 
-ClapTrap::ClapTrap()
-    : name_(""), hit_(kHit), energy_(kEnergy), attack_damage_(kAttackDamage) {
-  std::cout << "ClapTrap with no name created.\n";
-}
-ClapTrap::ClapTrap(std::string name)
-    : name_(name), hit_(kHit), energy_(kEnergy), attack_damage_(kAttackDamage) {
-  std::cout << "ClapTrap " << get_name_for_display() << " created.\n";
-}
-ClapTrap::ClapTrap(const ClapTrap &ct) {
-  name_ = ct.name_;
-  hit_ = ct.hit_;
-  energy_ = ct.energy_;
-  attack_damage_ = ct.attack_damage_;
-  std::cout << "ClapTrap " << get_name_for_display() << " created.\n";
-}
-ClapTrap::~ClapTrap() {
-  std::cout << "ClapTrap " << get_name_for_display() << " destroyed.\n";
-}
-ClapTrap &ClapTrap::operator=(const ClapTrap &ct) {
-  name_ = ct.name_;
-  hit_ = ct.hit_;
-  energy_ = ct.energy_;
-  attack_damage_ = ct.attack_damage_;
-  return *this;
+ClapTrap::ClapTrap() : name(""), hit(10), energy(10), attackDamage(0)
+{
+    std::cout << "ClapTrap with no name created.\n";
 }
 
-void ClapTrap::attack(const std::string &target) {
-  if (hit_ > 0 && energy_ > 0) {
-    --energy_;
-    std::cout << "ClapTrap " << get_name_for_display() << " ";
-    std::cout << "attacks " << target << ", ";
-    std::cout << "causing " << attack_damage_ << " ";
-    std::cout << "points of damage!\n";
-  } else if (hit_ <= 0) {
-    std::cout << "ClapTrap " << get_name_for_display() << " ";
-    std::cout << "cannot attack " << target << " because of hit point.\n";
-  } else {
-    std::cout << "ClapTrap " << get_name_for_display() << " ";
-    std::cout << "cannot attack " << target << " because of energy point.\n";
-  }
-}
-void ClapTrap::takeDamage(unsigned int amount) {
-  hit_ -= amount;
-  if (hit_ < 0) {
-    hit_ = 0;
-  }
-  std::cout << "ClapTrap " << get_name_for_display() << " ";
-  std::cout << "take " << amount << " of damage, ";
-  std::cout << "now health is " << hit_ << ".\n";
-}
-void ClapTrap::beRepaired(unsigned int amount) {
-  if (energy_ > 0) {
-    --energy_;
-    hit_ += amount;
-    std::cout << "ClapTrap " << get_name_for_display() << " ";
-    std::cout << "is repaired " << amount << ", ";
-    std::cout << "now health is " << hit_ << ".\n";
-  } else {
-    std::cout << "ClapTrap " << get_name_for_display() << " ";
-    std::cout << "cannot be repaired because it has no energy point.\n";
-  }
-}
-const std::string ClapTrap::get_name_for_display() const {
-  return name_.empty() ? "with no name" : "[" + name_ + "]";
+ClapTrap::ClapTrap(std::string name) : name(name), hit(10), energy(10), attackDamage(0)
+{
+    std::cout << "ClapTrap " << getNameForDisplay() << " created.\n";
 }
 
-void ClapTrap::set_name(std::string name) { name_ = name; }
-void ClapTrap::set_hit(int hit) { hit_ = hit; }
-void ClapTrap::set_energy(int energy) { energy_ = energy; }
-void ClapTrap::set_attack_damage(int attack_damage) {
-  attack_damage_ = attack_damage;
+ClapTrap::ClapTrap(const ClapTrap &clapTrap)
+{
+    this->name = clapTrap.name;
+    this->hit = clapTrap.hit;
+    this->energy = clapTrap.energy;
+    this->attackDamage = clapTrap.attackDamage;
+    std::cout << "ClapTrap " << getNameForDisplay() << " created.\n";
 }
-const std::string &ClapTrap::get_name() const { return name_; }
-const int &ClapTrap::get_hit() const { return hit_; }
-const int &ClapTrap::get_energy() const { return energy_; }
-const int &ClapTrap::get_attack_damage() const { return attack_damage_; }
+
+ClapTrap::~ClapTrap()
+{
+    std::cout << "ClapTrap " << getNameForDisplay() << " destroyed.\n";
+}
+
+ClapTrap &ClapTrap::operator=(const ClapTrap &clapTrap)
+{
+    this->name = clapTrap.name;
+    this->hit = clapTrap.hit;
+    this->energy = clapTrap.energy;
+    this->attackDamage = clapTrap.attackDamage;
+    std::cout << "ClapTrap " << getNameForDisplay() << " assigned.\n";
+    return *this;
+}
+
+void ClapTrap::attack(const std::string &target)
+{
+    if (hit > 0 && energy > 0)
+    {
+        --energy;
+        std::cout << "ClapTrap " << getNameForDisplay() << " ";
+        std::cout << "attacks " << target << ", ";
+        std::cout << "causing " << this->attackDamage << " ";
+        std::cout << "points of damage!\n";
+    }
+    else if (hit <= 0)
+    {
+        std::cout << "ClapTrap " << getNameForDisplay() << " ";
+        std::cout << "cannot attack " << target << " because it has no hit point.\n";
+    }
+    else
+    {
+        std::cout << "ClapTrap " << getNameForDisplay() << " ";
+        std::cout << "cannot attack " << target << " because it has no energy point.\n";
+    }
+}
+void ClapTrap::takeDamage(unsigned int amount)
+{
+    hit -= amount;
+    if (hit < 0)
+    {
+        hit = 0;
+    }
+    std::cout << "ClapTrap " << getNameForDisplay() << " ";
+    std::cout << "take " << amount << " of damage, ";
+    std::cout << "now health is " << hit << ".\n";
+}
+void ClapTrap::beRepaired(unsigned int amount)
+{
+    if (hit > 0 && energy > 0)
+    {
+        --energy;
+        hit += amount;
+        std::cout << "ClapTrap " << getNameForDisplay() << " ";
+        std::cout << "is repaired " << amount << ", ";
+        std::cout << "now health is " << hit << ".\n";
+    }
+    else if (hit <= 0)
+    {
+        std::cout << "ClapTrap " << getNameForDisplay() << " ";
+        std::cout << "cannot be repaired because it has no hit point.\n";
+    }
+    else
+    {
+        std::cout << "ClapTrap " << getNameForDisplay() << " ";
+        std::cout << "cannot be repaired because it has no energy point.\n";
+    }
+}
+const std::string ClapTrap::getNameForDisplay() const
+{
+    return this->name.empty() ? "with no name" : "[" + name + "]";
+}

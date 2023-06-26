@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/20 13:49:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/24 18:32:08 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/26 15:45:43 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,25 @@
 #include "FragTrap.hpp"
 #include "ScavTrap.hpp"
 
-class DiamondTrap : public ScavTrap, public FragTrap {
-public:
-  static const int kHit = FragTrap::kHit;
-  static const int kEnergy = ScavTrap::kEnergy;
-  static const int kAttackDamage = FragTrap::kAttackDamage;
+class DiamondTrap : public ScavTrap, public FragTrap
+{
+  public:
+    DiamondTrap();
+    DiamondTrap(std::string name);
+    DiamondTrap(const DiamondTrap &diamondTrap);
+    ~DiamondTrap();
+    DiamondTrap &operator=(const DiamondTrap &diamondTrap);
 
-  DiamondTrap();
-  DiamondTrap(std::string name);
-  DiamondTrap(const DiamondTrap &dt);
-  ~DiamondTrap();
-  DiamondTrap &operator=(const DiamondTrap &dt);
+    void whoAmI();
 
-  void whoAmI();
-  const std::string get_name_for_display() const;
+  private:
+    const static int kHit = FragTrap::kHit;
+    const static int kEnergy = ScavTrap::kEnergy;
+    const static int kAttackDamage = FragTrap::kAttackDamage;
 
-  void set_name(std::string name);
-  const std::string &get_name() const;
+    std::string name;
 
-private:
-  std::string name_;
+    const std::string getNameForDisplay() const;
 };
 
 #endif
