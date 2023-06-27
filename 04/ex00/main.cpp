@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:26:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/27 21:03:59 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/27 21:09:48 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,8 @@ int main()
 {
     {
         const Animal *meta = new Animal();
-        const Animal *j = new Dog();
         const Animal *i = new Cat();
+        const Animal *j = new Dog();
 
         std::cout << i->getType() << std::endl;
         std::cout << j->getType() << std::endl;
@@ -32,6 +32,10 @@ int main()
         i->makeSound();
         j->makeSound();
         meta->makeSound();
+
+        delete meta;
+        delete i;
+        delete j;
     }
 
     std::cout << std::endl;
@@ -47,7 +51,10 @@ int main()
         i->makeSound();
         j->makeSound();
         meta->makeSound();
-    }
 
+        delete meta;
+        delete i;
+        delete j;
+    }
     return 0;
 }
