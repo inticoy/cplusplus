@@ -17,7 +17,7 @@
 
 WrongDog::WrongDog() : WrongAnimal()
 {
-    type = "WrongDog";
+    type = "Dog";
     std::cout << "WrongDog Default Constructor called.\n";
 }
 
@@ -32,11 +32,12 @@ WrongDog::~WrongDog()
 }
 WrongDog &WrongDog::operator=(const WrongDog &dog)
 {
+    type = dog.type;
     std::cout << "WrongDog Assignment Operator called.\n";
     return *this;
 }
 
 void WrongDog::makeSound() const
 {
-    std::cout << "Dogs meow\n";
+    std::cout << "Dog barks!\n";
 }

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:29:11 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/27 20:53:15 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/27 21:20:21 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ Animal::~Animal()
 
 Animal &Animal::operator=(const Animal &a)
 {
+    type = a.type;
     std::cout << "Animal Assignment Operator called.\n";
     return *this;
 }
 
 void Animal::makeSound() const
 {
-    std::cout << "hi\n";
+    std::cout << "Animal can't make sound because type is undefined.\n";
 }
 
 void Animal::setType(std::string type)

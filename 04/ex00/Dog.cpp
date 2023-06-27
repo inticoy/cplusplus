@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:46:59 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/27 20:53:21 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/27 21:18:57 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ Dog &Dog::operator=(const Dog &dog)
 
 void Dog::makeSound() const
 {
-    std::cout << "Dogs meow\n";
+    std::cout << "Dog barks!\n";
 }

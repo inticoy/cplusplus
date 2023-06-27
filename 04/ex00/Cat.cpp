@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:42:38 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/27 20:53:25 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/27 21:17:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,12 @@ Cat::~Cat()
 }
 Cat &Cat::operator=(const Cat &cat)
 {
+    type = cat.type;
     std::cout << "Cat Assignment Operator called.\n";
     return *this;
 }
 
 void Cat::makeSound() const
 {
-    std::cout << "Cats meow\n";
+    std::cout << "Cat meows~\n";
 }

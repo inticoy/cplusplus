@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:27:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/27 20:59:38 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/27 21:23:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ class WrongAnimal
   public:
     WrongAnimal();
     WrongAnimal(const WrongAnimal &a);
-    ~WrongAnimal();
+    virtual ~WrongAnimal();
     WrongAnimal &operator=(const WrongAnimal &a);
 
     void makeSound() const;

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:42:38 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/27 21:01:04 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/27 21:25:21 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,25 +17,26 @@
 WrongCat::WrongCat() : WrongAnimal()
 {
     type = "Cat";
-    std::cout << "Cat Default Constructor called.\n";
+    std::cout << "WrongCat Default Constructor called.\n";
 }
 
 WrongCat::WrongCat(const WrongCat &cat) : WrongAnimal()
 {
     type = cat.type;
-    std::cout << "Cat Copy Constructor called.\n";
+    std::cout << "WrongCat Copy Constructor called.\n";
 }
 WrongCat::~WrongCat()
 {
-    std::cout << "Cat Destructor called.\n";
+    std::cout << "WrongCat Destructor called.\n";
 }
 WrongCat &WrongCat::operator=(const WrongCat &cat)
 {
-    std::cout << "Cat Assignment Operator called.\n";
+    type = cat.type;
+    std::cout << "WrongCat Assignment Operator called.\n";
     return *this;
 }
 
 void WrongCat::makeSound() const
 {
-    std::cout << "Cats meow\n";
+    std::cout << "Cat meows~\n";
 }

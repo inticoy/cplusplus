@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:26:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/27 21:09:48 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/06/27 21:24:42 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,19 @@
 int main()
 {
     {
+        std::cout << "# Right Animal" << std::endl;
+
         const Animal *meta = new Animal();
         const Animal *i = new Cat();
         const Animal *j = new Dog();
 
-        std::cout << i->getType() << std::endl;
-        std::cout << j->getType() << std::endl;
+        std::cout << std::endl;
 
+        meta->makeSound();
         i->makeSound();
         j->makeSound();
-        meta->makeSound();
+
+        std::cout << std::endl;
 
         delete meta;
         delete i;
@@ -41,16 +44,19 @@ int main()
     std::cout << std::endl;
 
     {
+        std::cout << "# Wrong Animal" << std::endl;
+
         const WrongAnimal *meta = new WrongAnimal();
         const WrongAnimal *j = new WrongDog();
         const WrongAnimal *i = new WrongCat();
 
-        std::cout << i->getType() << std::endl;
-        std::cout << j->getType() << std::endl;
+        std::cout << std::endl;
 
+        meta->makeSound();
         i->makeSound();
         j->makeSound();
-        meta->makeSound();
+
+        std::cout << std::endl;
 
         delete meta;
         delete i;
