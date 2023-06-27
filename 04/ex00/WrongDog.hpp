@@ -1,35 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Animal.hpp                                         :+:      :+:    :+:   */
+/*   WrongDog.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/25 16:27:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/27 20:53:04 by gyoon            ###   ########.fr       */
+/*   Created: 2023/06/27 21:01:49 by gyoon             #+#    #+#             */
+/*   Updated: 2023/06/27 21:02:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ANIMAL_HPP
-#define ANIMAL_HPP
+#ifndef WRONG_DOG_HPP
+#define WRONG_DOG_HPP
 
-#include <string>
+#include "WrongAnimal.hpp"
 
-class Animal
+class WrongDog : public WrongAnimal
 {
-  protected:
-    std::string type;
-
   public:
-    Animal();
-    Animal(const Animal &a);
-    ~Animal();
-    Animal &operator=(const Animal &a);
+    WrongDog();
+    WrongDog(const WrongDog &dog);
+    ~WrongDog();
+    WrongDog &operator=(const WrongDog &dog);
 
-    virtual void makeSound() const;
-
-    void setType(std::string type);
-    const std::string &getType() const;
+    void makeSound() const;
 };
 
 #endif

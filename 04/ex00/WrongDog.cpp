@@ -1,7 +1,8 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   WrongDog.cpp                                            :+:      :+:    :+:
+ */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -10,32 +11,32 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "WrongDog.hpp"
 
 #include <iostream>
 
-Dog::Dog() : Animal()
+WrongDog::WrongDog() : WrongAnimal()
 {
-    type = "Dog";
-    std::cout << "Dog Default Constructor called.\n";
+    type = "WrongDog";
+    std::cout << "WrongDog Default Constructor called.\n";
 }
 
-Dog::Dog(const Dog &dog) : Animal()
+WrongDog::WrongDog(const WrongDog &dog) : WrongAnimal()
 {
     type = dog.type;
-    std::cout << "Dog Copy Constructor called.\n";
+    std::cout << "WrongDog Copy Constructor called.\n";
 }
-Dog::~Dog()
+WrongDog::~WrongDog()
 {
-    std::cout << "Dog Destructor called.\n";
+    std::cout << "WrongDog Destructor called.\n";
 }
-Dog &Dog::operator=(const Dog &dog)
+WrongDog &WrongDog::operator=(const WrongDog &dog)
 {
-    std::cout << "Dog Assignment Operator called.\n";
+    std::cout << "WrongDog Assignment Operator called.\n";
     return *this;
 }
 
-void Dog::makeSound() const
+void WrongDog::makeSound() const
 {
     std::cout << "Dogs meow\n";
 }
