@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:26:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/27 21:24:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/07/01 19:56:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,52 +15,43 @@
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
-#include "WrongAnimal.hpp"
-#include "WrongCat.hpp"
-#include "WrongDog.hpp"
+
+// void f()
+// {
+//     system("leaks polymorphism");
+// }
 
 int main()
 {
+    // atexit(f);
     {
-        std::cout << "# Right Animal" << std::endl;
-
-        const Animal *meta = new Animal();
-        const Animal *i = new Cat();
-        const Animal *j = new Dog();
+        const Animal *cat1 = new Cat();
+        const Animal *dog1 = new Dog();
 
         std::cout << std::endl;
 
-        meta->makeSound();
-        i->makeSound();
-        j->makeSound();
+        const Animal *cat2 = new Cat(*((Cat *)cat1));
+        const Animal *dog2 = new Dog(*((Dog *)dog1));
 
         std::cout << std::endl;
 
-        delete meta;
-        delete i;
-        delete j;
+        // ((Cat *)cat1)->brain->set_idea("I don't want anything...", 0);
+        // ((Dog *)dog1)->brain->set_idea("I don't want anything...", 0);
+        cat1->makeSound();
+        cat2->makeSound();
+        dog1->makeSound();
+        dog2->makeSound();
+
+        std::cout << std::endl;
+
+        delete cat1;
+        delete cat2;
+
+        std::cout << std::endl;
+
+        delete dog1;
+        delete dog2;
     }
 
-    std::cout << std::endl;
-
-    {
-        std::cout << "# Wrong Animal" << std::endl;
-
-        const WrongAnimal *meta = new WrongAnimal();
-        const WrongAnimal *j = new WrongDog();
-        const WrongAnimal *i = new WrongCat();
-
-        std::cout << std::endl;
-
-        meta->makeSound();
-        i->makeSound();
-        j->makeSound();
-
-        std::cout << std::endl;
-
-        delete meta;
-        delete i;
-        delete j;
-    }
     return 0;
 }

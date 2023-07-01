@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/06/27 20:58:30 by gyoon            ###   ########.fr        #
+#    Updated: 2023/07/01 17:34:51 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,7 +19,7 @@ NAME		= polymorphism
 # **************************************************************************** #
 
 CC		= c++
-FLAGS	= -Wall -Wextra -Werror -std=c++98 -Wshadow
+FLAGS	= -Wall -Wextra -Werror -std=c++98
 RM		= rm -rf
 
 # **************************************************************************** #
@@ -29,8 +29,7 @@ RM		= rm -rf
 # **************************************************************************** #
 
 SRCS		= 	main.cpp \
-				Animal.cpp Cat.cpp Dog.cpp \
-				WrongAnimal.cpp WrongCat.cpp WrongDog.cpp
+				Animal.cpp Cat.cpp Dog.cpp Brain.cpp
 OBJS		= 	${SRCS:.cpp=.o}
 INC			= 	./
 
