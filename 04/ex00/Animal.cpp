@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:29:11 by gyoon             #+#    #+#             */
-/*   Updated: 2023/06/27 21:20:21 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/07/01 19:11:45 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ Animal::Animal() : type("")
 
 Animal::Animal(const Animal &a)
 {
-    type = a.type;
     std::cout << "Animal Copy Constructor called.\n";
+    type = a.type;
 }
 
 Animal::~Animal()
@@ -32,8 +32,8 @@ Animal::~Animal()
 
 Animal &Animal::operator=(const Animal &a)
 {
-    type = a.type;
     std::cout << "Animal Assignment Operator called.\n";
+    type = a.type;
     return *this;
 }
 
