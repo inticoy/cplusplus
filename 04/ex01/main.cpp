@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:26:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/07/01 19:56:10 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/07/02 14:10:55 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,7 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 
-// void f()
-// {
-//     system("leaks polymorphism");
-// }
+// void f();
 
 int main()
 {
@@ -35,8 +32,8 @@ int main()
 
         std::cout << std::endl;
 
-        // ((Cat *)cat1)->brain->set_idea("I don't want anything...", 0);
-        // ((Dog *)dog1)->brain->set_idea("I don't want anything...", 0);
+        // ((Cat *)cat1)->brain->set_idea("Cat don't want anything...", 0);
+        // ((Dog *)dog1)->brain->set_idea("Dog don't want anything...", 0);
         cat1->makeSound();
         cat2->makeSound();
         dog1->makeSound();
@@ -55,3 +52,8 @@ int main()
 
     return 0;
 }
+
+// void f()
+// {
+//     system("leaks i_dont_want_to_set_the_world_on_fire");
+// }
