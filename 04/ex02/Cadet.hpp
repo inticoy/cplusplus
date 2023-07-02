@@ -1,39 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   Cadet.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/25 16:26:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/07/02 15:32:52 by gyoon            ###   ########.fr       */
+/*   Created: 2023/07/02 15:33:18 by gyoon             #+#    #+#             */
+/*   Updated: 2023/07/02 15:35:26 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <iostream>
+#ifndef CADET_HPP
+#define CADET_HPP
 
 #include "Animal.hpp"
-#include "Cat.hpp"
-#include "Dog.hpp"
 
-int main()
+class Cadet
 {
-    {
-        // const Animal *animal = new Animal();
-        const Animal *cat = new Cat();
-        const Animal *dog = new Dog();
+  private:
+    Animal *animals[100];
 
-        std::cout << std::endl;
+  public:
+    Cadet();
+    Cadet(const Cadet &cadet);
+    ~Cadet();
+    Cadet &operator=(const Cadet *cadet);
+};
 
-        // animal->makeSound();
-        cat->makeSound();
-        dog->makeSound();
-
-        std::cout << std::endl;
-
-        delete cat;
-        delete dog;
-    }
-
-    return 0;
-}
+#endif
