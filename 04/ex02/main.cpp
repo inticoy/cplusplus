@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:26:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/07/02 15:32:52 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/07/03 15:32:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,38 @@ int main()
 
         delete cat;
         delete dog;
+    }
+
+    std::cout << std::endl;
+
+    {
+        const int animalCnt = 10;
+        Animal *animals[animalCnt];
+        for (int i = 0; i < animalCnt / 2; i++)
+        {
+            animals[i] = new Cat();
+        }
+
+        std::cout << std::endl;
+
+        for (int i = 0; i < animalCnt / 2; i++)
+        {
+            animals[i + animalCnt / 2] = new Dog();
+        }
+
+        std::cout << std::endl;
+
+        for (int i = 0; i < animalCnt; i++)
+        {
+            animals[i]->makeSound();
+        }
+
+        std::cout << std::endl;
+
+        for (int i = 0; i < animalCnt; i++)
+        {
+            delete animals[i];
+        }
     }
 
     return 0;
