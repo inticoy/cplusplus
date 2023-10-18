@@ -65,6 +65,11 @@
 		"bit": "cpp",
 		"deque": "cpp",
 		"iomanip": "cpp",
-		"stack": "cpp"
+		"stack": "cpp",
+		"__functional_base": "cpp",
+		"functional": "cpp",
+		"iterator": "cpp",
+		"utility": "cpp",
+		"filesystem": "cpp"
 	}
 }
