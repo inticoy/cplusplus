@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:26:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/07/02 14:10:55 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/21 16:47:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,8 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 
-// void f();
-
 int main()
 {
-    // atexit(f);
     {
         const Animal *cat1 = new Cat();
         const Animal *dog1 = new Dog();
@@ -32,12 +29,19 @@ int main()
 
         std::cout << std::endl;
 
-        // ((Cat *)cat1)->brain->set_idea("Cat don't want anything...", 0);
-        // ((Dog *)dog1)->brain->set_idea("Dog don't want anything...", 0);
         cat1->makeSound();
         cat2->makeSound();
         dog1->makeSound();
         dog2->makeSound();
+
+        std::cout << std::endl;
+
+        std::cout << "[Dog1]" << std::endl;
+        ((Dog *)dog1)->getBrain()->add_idea("I'm a dog.");
+        ((Dog *)dog1)->getBrain()->add_idea("I'm hungry.");
+        ((Dog *)dog1)->getBrain()->add_idea("I'm tired.");
+        ((Dog *)dog1)->getBrain()->del_idea();
+        ((Dog *)dog1)->getBrain()->print_ideas();
 
         std::cout << std::endl;
 
@@ -53,6 +57,8 @@ int main()
     return 0;
 }
 
+// void f();
+// atexit(f);
 // void f()
 // {
 //     system("leaks i_dont_want_to_set_the_world_on_fire");

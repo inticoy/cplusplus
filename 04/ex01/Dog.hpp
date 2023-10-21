@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:39:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/07/01 19:55:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/21 16:41:00 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ class Dog : public Animal
     Brain *brain;
 
   public:
-    // Brain *brain;
     Dog();
     Dog(const Dog &dog);
     ~Dog();
     Dog &operator=(const Dog &dog);
 
     void makeSound() const;
+    Brain *getBrain() const;
 };
 
 #endif

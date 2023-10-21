@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:39:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/07/01 19:55:36 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/21 16:43:09 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,13 @@ class Cat : public Animal
     Brain *brain;
 
   public:
-    // Brain *brain;
     Cat();
     Cat(const Cat &cat);
     ~Cat();
     Cat &operator=(const Cat &cat);
 
     void makeSound() const;
+    Brain *getBrain() const;
 };
 
 #endif
