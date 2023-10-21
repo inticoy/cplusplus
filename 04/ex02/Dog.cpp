@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:46:59 by gyoon             #+#    #+#             */
-/*   Updated: 2023/07/02 14:15:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/21 18:36:14 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Dog::Dog() : Animal()
     std::cout << "Dog Default Constructor called.\n";
     type = "Dog";
     brain = new Brain();
-    brain->set_idea("I want some bone snack!", 0);
+    brain->addIdea("I want some bone snack!");
 }
 
 Dog::Dog(const Dog &dog) : Animal()
@@ -44,4 +44,9 @@ Dog &Dog::operator=(const Dog &dog)
 void Dog::makeSound() const
 {
     std::cout << "Dog barks!\n";
+}
+
+Brain *Dog::getBrain() const
+{
+    return this->brain;
 }

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:42:38 by gyoon             #+#    #+#             */
-/*   Updated: 2023/07/02 14:16:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/21 18:35:42 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ Cat::Cat() : Animal()
     std::cout << "Cat Default Constructor called.\n";
     type = "Cat";
     brain = new Brain();
-    brain->set_idea("I want some fresh fish!", 0);
+    brain->addIdea("I want some fresh fish!");
 }
 
 Cat::Cat(const Cat &cat) : Animal()
@@ -44,4 +44,9 @@ Cat &Cat::operator=(const Cat &cat)
 void Cat::makeSound() const
 {
     std::cout << "Cat meows~\n";
+}
+
+Brain *Cat::getBrain() const
+{
+    return this->brain;
 }
