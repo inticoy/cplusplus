@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 16:08:18 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/21 16:11:58 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/21 18:20:01 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,10 @@ class Brain
     ~Brain();
     Brain &operator=(const Brain &brain);
 
-    void add_idea(std::string idea);
-    void del_idea();
-    const std::string get_idea(int n) const;
-    void print_ideas() const;
+    void addIdea(std::string idea);
+    void delIdea();
+    const std::string getIdea(int n) const;
+    void printIdeas() const;
 
   private:
     std::string ideas[kIdeas];

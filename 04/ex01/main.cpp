@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:26:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/21 16:47:11 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/21 18:22:17 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,17 @@ int main()
         std::cout << std::endl;
 
         std::cout << "[Dog1]" << std::endl;
-        ((Dog *)dog1)->getBrain()->add_idea("I'm a dog.");
-        ((Dog *)dog1)->getBrain()->add_idea("I'm hungry.");
-        ((Dog *)dog1)->getBrain()->add_idea("I'm tired.");
-        ((Dog *)dog1)->getBrain()->del_idea();
-        ((Dog *)dog1)->getBrain()->print_ideas();
+        ((Dog *)dog1)->getBrain()->addIdea("I'm a dog.");
+        ((Dog *)dog1)->getBrain()->addIdea("I'm hungry.");
+        ((Dog *)dog1)->getBrain()->addIdea("I'm tired.");
+        ((Dog *)dog1)->getBrain()->delIdea();
+        ((Dog *)dog1)->getBrain()->printIdeas();
+
+        std::cout << std::endl;
+
+        std::cout << "[Dog3]" << std::endl;
+        const Animal *dog3 = new Dog(*((Dog *)dog1));
+        ((Dog *)dog1)->getBrain()->printIdeas();
 
         std::cout << std::endl;
 
@@ -52,6 +58,7 @@ int main()
 
         delete dog1;
         delete dog2;
+        delete dog3;
     }
 
     return 0;

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 16:12:29 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/21 16:18:01 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/21 18:20:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ Brain &Brain::operator=(const Brain &brain)
     return *this;
 }
 
-void Brain::add_idea(std::string idea)
+void Brain::addIdea(std::string idea)
 {
     if (nIdeas >= 100)
         std::cout << "error: brain is full.\n";
@@ -58,7 +58,7 @@ void Brain::add_idea(std::string idea)
         ideas[nIdeas++] = idea;
 }
 
-void Brain::del_idea()
+void Brain::delIdea()
 {
     if (nIdeas <= 0)
         std::cout << "error: brain is empty.\n";
@@ -66,7 +66,7 @@ void Brain::del_idea()
         ideas[--nIdeas].clear();
 }
 
-const std::string Brain::get_idea(int n) const
+const std::string Brain::getIdea(int n) const
 {
     if (n < 0 || n >= nIdeas)
     {
@@ -77,10 +77,10 @@ const std::string Brain::get_idea(int n) const
         return ideas[n];
 }
 
-void Brain::print_ideas() const
+void Brain::printIdeas() const
 {
     for (int i = 0; i < nIdeas; i++)
     {
-        std::cout << get_idea(i) << "\n";
+        std::cout << getIdea(i) << "\n";
     }
 }
