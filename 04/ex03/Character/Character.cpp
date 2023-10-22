@@ -58,6 +58,10 @@ Character::~Character()
 Character &Character::operator=(const Character &c)
 {
     // std::cout << "Character Assignment Operator called.\n";
+    for (int i = 0; i < nInventory; i++)
+    {
+        delete inventory[nInventory];
+    }
     name = c.name;
     nInventory = c.nInventory;
     for (int i = 0; i < nInventory; i++)

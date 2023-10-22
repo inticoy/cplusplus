@@ -6,9 +6,11 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:30:29 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/22 17:00:45 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/22 17:40:24 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <iostream>
 
 #include "AMateria.hpp"
 #include "Character.hpp"
@@ -18,34 +20,39 @@
 
 void f()
 {
-    system("leaks league_of_sorcerer");
+    system("leaks league_of_sorcerers");
 }
 
 int main()
 {
     atexit(f);
+    {
+        std::cout << "Test 1" << std::endl;
 
-    IMateriaSource *src = new MateriaSource();
+        IMateriaSource *src = new MateriaSource();
 
-    src->learnMateria(new Ice());
-    src->learnMateria(new Cure());
+        src->learnMateria(new Ice());
+        src->learnMateria(new Cure());
 
-    ICharacter *me = new Character("me");
+        ICharacter *me = new Character("me");
 
-    AMateria *tmp;
-    tmp = src->createMateria("ice");
-    me->equip(tmp);
+        AMateria *tmp;
+        tmp = src->createMateria("ice");
+        me->equip(tmp);
 
-    tmp = src->createMateria("cure");
-    me->equip(tmp);
+        tmp = src->createMateria("cure");
+        me->equip(tmp);
 
-    ICharacter *bob = new Character("bob");
-    me->use(0, *bob);
-    me->use(1, *bob);
+        ICharacter *bob = new Character("bob");
+        me->use(0, *bob);
+        me->use(1, *bob);
 
-    delete bob;
-    delete me;
-    delete src;
+        delete bob;
+        delete me;
+        delete src;
+    }
 
+    {
+    }
     return 0;
 }
