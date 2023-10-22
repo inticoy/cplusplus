@@ -85,6 +85,7 @@ void Character::equip(AMateria *m)
     else
     {
         inventory[nInventory++] = m;
+        m->setEquipped();
     }
 }
 
@@ -96,7 +97,8 @@ void Character::unequip(int idx)
     }
     else
     {
-        inventory[--nInventory] = NULL;
+        inventory[--nInventory]->setRemoved();
+        inventory[nInventory] = NULL;
     }
 }
 

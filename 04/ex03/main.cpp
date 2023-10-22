@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:30:29 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/22 17:40:24 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/22 20:55:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ int main()
 
         tmp = src->createMateria("cure");
         me->equip(tmp);
+        me->unequip(2);
 
         ICharacter *bob = new Character("bob");
         me->use(0, *bob);

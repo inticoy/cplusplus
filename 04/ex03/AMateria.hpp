@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:19:00 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/22 17:50:11 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/22 20:25:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ class AMateria
 {
   protected:
     std::string type;
+    bool equipped;
 
   public:
     AMateria();
@@ -30,7 +31,12 @@ class AMateria
     virtual ~AMateria();
     AMateria &operator=(const AMateria &a);
 
+    void setEquipped();
+    void setRemoved();
+    bool getEquipped();
+
     std::string const &getType() const;
+
     virtual AMateria *clone() const = 0;
     virtual void use(ICharacter &target);
 };

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:33:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/22 16:22:39 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/22 20:47:41 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,13 @@ class MateriaSource : public IMateriaSource
     enum
     {
         kMateria = 4,
+        kCreatedMateria = 50,
     };
     int nMateria;
+    int nCreatedMateria;
+    int sizeCreatedMateria;
     AMateria *materias[kMateria];
+    AMateria **createdMaterias;
 
   public:
     MateriaSource();
