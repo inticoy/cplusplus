@@ -6,11 +6,11 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/07/02 14:18:53 by gyoon            ###   ########.fr        #
+#    Updated: 2023/10/22 17:00:20 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= abstract_class
+NAME		= league_of_sorcerers
 
 # **************************************************************************** #
 #                                                                              #
@@ -29,9 +29,12 @@ RM		= rm -rf
 # **************************************************************************** #
 
 SRCS		= 	main.cpp \
-				Animal.cpp Cat.cpp Dog.cpp Brain.cpp
+				AMateria.cpp ICharacter.cpp IMateriaSource.cpp \
+				Character/Character.cpp \
+				Materia/Cure.cpp Materia/Ice.cpp \
+				MateriaSource/MateriaSource.cpp
 OBJS		= 	${SRCS:.cpp=.o}
-INC			= 	./
+INC			= 	-I./ -I./Character -I./Materia -I./MateriaSource
 
 # **************************************************************************** #
 #                                                                              #
@@ -83,7 +86,7 @@ $(NAME) : $(OBJS)
 	@printf "%.$(shell printf "%d" $(len_done))s" $(bar_done)
 	@printf "%.$(shell printf "%d" $(len_ready))s" $(bar_ready)
 	@printf "%7.2f%%" $(percent)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) -c $< -o $@ $(INC)
 
 clean :
 	@$(RM) $(OBJS)

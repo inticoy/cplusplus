@@ -6,12 +6,15 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:56:00 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/21 20:13:55 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/22 16:24:36 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CHARACTER_HPP
 #define CHARACTER_HPP
+
+#include <iostream>
+#include <string>
 
 #include "AMateria.hpp"
 #include "ICharacter.hpp"
@@ -19,8 +22,13 @@
 class Character : public ICharacter
 {
   private:
+    enum
+    {
+        kInventory = 4,
+    };
     std::string name;
-    AMateria *inventory[4];
+    int nInventory;
+    AMateria *inventory[kInventory];
 
   public:
     Character();

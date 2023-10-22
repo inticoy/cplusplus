@@ -6,12 +6,25 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:30:29 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/21 19:31:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/22 17:00:45 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "AMateria.hpp"
+#include "Character.hpp"
+#include "Cure.hpp"
+#include "Ice.hpp"
+#include "MateriaSource.hpp"
+
+void f()
+{
+    system("leaks league_of_sorcerer");
+}
+
 int main()
 {
+    atexit(f);
+
     IMateriaSource *src = new MateriaSource();
 
     src->learnMateria(new Ice());
