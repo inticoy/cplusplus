@@ -89,6 +89,7 @@ void Character::equip(AMateria *m)
         {
             inventory[i] = m;
             m->getSource()->unequip(m);
+            return;
         }
     }
     std::cout << "error: inventory is full\n";

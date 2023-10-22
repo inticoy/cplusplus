@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:35:27 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/22 22:54:19 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/22 23:11:54 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void MateriaSource::unequip(AMateria *m)
             return;
         }
     }
-    std::cout << "error: \n";
+    std::cout << "error: Materia not found.\n";
 }
 
 void MateriaSource::learnMateria(AMateria *m)
@@ -119,7 +119,7 @@ AMateria *MateriaSource::createMateria(std::string const &type)
             }
             else
             {
-                createdMaterias[nCreatedMateria++] = newMateria;
+                equip(newMateria);
             }
             return newMateria;
         }
