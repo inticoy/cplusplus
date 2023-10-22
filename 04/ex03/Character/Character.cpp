@@ -12,12 +12,11 @@
 /* ************************************************************************** */
 
 #include "Character.hpp"
+#include "MateriaSource.hpp"
 
 Character::Character()
 {
-    // std::cout << "Character Default Constructor called.\n";
     name = "No Name";
-    nInventory = 0;
     for (int i = 0; i < kInventory; i++)
     {
         inventory[i] = NULL;
@@ -26,20 +25,23 @@ Character::Character()
 
 Character::Character(const Character &c)
 {
-    // std::cout << "Character Copy Constructor called.\n";
     name = c.name;
-    nInventory = c.nInventory;
-    for (int i = 0; i < nInventory; i++)
+    for (int i = 0; i < kInventory; i++)
     {
-        inventory[i] = c.inventory[i]->clone();
+        if (c.inventory[i])
+        {
+            inventory[i] = c.inventory[i]->clone();
+        }
+        else
+        {
+            inventory[i] = NULL;
+        }
     }
 }
 
 Character::Character(std::string name)
 {
-    // std::cout << "Character Name Constructor called.\n";
     this->name = name;
-    nInventory = 0;
     for (int i = 0; i < kInventory; i++)
     {
         inventory[i] = NULL;
@@ -48,25 +50,28 @@ Character::Character(std::string name)
 
 Character::~Character()
 {
-    // std::cout << "Character Destructor called.\n";
-    for (int i = 0; i < nInventory; i++)
+    for (int i = 0; i < kInventory; i++)
     {
-        delete inventory[i];
+        if (inventory[i])
+        {
+            delete inventory[i];
+        }
     }
 }
 
 Character &Character::operator=(const Character &c)
 {
-    // std::cout << "Character Assignment Operator called.\n";
-    for (int i = 0; i < nInventory; i++)
-    {
-        delete inventory[nInventory];
-    }
     name = c.name;
-    nInventory = c.nInventory;
-    for (int i = 0; i < nInventory; i++)
+    for (int i = 0; i < kInventory; i++)
     {
-        inventory[i] = c.inventory[i]->clone();
+        if (c.inventory[i])
+        {
+            inventory[i] = c.inventory[i]->clone();
+        }
+        else
+        {
+            inventory[i] = NULL;
+        }
     }
     return *this;
 }
@@ -78,25 +83,32 @@ std::string const &Character::getName() const
 
 void Character::equip(AMateria *m)
 {
-    if (nInventory >= kInventory)
+    for (int i = 0; i < kInventory; i++)
     {
-        std::cout << "error: inventory is full.\n";
+        if (inventory[i] == NULL)
+        {
+            inventory[i] = m;
+            m->getSource()->unequip(m);
+        }
     }
-    else
-    {
-        inventory[nInventory++] = m;
-    }
+    std::cout << "error: inventory is full\n";
 }
 
 void Character::unequip(int idx)
 {
-    if (nInventory <= 0)
+    if (idx < 0 || idx >= kInventory)
     {
-        std::cout << "error: inventory is empty.\n";
+        std::cout << "error: idx should be between 0 and " << kInventory
+                  << ".\n";
+    }
+    else if (!inventory[idx])
+    {
+        std::cout << "error: slot " << idx << " is empty.\n";
     }
     else
     {
-        inventory[--nInventory] = NULL;
+        inventory[idx]->getSource()->equip(inventory[idx]);
+        inventory[idx] = NULL;
     }
 }
 
@@ -107,7 +119,7 @@ void Character::use(int idx, ICharacter &target)
         std::cout << "error: idx should be between 0 and " << kInventory;
         std::cout << ".\n";
     }
-    else if (idx > nInventory - 1)
+    else if (!inventory[idx])
     {
         std::cout << "error: slot " << idx << " is empty.\n";
     }

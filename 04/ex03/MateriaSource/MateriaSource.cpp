@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:35:27 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/22 17:04:15 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/22 22:54:19 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,13 @@
 
 MateriaSource::MateriaSource()
 {
-    // std::cout << "MateriaSource Default Constructor called.\n";
     nMateria = 0;
     for (int i = 0; i < kMateria; i++)
+    {
+        materias[i] = NULL;
+    }
+    nCreatedMateria = 0;
+    for (int i = 0; i < kMaxMateria; i++)
     {
         materias[i] = NULL;
     }
@@ -24,32 +28,68 @@ MateriaSource::MateriaSource()
 
 MateriaSource::MateriaSource(const MateriaSource &ms)
 {
-    // std::cout << "MateriaSource Copy Constructor called.\n";
     nMateria = ms.nMateria;
     for (int i = 0; i < nMateria; i++)
     {
         materias[i] = ms.materias[i];
     }
+    // nCreatedMateria = 0;
+    // for (int i = 0; i < kMaxMateria; i++)
+    // {
+    //     materias[i] = NULL;
+    // }
 }
 
 MateriaSource::~MateriaSource()
 {
-    // std::cout << "MateriaSource Destructor called.\n";
     for (int i = 0; i < nMateria; i++)
     {
         delete materias[i];
+    }
+    for (int i = 0; i < nCreatedMateria; i++)
+    {
+        delete createdMaterias[i];
     }
 }
 
 MateriaSource &MateriaSource::operator=(const MateriaSource &ms)
 {
-    // std::cout << "MateriaSource Assignment Operator called.\n";
     nMateria = ms.nMateria;
     for (int i = 0; i < nMateria; i++)
     {
         materias[i] = ms.materias[i];
     }
+    // nCreatedMateria = 0;
+    // for (int i = 0; i < kMaxMateria; i++)
+    // {
+    //     materias[i] = NULL;
+    // }
     return *this;
+}
+
+void MateriaSource::equip(AMateria *m)
+{
+    if (nCreatedMateria >= kMaxMateria)
+    {
+        std::cout << "error: and your player cannot unequip return";
+    }
+    else
+    {
+        createdMaterias[nCreatedMateria++] = m;
+    }
+}
+
+void MateriaSource::unequip(AMateria *m)
+{
+    for (int i = 0; i < nCreatedMateria; i++)
+    {
+        if (createdMaterias[i] == m)
+        {
+            createdMaterias[i] = NULL;
+            return;
+        }
+    }
+    std::cout << "error: \n";
 }
 
 void MateriaSource::learnMateria(AMateria *m)
@@ -70,7 +110,18 @@ AMateria *MateriaSource::createMateria(std::string const &type)
     {
         if (materias[i]->getType() == type)
         {
-            return materias[i]->clone();
+            AMateria *newMateria = materias[i]->clone();
+            newMateria->setSource(this);
+            if (nCreatedMateria >= kMaxMateria)
+            {
+                std::cout << "error: MateriaSource cannot create materia more "
+                             "than 1024.\n";
+            }
+            else
+            {
+                createdMaterias[nCreatedMateria++] = newMateria;
+            }
+            return newMateria;
         }
     }
     return NULL;
