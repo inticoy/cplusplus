@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:19:00 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 14:59:20 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 15:26:49 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ class AMateria
     MateriaSource *source;
 
   public:
+    AMateria(std::string const &type);
     AMateria();
     AMateria(const AMateria &m);
-    AMateria(std::string const &type);
     virtual ~AMateria();
     AMateria &operator=(const AMateria &m);
 

@@ -26,17 +26,8 @@ Character::Character()
 Character::Character(const Character &c)
 {
     name = c.name;
-    for (int i = 0; i < kInventory; i++)
-    {
-        if (c.inventory[i])
-        {
-            inventory[i] = c.inventory[i]->clone();
-        }
-        else
-        {
-            inventory[i] = NULL;
-        }
-    }
+    // copying character does not make sense.
+    // if copy, just a name should be same, not the inventory.
 }
 
 Character::Character(std::string name)
@@ -61,18 +52,8 @@ Character::~Character()
 
 Character &Character::operator=(const Character &c)
 {
-    name = c.name;
-    for (int i = 0; i < kInventory; i++)
-    {
-        if (c.inventory[i])
-        {
-            inventory[i] = c.inventory[i]->clone();
-        }
-        else
-        {
-            inventory[i] = NULL;
-        }
-    }
+    // assigning a character does not make sense.
+    // if assign, nothing happens.
     return *this;
 }
 
@@ -92,7 +73,7 @@ void Character::equip(AMateria *m)
             return;
         }
     }
-    std::cout << "error: inventory is full\n";
+    std::cout << "error: " << name << "'s inventory is full\n";
 }
 
 void Character::unequip(int idx)
@@ -104,7 +85,7 @@ void Character::unequip(int idx)
     }
     else if (!inventory[idx])
     {
-        std::cout << "error: slot " << idx << " is empty.\n";
+        std::cout << "error: " << name << "'s slot " << idx << " is empty.\n";
     }
     else
     {
@@ -122,7 +103,7 @@ void Character::use(int idx, ICharacter &target)
     }
     else if (!inventory[idx])
     {
-        std::cout << "error: slot " << idx << " is empty.\n";
+        std::cout << "error: " << name << "'s slot " << idx << " is empty.\n";
     }
     else
     {
