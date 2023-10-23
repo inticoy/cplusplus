@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:35:27 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/22 23:11:54 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 14:25:21 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 MateriaSource::MateriaSource()
 {
-    nMateria = 0;
     for (int i = 0; i < kMateria; i++)
     {
         materias[i] = NULL;
@@ -28,8 +27,7 @@ MateriaSource::MateriaSource()
 
 MateriaSource::MateriaSource(const MateriaSource &ms)
 {
-    nMateria = ms.nMateria;
-    for (int i = 0; i < nMateria; i++)
+    for (int i = 0; i < kMateria; i++)
     {
         materias[i] = ms.materias[i];
     }
@@ -42,9 +40,12 @@ MateriaSource::MateriaSource(const MateriaSource &ms)
 
 MateriaSource::~MateriaSource()
 {
-    for (int i = 0; i < nMateria; i++)
+    for (int i = 0; i < kMateria; i++)
     {
-        delete materias[i];
+        if (materias[i])
+        {
+            delete materias[i];
+        }
     }
     for (int i = 0; i < nCreatedMateria; i++)
     {
@@ -54,8 +55,7 @@ MateriaSource::~MateriaSource()
 
 MateriaSource &MateriaSource::operator=(const MateriaSource &ms)
 {
-    nMateria = ms.nMateria;
-    for (int i = 0; i < nMateria; i++)
+    for (int i = 0; i < kMateria; i++)
     {
         materias[i] = ms.materias[i];
     }
@@ -94,19 +94,20 @@ void MateriaSource::unequip(AMateria *m)
 
 void MateriaSource::learnMateria(AMateria *m)
 {
-    if (nMateria >= kMateria)
+    for (int i = 0; i < kMateria; i++)
     {
-        std::cout << "error: MateriaSource is full.\n";
+        if (!materias[i])
+        {
+            materias[i] = m;
+            return;
+        }
     }
-    else
-    {
-        materias[nMateria++] = m;
-    }
+    std::cout << "error: MateriaSource is full.\n";
 }
 
 AMateria *MateriaSource::createMateria(std::string const &type)
 {
-    for (int i = 0; i < nMateria; i++)
+    for (int i = 0; i < kMateria; i++)
     {
         if (materias[i]->getType() == type)
         {
