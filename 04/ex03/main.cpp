@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:30:29 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 14:37:10 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 15:23:26 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,16 +18,17 @@
 #include "Ice.hpp"
 #include "MateriaSource.hpp"
 
-void f()
+void leaks()
 {
     system("leaks league_of_sorcerers");
 }
 
 int main()
 {
-    atexit(f);
+    atexit(leaks);
+
     {
-        std::cout << "Test 1" << std::endl;
+        std::cout << "Test 0" << std::endl;
 
         IMateriaSource *src = new MateriaSource();
 
@@ -52,7 +53,16 @@ int main()
         delete src;
     }
 
+    std::cout << std::endl;
+
     {
+        std::cout << "Test 0" << std::endl;
+
+        IMateriaSource *src = new MateriaSource();
+
+        src->learnMateria(new Ice());
+        src->learnMateria(new Cure());
+        delete src;
     }
     return 0;
 }

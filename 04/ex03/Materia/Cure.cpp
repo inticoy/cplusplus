@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:59:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/22 22:42:40 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 15:20:58 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,9 @@ Cure &Cure::operator=(const Cure &c)
 
 AMateria *Cure::clone() const
 {
-    return new Cure(*this);
+    AMateria *ret = new Cure(*this);
+    ret->setSource(this->source);
+    return ret;
 }
 
 void Cure::use(ICharacter &target)

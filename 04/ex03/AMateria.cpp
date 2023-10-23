@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:10:41 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/22 22:42:28 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 14:59:39 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ AMateria::AMateria()
 AMateria::AMateria(const AMateria &m)
 {
     type = m.type;
-    // source = NULL;
+    source = m.source;
 }
 
 AMateria::AMateria(std::string const &type)
@@ -34,10 +34,10 @@ AMateria::~AMateria()
 {
 }
 
-AMateria &AMateria::operator=(const AMateria &a)
+AMateria &AMateria::operator=(const AMateria &m)
 {
-    type = a.type;
-    // source = NULL;
+    type = m.type;
+    source = m.source;
     return *this;
 }
 

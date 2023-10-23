@@ -115,6 +115,7 @@ AMateria *MateriaSource::createMateria(std::string const &type)
         {
             AMateria *newMateria = materias[i]->clone();
             newMateria->setSource(this);
+            // should be done cause materias[i]'s source are null (in main)
             for (int j = 0; j < kMaxMateria; j++)
             {
                 if (!createdMaterias[j])
