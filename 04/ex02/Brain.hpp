@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/01 16:08:18 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/21 18:35:29 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 21:58:30 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,15 @@
 
 class Brain
 {
+  private:
+    enum
+    {
+        kIdeas = 100,
+    };
+    int nIdeas;
+    std::string ideas[kIdeas];
+
   public:
-    const static int kIdeas = 100;
     Brain();
     Brain(const Brain &brain);
     ~Brain();
@@ -28,10 +35,6 @@ class Brain
     void delIdea();
     const std::string getIdea(int n) const;
     void printIdeas() const;
-
-  private:
-    std::string ideas[kIdeas];
-    int nIdeas;
 };
 
 #endif

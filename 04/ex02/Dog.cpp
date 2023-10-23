@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:46:59 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/21 18:36:14 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 21:59:42 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ Dog &Dog::operator=(const Dog &dog)
 {
     std::cout << "Dog Assignment Operator called.\n";
     type = dog.type;
-    brain = new Brain(*dog.brain);
+    Brain *newBrain = new Brain(*dog.brain);
+    delete brain;
+    brain = newBrain;
     return *this;
 }
 

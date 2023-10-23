@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:42:38 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/21 18:35:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 21:58:49 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ Cat &Cat::operator=(const Cat &cat)
 {
     std::cout << "Cat Assignment Operator called.\n";
     type = cat.type;
-    brain = new Brain(*cat.brain);
+    Brain *newBrain = new Brain(*cat.brain);
+    delete brain;
+    brain = newBrain;
     return *this;
 }
 
