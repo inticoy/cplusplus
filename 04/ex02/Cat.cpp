@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:42:38 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 21:58:49 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 22:09:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,17 @@ void Cat::makeSound() const
     std::cout << "Cat meows~\n";
 }
 
-Brain *Cat::getBrain() const
+void Cat::addIdea(const std::string &idea) const
 {
-    return this->brain;
+    brain->addIdea(idea);
+}
+
+void Cat::delIdea() const
+{
+    brain->delIdea();
+}
+
+void Cat::printIdeas() const
+{
+    brain->printIdeas();
 }

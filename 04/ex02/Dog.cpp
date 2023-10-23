@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/27 20:46:59 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 21:59:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 22:08:47 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,17 @@ void Dog::makeSound() const
     std::cout << "Dog barks!\n";
 }
 
-Brain *Dog::getBrain() const
+void Dog::addIdea(const std::string &idea) const
 {
-    return this->brain;
+    brain->addIdea(idea);
+}
+
+void Dog::delIdea() const
+{
+    brain->delIdea();
+}
+
+void Dog::printIdeas() const
+{
+    brain->printIdeas();
 }
