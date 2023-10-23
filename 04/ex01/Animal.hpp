@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:27:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/18 16:20:14 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 22:16:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ class Animal
     Animal &operator=(const Animal &a);
 
     virtual void makeSound() const;
+    virtual void addIdea(const std::string &idea) const;
+    virtual void delIdea() const;
+    virtual void printIdeas() const;
 
     void setType(std::string type);
     const std::string &getType() const;
