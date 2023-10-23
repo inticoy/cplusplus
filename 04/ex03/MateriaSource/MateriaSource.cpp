@@ -15,26 +15,30 @@
 
 MateriaSource::MateriaSource()
 {
+    maxMateria = kMaxMateria;
     for (int i = 0; i < kMateria; i++)
     {
         materias[i] = NULL;
     }
-    for (int i = 0; i < kMaxMateria; i++)
+    createdMaterias = new AMateria *[maxMateria];
+    for (int i = 0; i < maxMateria; i++)
     {
-        materias[i] = NULL;
+        createdMaterias[i] = NULL;
     }
 }
 
 MateriaSource::MateriaSource(const MateriaSource &ms)
 {
+    maxMateria = kMaxMateria;
     for (int i = 0; i < kMateria; i++)
     {
-        materias[i] = ms.materias[i];
+        materias[i] = NULL;
     }
-    // for (int i = 0; i < kMaxMateria; i++)
-    // {
-    //     materias[i] = NULL;
-    // }
+    createdMaterias = new AMateria *[maxMateria];
+    for (int i = 0; i < maxMateria; i++)
+    {
+        createdMaterias[i] = NULL;
+    }
 }
 
 MateriaSource::~MateriaSource()
@@ -46,31 +50,25 @@ MateriaSource::~MateriaSource()
             delete materias[i];
         }
     }
-    for (int i = 0; i < kMaxMateria; i++)
+    for (int i = 0; i < maxMateria; i++)
     {
         if (createdMaterias[i])
         {
             delete createdMaterias[i];
         }
     }
+    delete[] createdMaterias;
 }
 
 MateriaSource &MateriaSource::operator=(const MateriaSource &ms)
 {
-    for (int i = 0; i < kMateria; i++)
-    {
-        materias[i] = ms.materias[i];
-    }
-    // for (int i = 0; i < kMaxMateria; i++)
-    // {
-    //     materias[i] = NULL;
-    // }
+    // assign can not be done.
     return *this;
 }
 
-void MateriaSource::equip(AMateria *m)
+void MateriaSource::acquireMateria(AMateria *m)
 {
-    for (int i = 0; i < kMaxMateria; i++)
+    for (int i = 0; i < maxMateria; i++)
     {
         if (!createdMaterias[i])
         {
@@ -78,20 +76,28 @@ void MateriaSource::equip(AMateria *m)
             return;
         }
     }
-    std::cout << "error: and your player cannot unequip return";
+    AMateria **tmp = new AMateria *[maxMateria + kMaxMateria];
+    for (int i = 0; i < maxMateria; i++)
+    {
+        tmp[i] = createdMaterias[i];
+    }
+    tmp[maxMateria] = m;
+    maxMateria += kMaxMateria;
+    delete createdMaterias;
+    createdMaterias = tmp;
 }
 
-void MateriaSource::unequip(AMateria *m)
+bool MateriaSource::loseMateria(AMateria *m)
 {
-    for (int i = 0; i < kMaxMateria; i++)
+    for (int i = 0; i < maxMateria; i++)
     {
         if (createdMaterias[i] == m)
         {
             createdMaterias[i] = NULL;
-            return;
+            return true;
         }
     }
-    std::cout << "error: Materia not found.\n";
+    return false;
 }
 
 void MateriaSource::learnMateria(AMateria *m)
@@ -113,21 +119,15 @@ AMateria *MateriaSource::createMateria(std::string const &type)
     {
         if (materias[i]->getType() == type)
         {
+            // setSource should be done
+            // because materias[i]'s source are null (made in main)
             AMateria *newMateria = materias[i]->clone();
             newMateria->setSource(this);
-            // should be done cause materias[i]'s source are null (in main)
-            for (int j = 0; j < kMaxMateria; j++)
-            {
-                if (!createdMaterias[j])
-                {
-                    createdMaterias[j] = newMateria;
-                    return newMateria;
-                }
-            }
-            std::cout << "error: MateriaSource cannot create materia more "
-                         "than 1024.\n";
-            return NULL;
+            newMateria->setRemoved();
+            acquireMateria(newMateria);
+            return newMateria;
         }
     }
+    std::cout << "error: cannot create " << type << " materia.\n";
     return NULL;
 }

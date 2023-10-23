@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:33:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 14:27:10 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 16:02:34 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,11 @@ class MateriaSource : public IMateriaSource
     enum
     {
         kMateria = 4,
-        kMaxMateria = 1024,
+        kMaxMateria = 10,
     };
+    int maxMateria;
     AMateria *materias[kMateria];
-    AMateria *createdMaterias[kMaxMateria];
+    AMateria **createdMaterias;
 
   public:
     MateriaSource();
@@ -34,8 +35,8 @@ class MateriaSource : public IMateriaSource
     ~MateriaSource();
     MateriaSource &operator=(const MateriaSource &ms);
 
-    void equip(AMateria *m);
-    void unequip(AMateria *m);
+    void acquireMateria(AMateria *m);
+    bool loseMateria(AMateria *m);
 
     virtual void learnMateria(AMateria *m);
     virtual AMateria *createMateria(std::string const &type);

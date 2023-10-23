@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:10:41 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 15:32:24 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 16:10:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,18 +16,21 @@ AMateria::AMateria()
 {
     type = "No Type";
     source = NULL;
+    equipped = false;
 }
 
 AMateria::AMateria(const AMateria &m)
 {
     type = m.type;
     source = m.source;
+    equipped = m.equipped;
 }
 
 AMateria::AMateria(std::string const &type)
 {
     this->type = type;
     source = NULL;
+    equipped = false;
 }
 
 AMateria::~AMateria()
@@ -49,6 +52,21 @@ MateriaSource *AMateria::getSource()
 void AMateria::setSource(MateriaSource *ms)
 {
     source = ms;
+}
+
+bool AMateria::getEquipped()
+{
+    return equipped;
+}
+
+void AMateria::setEquipped()
+{
+    equipped = true;
+}
+
+void AMateria::setRemoved()
+{
+    equipped = false;
 }
 
 std::string const &AMateria::getType() const

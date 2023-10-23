@@ -64,12 +64,23 @@ std::string const &Character::getName() const
 
 void Character::equip(AMateria *m)
 {
+    if (!m)
+    {
+        std::cout << "error: materia is null.\n";
+        return;
+    }
+    else if (m->getEquipped())
+    {
+        std::cout << "error: materia is already equipped.\n";
+        return;
+    }
     for (int i = 0; i < kInventory; i++)
     {
         if (inventory[i] == NULL)
         {
             inventory[i] = m;
-            m->getSource()->unequip(m);
+            m->getSource()->loseMateria(m);
+            m->setEquipped();
             return;
         }
     }
@@ -89,7 +100,8 @@ void Character::unequip(int idx)
     }
     else
     {
-        inventory[idx]->getSource()->equip(inventory[idx]);
+        inventory[idx]->setRemoved();
+        inventory[idx]->getSource()->acquireMateria(inventory[idx]);
         inventory[idx] = NULL;
     }
 }

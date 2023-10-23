@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:30:29 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 15:23:26 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 16:21:04 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,7 @@ void leaks()
 
 int main()
 {
-    atexit(leaks);
-
+    // atexit(leaks);
     {
         std::cout << "Test 0" << std::endl;
 
@@ -56,12 +55,37 @@ int main()
     std::cout << std::endl;
 
     {
-        std::cout << "Test 0" << std::endl;
+        std::cout << "Test 1" << std::endl;
 
         IMateriaSource *src = new MateriaSource();
 
         src->learnMateria(new Ice());
         src->learnMateria(new Cure());
+
+        AMateria *tmp;
+        for (int i = 0; i < 40; i++)
+        {
+            tmp = src->createMateria("ice");
+            // std::cout << "materia ptr: " << tmp << std::endl;
+        }
+
+        ICharacter *me = new Character("A");
+        ICharacter *you = new Character("B");
+
+        me->equip(tmp);
+        you->equip(tmp);
+        you->unequip(0);
+        you->unequip(1);
+
+        tmp = src->createMateria("cure");
+        me->equip(tmp);
+
+        me->unequip(0);
+        me->use(0, *you);
+        me->use(1, *you);
+
+        delete me;
+        delete you;
         delete src;
     }
     return 0;

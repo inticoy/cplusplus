@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/18 16:19:00 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 15:26:49 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 16:09:32 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ class AMateria
   protected:
     std::string type;
     MateriaSource *source;
+    bool equipped;
 
   public:
     AMateria(std::string const &type);
@@ -34,6 +35,9 @@ class AMateria
 
     MateriaSource *getSource();
     void setSource(MateriaSource *ms);
+    bool getEquipped();
+    void setEquipped();
+    void setRemoved();
 
     std::string const &getType() const;
 
