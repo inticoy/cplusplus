@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/25 16:26:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/21 18:22:17 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 20:53:19 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,14 @@
 #include "Cat.hpp"
 #include "Dog.hpp"
 
+// void f()
+// {
+//     system("leaks i_dont_want_to_set_the_world_on_fire");
+// }
+
 int main()
 {
+    // atexit(f);
     {
         const Animal *cat1 = new Cat();
         const Animal *dog1 = new Dog();
@@ -47,7 +53,8 @@ int main()
 
         std::cout << "[Dog3]" << std::endl;
         const Animal *dog3 = new Dog(*((Dog *)dog1));
-        ((Dog *)dog1)->getBrain()->printIdeas();
+        ((Dog *)dog3)->getBrain()->addIdea("Hi my friend!");
+        ((Dog *)dog3)->getBrain()->printIdeas();
 
         std::cout << std::endl;
 
@@ -63,10 +70,3 @@ int main()
 
     return 0;
 }
-
-// void f();
-// atexit(f);
-// void f()
-// {
-//     system("leaks i_dont_want_to_set_the_world_on_fire");
-// }
