@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/10/23 15:03:42 by gyoon            ###   ########.fr        #
+#    Updated: 2023/10/23 16:25:59 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,9 +30,9 @@ RM		= rm -rf
 
 SRCS		= 	main.cpp \
 				AMateria.cpp ICharacter.cpp IMateriaSource.cpp \
-				Character/Character.cpp \
-				Materia/Cure.cpp Materia/Ice.cpp \
-				MateriaSource/MateriaSource.cpp
+				Character.cpp \
+				Cure.cpp Ice.cpp \
+				MateriaSource.cpp
 OBJS		= 	${SRCS:.cpp=.o}
 INC			= 	-I./ -I./Character -I./Materia -I./MateriaSource
 
