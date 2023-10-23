@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/07/01 17:34:45 by gyoon            ###   ########.fr        #
+#    Updated: 2023/10/23 20:35:42 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ NAME		= polymorphism
 #                                                                              #
 # **************************************************************************** #
 
-CC		= c++
-FLAGS	= -Wall -Wextra -Werror -std=c++98
-RM		= rm -rf
+CC			= c++
+CXXFLAGS	= -Wall -Wextra -Werror -std=c++98
+RM			= rm -rf
 
 # **************************************************************************** #
 #                                                                              #
@@ -66,7 +66,7 @@ version = "mandatory version"
 all : $(NAME)
 
 $(NAME) : $(OBJS)
-	@$(CC) $(CFLAGS) $(OBJS) -o $@
+	@$(CC) $(CXXFLAGS) $(OBJS) -o $@
 	@printf "\rCompiling source files... "
 	@printf "%.$(shell printf "%d" 64)s" $(bar_done)
 	@printf "%7.2f%%\n" 100
@@ -84,7 +84,7 @@ $(NAME) : $(OBJS)
 	@printf "%.$(shell printf "%d" $(len_done))s" $(bar_done)
 	@printf "%.$(shell printf "%d" $(len_ready))s" $(bar_ready)
 	@printf "%7.2f%%" $(percent)
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CXXFLAGS) -c $< -o $@
 
 clean :
 	@$(RM) $(OBJS)
