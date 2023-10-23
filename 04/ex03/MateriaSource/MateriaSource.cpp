@@ -1,4 +1,5 @@
 /* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   MateriaSource.cpp                                  :+:      :+:    :+:   */
@@ -6,7 +7,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:35:27 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 14:25:21 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/23 14:29:02 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +19,6 @@ MateriaSource::MateriaSource()
     {
         materias[i] = NULL;
     }
-    nCreatedMateria = 0;
     for (int i = 0; i < kMaxMateria; i++)
     {
         materias[i] = NULL;
@@ -31,7 +31,6 @@ MateriaSource::MateriaSource(const MateriaSource &ms)
     {
         materias[i] = ms.materias[i];
     }
-    // nCreatedMateria = 0;
     // for (int i = 0; i < kMaxMateria; i++)
     // {
     //     materias[i] = NULL;
@@ -47,9 +46,12 @@ MateriaSource::~MateriaSource()
             delete materias[i];
         }
     }
-    for (int i = 0; i < nCreatedMateria; i++)
+    for (int i = 0; i < kMaxMateria; i++)
     {
-        delete createdMaterias[i];
+        if (createdMaterias[i])
+        {
+            delete createdMaterias[i];
+        }
     }
 }
 
@@ -59,7 +61,6 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &ms)
     {
         materias[i] = ms.materias[i];
     }
-    // nCreatedMateria = 0;
     // for (int i = 0; i < kMaxMateria; i++)
     // {
     //     materias[i] = NULL;
@@ -69,19 +70,20 @@ MateriaSource &MateriaSource::operator=(const MateriaSource &ms)
 
 void MateriaSource::equip(AMateria *m)
 {
-    if (nCreatedMateria >= kMaxMateria)
+    for (int i = 0; i < kMaxMateria; i++)
     {
-        std::cout << "error: and your player cannot unequip return";
+        if (!createdMaterias[i])
+        {
+            createdMaterias[i] = m;
+            return;
+        }
     }
-    else
-    {
-        createdMaterias[nCreatedMateria++] = m;
-    }
+    std::cout << "error: and your player cannot unequip return";
 }
 
 void MateriaSource::unequip(AMateria *m)
 {
-    for (int i = 0; i < nCreatedMateria; i++)
+    for (int i = 0; i < kMaxMateria; i++)
     {
         if (createdMaterias[i] == m)
         {
@@ -113,16 +115,17 @@ AMateria *MateriaSource::createMateria(std::string const &type)
         {
             AMateria *newMateria = materias[i]->clone();
             newMateria->setSource(this);
-            if (nCreatedMateria >= kMaxMateria)
+            for (int j = 0; j < kMaxMateria; j++)
             {
-                std::cout << "error: MateriaSource cannot create materia more "
-                             "than 1024.\n";
+                if (!createdMaterias[j])
+                {
+                    createdMaterias[j] = newMateria;
+                    return newMateria;
+                }
             }
-            else
-            {
-                equip(newMateria);
-            }
-            return newMateria;
+            std::cout << "error: MateriaSource cannot create materia more "
+                         "than 1024.\n";
+            return NULL;
         }
     }
     return NULL;
