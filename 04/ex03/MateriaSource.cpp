@@ -77,6 +77,10 @@ void MateriaSource::acquireMateria(AMateria *m)
         }
     }
     AMateria **tmp = new AMateria *[maxMateria + kMaxMateria];
+    for (int i = 0; i < maxMateria + kMaxMateria; i++)
+    {
+        tmp[i] = NULL;
+    }
     for (int i = 0; i < maxMateria; i++)
     {
         tmp[i] = createdMaterias[i];
