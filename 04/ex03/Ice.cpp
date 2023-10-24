@@ -6,11 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:52:06 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/24 13:39:31 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/24 16:29:47 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Ice.hpp"
+#include "MateriaSource.hpp"
 
 Ice::Ice() : AMateria("ice")
 {
@@ -26,8 +27,12 @@ Ice::~Ice()
 
 Ice &Ice::operator=(const Ice &i)
 {
-    // TODO
-    std::cout << i.type << std::endl;
+    if (source)
+    {
+        source->loseMateria(this);
+    }
+    source = i.source;
+    equipped = i.equipped;
     return *this;
 }
 

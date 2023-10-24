@@ -90,6 +90,7 @@ void MateriaSource::acquireMateria(AMateria *m)
             return;
         }
     }
+    // if createdMaterias is full
     AMateria **tmp = new AMateria *[maxMateria + kMaxMateria];
     for (int i = 0; i < maxMateria + kMaxMateria; i++)
     {

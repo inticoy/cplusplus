@@ -6,11 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:59:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/24 13:39:39 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/24 16:29:30 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Cure.hpp"
+#include "MateriaSource.hpp"
 
 Cure::Cure() : AMateria("cure")
 {
@@ -26,8 +27,12 @@ Cure::~Cure()
 
 Cure &Cure::operator=(const Cure &c)
 {
-    // TODO
-    std::cout << c.type << std::endl;
+    if (source)
+    {
+        source->loseMateria(this);
+    }
+    source = c.source;
+    equipped = c.equipped;
     return *this;
 }
 
