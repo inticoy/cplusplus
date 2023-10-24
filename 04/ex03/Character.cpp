@@ -43,17 +43,19 @@ Character::~Character()
 {
     for (int i = 0; i < kInventory; i++)
     {
-        if (inventory[i])
-        {
-            delete inventory[i];
-        }
+        delete inventory[i];
+        inventory[i] = NULL;
     }
 }
 
 Character &Character::operator=(const Character &c)
 {
-    // assigning a character does not make sense.
-    // if assign, nothing happens.
+    name = c.name;
+    for (int i = 0; i < kInventory; i++)
+    {
+        delete inventory[i];
+        inventory[i] = c.inventory[i];
+    }
     return *this;
 }
 

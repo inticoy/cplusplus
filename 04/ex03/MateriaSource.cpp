@@ -29,15 +29,16 @@ MateriaSource::MateriaSource()
 
 MateriaSource::MateriaSource(const MateriaSource &ms)
 {
-    maxMateria = kMaxMateria;
+    maxMateria = ms.maxMateria;
     for (int i = 0; i < kMateria; i++)
     {
-        materias[i] = NULL;
+        materias[i] = ms.materias[i]->clone();
     }
-    createdMaterias = new AMateria *[maxMateria];
+    createdMaterias = new AMateria *[ms.maxMateria];
     for (int i = 0; i < maxMateria; i++)
     {
-        createdMaterias[i] = NULL;
+        createdMaterias[i] = ms.createdMaterias[i]->clone();
+        createdMaterias[i]->setSource(this);
     }
 }
 
@@ -45,24 +46,37 @@ MateriaSource::~MateriaSource()
 {
     for (int i = 0; i < kMateria; i++)
     {
-        if (materias[i])
-        {
-            delete materias[i];
-        }
+        delete materias[i];
+        materias[i] = NULL;
     }
     for (int i = 0; i < maxMateria; i++)
     {
-        if (createdMaterias[i])
-        {
-            delete createdMaterias[i];
-        }
+        delete createdMaterias[i];
+        createdMaterias[i] = NULL;
     }
     delete[] createdMaterias;
 }
 
 MateriaSource &MateriaSource::operator=(const MateriaSource &ms)
 {
-    // assign can not be done.
+    for (int i = 0; i < kMateria; i++)
+    {
+        delete materias[i];
+        materias[i] = ms.materias[i]->clone();
+    }
+    AMateria **newCreatedMaterias = new AMateria *[ms.maxMateria];
+    for (int i = 0; i < ms.maxMateria; i++)
+    {
+        newCreatedMaterias[i] = ms.createdMaterias[i]->clone();
+        createdMaterias[i]->setSource(this);
+    }
+    for (int i = 0; i < maxMateria; i++)
+    {
+        delete createdMaterias[i];
+        createdMaterias[i] = NULL;
+    }
+    delete createdMaterias;
+    createdMaterias = newCreatedMaterias;
     return *this;
 }
 

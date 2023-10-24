@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:52:06 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/22 22:42:50 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/24 13:39:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ Ice::~Ice()
 
 Ice &Ice::operator=(const Ice &i)
 {
-    type = i.type;
+    // TODO
+    std::cout << i.type << std::endl;
     return *this;
 }
 

@@ -6,11 +6,13 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:10:41 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 16:10:12 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/24 13:39:00 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AMateria.hpp"
+#include "ICharacter.hpp"
+#include "MateriaSource.hpp"
 
 AMateria::AMateria()
 {
@@ -39,8 +41,10 @@ AMateria::~AMateria()
 
 AMateria &AMateria::operator=(const AMateria &m)
 {
-    // Cure cure = ice does not make sense.
+    // cure = ice does not make sense.
     // assign operator does not works.
+    // TODO
+    std::cout << m.type << std::endl;
     return *this;
 }
 
@@ -76,5 +80,5 @@ std::string const &AMateria::getType() const
 
 void AMateria::use(ICharacter &target)
 {
-    std::cout << "* Materia does sth to <name> *\n";
+    std::cout << "* Materia does sth to " << target.getName() << " *\n";
 }

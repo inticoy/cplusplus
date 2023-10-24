@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 18:59:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 15:20:58 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/24 13:39:39 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,8 @@ Cure::~Cure()
 
 Cure &Cure::operator=(const Cure &c)
 {
-    type = c.type;
+    // TODO
+    std::cout << c.type << std::endl;
     return *this;
 }
 
