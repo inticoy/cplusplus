@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/21 19:30:29 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/24 16:29:59 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/26 17:42:37 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@
 #include "Ice.hpp"
 #include "MateriaSource.hpp"
 
-void leaks()
-{
-    system("leaks league_of_sorcerers");
-}
+// void leaks()
+// {
+//     system("leaks league_of_sorcerers");
+// }
 
 int main()
 {
