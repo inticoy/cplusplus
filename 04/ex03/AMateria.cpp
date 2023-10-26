@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 16:10:41 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/24 13:39:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/10/26 16:14:18 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,10 +41,12 @@ AMateria::~AMateria()
 
 AMateria &AMateria::operator=(const AMateria &m)
 {
-    // cure = ice does not make sense.
-    // assign operator does not works.
-    // TODO
-    std::cout << m.type << std::endl;
+    if (source)
+    {
+        source->loseMateria(this);
+    }
+    source = m.source;
+    equipped = m.equipped;
     return *this;
 }
 
