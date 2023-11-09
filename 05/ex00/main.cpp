@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 20:57:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/05 21:39:47 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/09 22:30:50 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,14 +16,57 @@
 
 int main()
 {
-    Bureaucrat man("Geon-woo, Yun", 1);
+    {
+        Bureaucrat president("Gyoon", 1);
 
-    try
-    {
-        man.incrementGrade();
+        std::cout << president << std::endl;
+        try
+        {
+            president.incrementGrade();
+        }
+        catch (std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
-    catch (std::exception &e)
+
+    std::cout << std::endl;
+
     {
-        std::cerr << e.what() << std::endl;
+        Bureaucrat servant("Gyoon", 150);
+
+        std::cout << servant << std::endl;
+        try
+        {
+            servant.incrementGrade();
+            std::cout << servant << std::endl;
+            servant.decrementGrade();
+            std::cout << servant << std::endl;
+            servant.decrementGrade();
+            std::cout << servant << std::endl;
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+    }
+
+    std::cout << std::endl;
+
+    {
+        Bureaucrat middle("Gyoon", 75);
+
+        try
+        {
+            for (;;)
+            {
+                std::cout << middle << std::endl;
+                middle.decrementGrade();
+            }
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
     }
 }
