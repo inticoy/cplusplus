@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/09 22:53:39 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/14 19:38:26 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,25 @@ const unsigned char &Bureaucrat::getGrade() const
 void Bureaucrat::incrementGrade() throw(GradeTooHighException)
 {
     if (grade == 1)
+    {
         throw(GradeTooHighException());
+    }
     else
+    {
         --grade;
+    }
 }
 
 void Bureaucrat::decrementGrade() throw(GradeTooLowException)
 {
     if (grade == 150)
+    {
         throw(GradeTooLowException());
+    }
     else
+    {
         ++grade;
+    }
 }
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &b)
