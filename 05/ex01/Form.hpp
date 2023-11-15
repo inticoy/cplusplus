@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/15 17:37:58 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/15 21:56:57 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ class Form
     const unsigned char &getMinExeGrade() const;
     const bool &getIsSigned() const;
 
-    void beSigned(const Bureaucrat &b) throw(GradeTooLowException);
+    bool beSigned(const Bureaucrat &b) throw(GradeTooLowException);
 
     friend std::ostream &operator<<(std::ostream &os, const Form &f);
 
