@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/10 20:48:01 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/14 19:20:34 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "Bureaucrat.hpp"
 #include <string>
 
+class Bureaucrat;
 class Form
 {
   public:
@@ -42,6 +43,8 @@ class Form
 
     Form();
     Form(const Form &f);
+    Form(const std::string &name, const unsigned char &minSignGrade,
+         const unsigned char &minExeGrade);
     ~Form();
     Form &operator=(const Form &f);
 
@@ -52,11 +55,15 @@ class Form
 
     void beSigned(const Bureaucrat &b) throw(GradeTooLowException);
 
+    friend std::ostream &operator<<(std::ostream &os, const Form &f);
+
   private:
     const std::string name;
     const unsigned char minSignGrade;
     const unsigned char minExeGrade;
     bool isSigned;
 };
+
+std::ostream &operator<<(std::ostream &os, const Form &f);
 
 #endif

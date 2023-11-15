@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/10 20:52:20 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/14 19:20:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@
 #include <exception>
 #include <iostream>
 #include <string>
+
+class Form;
 
 class Bureaucrat
 {

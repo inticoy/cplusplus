@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/10 21:37:34 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/14 19:37:54 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,17 +87,25 @@ const unsigned char &Bureaucrat::getGrade() const
 void Bureaucrat::incrementGrade() throw(GradeTooHighException)
 {
     if (grade == 1)
+    {
         throw(GradeTooHighException());
+    }
     else
+    {
         --grade;
+    }
 }
 
 void Bureaucrat::decrementGrade() throw(GradeTooLowException)
 {
     if (grade == 150)
+    {
         throw(GradeTooLowException());
+    }
     else
+    {
         ++grade;
+    }
 }
 
 void Bureaucrat::signForm(Form &f) const
@@ -105,12 +113,12 @@ void Bureaucrat::signForm(Form &f) const
     try
     {
         f.beSigned(*this);
-        std::cout << name << " signed " << f.getName() << "\n";
+        std::cout << name << " signed '" << f.getName() << "'\n";
     }
     catch (const std::exception &e)
     {
-        std::cerr << name << "couldn't sign" << f.getName() std::cerr
-                  << e.what() << '\n';
+        std::cerr << name << " couldn't sign '" << f.getName() << "' because ";
+        std::cerr << e.what() << '\n';
     }
 }
 

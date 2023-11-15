@@ -6,11 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:51:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/10 20:47:16 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/14 19:25:26 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
+#include "Bureaucrat.hpp"
 
 Form::GradeTooHighException::GradeTooHighException() : msg("grade_too_high")
 {
@@ -49,12 +50,21 @@ Form::Form(const Form &f)
 {
 }
 
+Form::Form(const std::string &name, const unsigned char &minSignGrade,
+           const unsigned char &minExeGrade)
+    : name(name), minSignGrade(minSignGrade), minExeGrade(minExeGrade),
+      isSigned(false)
+{
+}
+
 Form::~Form()
 {
 }
 
 Form &Form::operator=(const Form &f)
 {
+    isSigned = f.isSigned;
+    return (*this);
 }
 
 const std::string &Form::getName() const
@@ -86,4 +96,14 @@ void Form::beSigned(const Bureaucrat &b) throw(GradeTooLowException)
     {
         isSigned = true;
     }
+}
+
+std::ostream &operator<<(std::ostream &os, const Form &f)
+{
+    os << "A form named " << f.name;
+    os << (f.isSigned ? " is signed." : "is not signed.");
+    os << "\nIt needs grade ";
+    os << static_cast<int>(f.minSignGrade) << " to sign, and grade ";
+    os << static_cast<int>(f.minExeGrade) << " to execute.";
+    return (os);
 }
