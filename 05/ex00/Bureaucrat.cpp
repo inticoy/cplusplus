@@ -6,14 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/09 22:53:39 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/15 17:10:32 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
 Bureaucrat::GradeTooHighException::GradeTooHighException()
-    : msg("grade_too_high")
+    : msg("grade is too high")
 {
 }
 
@@ -26,7 +26,8 @@ const char *Bureaucrat::GradeTooHighException::what() const throw()
     return msg.c_str();
 }
 
-Bureaucrat::GradeTooLowException::GradeTooLowException() : msg("grade_too_low")
+Bureaucrat::GradeTooLowException::GradeTooLowException()
+    : msg("grade is too low")
 {
 }
 
