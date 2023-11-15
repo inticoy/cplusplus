@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/15 17:22:01 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/15 17:33:54 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ Bureaucrat::Bureaucrat(const std::string &name) : name(name), grade(150)
 Bureaucrat::Bureaucrat(const std::string &name,
                        unsigned char grade) throw(GradeTooHighException,
                                                   GradeTooLowException)
-    : name(name), grade(grade)
+    : name(name)
 {
     if (grade < 1)
     {

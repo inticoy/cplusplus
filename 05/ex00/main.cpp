@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 20:57:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/15 17:13:28 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/15 17:34:56 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,32 @@ int main()
                 std::cout << low << std::endl;
                 low.decrementGrade();
             }
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+    }
+
+    {
+        std::cout << "\n[TEST 5]\n";
+
+        try
+        {
+            Bureaucrat zero("Gyoon", 0);
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << e.what() << '\n';
+        }
+    }
+
+    {
+        std::cout << "\n[TEST 6]\n";
+
+        try
+        {
+            Bureaucrat over("Gyoon", 151);
         }
         catch (const std::exception &e)
         {
