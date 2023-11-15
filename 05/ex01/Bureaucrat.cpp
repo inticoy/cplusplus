@@ -6,14 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/14 19:37:54 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/15 20:27:52 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
 
 Bureaucrat::GradeTooHighException::GradeTooHighException()
-    : msg("grade_too_high")
+    : msg("grade is too high")
 {
 }
 
@@ -26,7 +26,8 @@ const char *Bureaucrat::GradeTooHighException::what() const throw()
     return msg.c_str();
 }
 
-Bureaucrat::GradeTooLowException::GradeTooLowException() : msg("grade_too_low")
+Bureaucrat::GradeTooLowException::GradeTooLowException()
+    : msg("grade is too low")
 {
 }
 
@@ -47,8 +48,14 @@ Bureaucrat::Bureaucrat(const Bureaucrat &b) : name(b.name), grade(b.grade)
 {
 }
 
-Bureaucrat::Bureaucrat(const std::string &name, unsigned char grade)
-    : name(name), grade(grade)
+Bureaucrat::Bureaucrat(const std::string &name) : name(name), grade(150)
+{
+}
+
+Bureaucrat::Bureaucrat(const std::string &name,
+                       unsigned char grade) throw(GradeTooHighException,
+                                                  GradeTooLowException)
+    : name(name)
 {
     if (grade < 1)
     {
@@ -110,6 +117,12 @@ void Bureaucrat::decrementGrade() throw(GradeTooLowException)
 
 void Bureaucrat::signForm(Form &f) const
 {
+    if (f.getIsSigned())
+    {
+        std::cout << name << " couldn't sign '" << f.getName();
+        std::cout << "' because form is already signed.\n";
+        return;
+    }
     try
     {
         f.beSigned(*this);

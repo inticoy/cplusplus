@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/14 19:20:34 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/15 17:37:58 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@
 #include <string>
 
 class Bureaucrat;
+
 class Form
 {
   public:
@@ -27,9 +28,10 @@ class Form
 
       public:
         GradeTooHighException();
-        ~GradeTooHighException() throw();
+        virtual ~GradeTooHighException() throw();
         const char *what() const throw();
     };
+
     class GradeTooLowException : public std::exception
     {
       private:
@@ -37,15 +39,17 @@ class Form
 
       public:
         GradeTooLowException();
-        ~GradeTooLowException() throw();
+        virtual ~GradeTooLowException() throw();
         const char *what() const throw();
     };
 
     Form();
     Form(const Form &f);
+    Form(const std::string &name);
     Form(const std::string &name, const unsigned char &minSignGrade,
-         const unsigned char &minExeGrade);
-    ~Form();
+         const unsigned char &minExeGrade) throw(GradeTooHighException,
+                                                 GradeTooLowException);
+    virtual ~Form();
     Form &operator=(const Form &f);
 
     const std::string &getName() const;

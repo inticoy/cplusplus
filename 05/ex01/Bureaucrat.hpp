@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/14 19:20:53 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/15 17:29:40 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,10 @@ class Bureaucrat
 
       public:
         GradeTooHighException();
-        ~GradeTooHighException() throw();
+        virtual ~GradeTooHighException() throw();
         const char *what() const throw();
     };
+
     class GradeTooLowException : public std::exception
     {
       private:
@@ -40,14 +41,17 @@ class Bureaucrat
 
       public:
         GradeTooLowException();
-        ~GradeTooLowException() throw();
+        virtual ~GradeTooLowException() throw();
         const char *what() const throw();
     };
 
     Bureaucrat();
     Bureaucrat(const Bureaucrat &b);
-    Bureaucrat(const std::string &name, unsigned char grade);
-    ~Bureaucrat();
+    Bureaucrat(const std::string &name);
+    Bureaucrat(const std::string &name,
+               unsigned char grade) throw(GradeTooHighException,
+                                          GradeTooLowException);
+    virtual ~Bureaucrat();
     Bureaucrat &operator=(const Bureaucrat &b);
 
     const std::string &getName() const;
