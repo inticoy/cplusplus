@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/10/22 15:33:05 by gyoon             #+#    #+#             */
-/*   Updated: 2023/10/23 16:02:34 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/15 17:26:08 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class MateriaSource : public IMateriaSource
   public:
     MateriaSource();
     MateriaSource(const MateriaSource &ms);
-    ~MateriaSource();
+    virtual ~MateriaSource();
     MateriaSource &operator=(const MateriaSource &ms);
 
     void acquireMateria(AMateria *m);
