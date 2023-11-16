@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:39:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/16 20:45:54 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/16 22:04:41 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 #include <iostream>
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-    : AForm("ShrubberyCreation", 145, 137), target("temp")
+    : AForm("Shrubbery Creation Form", 145, 137), target("temp")
 {
 }
 
@@ -26,7 +26,7 @@ ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &scf)
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
-    : AForm("ShrubberyCreation", 145, 137), target(target)
+    : AForm("Shrubbery Creation Form", 145, 137), target(target)
 {
 }
 
@@ -34,7 +34,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 {
 }
 
-const ShrubberyCreationForm &ShrubberyCreationForm::operator=(
+ShrubberyCreationForm &ShrubberyCreationForm::operator=(
     const ShrubberyCreationForm &scf)
 {
     target = scf.target;
