@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/15 17:33:54 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 14:57:25 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,12 @@
 
 Bureaucrat::GradeTooHighException::GradeTooHighException()
     : msg("grade is too high")
+{
+}
+
+Bureaucrat::GradeTooHighException::GradeTooHighException(
+    const unsigned char &grade)
+    : msg("grade " + std::to_string(static_cast<int>(grade)) + " is too high")
 {
 }
 
@@ -28,6 +34,12 @@ const char *Bureaucrat::GradeTooHighException::what() const throw()
 
 Bureaucrat::GradeTooLowException::GradeTooLowException()
     : msg("grade is too low")
+{
+}
+
+Bureaucrat::GradeTooLowException::GradeTooLowException(
+    const unsigned char &grade)
+    : msg("grade " + std::to_string(static_cast<int>(grade)) + " is too low")
 {
 }
 
@@ -59,11 +71,11 @@ Bureaucrat::Bureaucrat(const std::string &name,
 {
     if (grade < 1)
     {
-        throw(GradeTooHighException());
+        throw(GradeTooHighException(grade));
     }
     else if (grade > 150)
     {
-        throw(GradeTooLowException());
+        throw(GradeTooLowException(grade));
     }
     else
     {
@@ -95,7 +107,7 @@ void Bureaucrat::incrementGrade() throw(GradeTooHighException)
 {
     if (grade == 1)
     {
-        throw(GradeTooHighException());
+        throw(GradeTooHighException(grade));
     }
     else
     {
@@ -107,7 +119,7 @@ void Bureaucrat::decrementGrade() throw(GradeTooLowException)
 {
     if (grade == 150)
     {
-        throw(GradeTooLowException());
+        throw(GradeTooLowException(grade));
     }
     else
     {

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/15 17:23:40 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 14:56:17 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ class Bureaucrat
 
       public:
         GradeTooHighException();
+        GradeTooHighException(const unsigned char &grade);
         virtual ~GradeTooHighException() throw();
         const char *what() const throw();
     };
@@ -38,6 +39,7 @@ class Bureaucrat
 
       public:
         GradeTooLowException();
+        GradeTooLowException(const unsigned char &grade);
         virtual ~GradeTooLowException() throw();
         const char *what() const throw();
     };
