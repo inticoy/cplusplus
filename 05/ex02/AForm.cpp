@@ -6,42 +6,15 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:51:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/15 22:01:03 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 19:20:15 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
 #include "Bureaucrat.hpp"
 
-AForm::GradeTooHighException::GradeTooHighException() : msg("grade is too high")
-{
-}
-
-AForm::GradeTooHighException::~GradeTooHighException() throw()
-{
-}
-
-const char *AForm::GradeTooHighException::what() const throw()
-{
-    return msg.c_str();
-}
-
-AForm::GradeTooLowException::GradeTooLowException() : msg("grade is too low")
-{
-}
-
-AForm::GradeTooLowException::~GradeTooLowException() throw()
-{
-}
-
-const char *AForm::GradeTooLowException::what() const throw()
-{
-    return msg.c_str();
-}
-
 AForm::AForm()
-    : name("default AForm"), minSignGrade(150), minExeGrade(150),
-      isSigned(false)
+    : name("default"), minSignGrade(150), minExeGrade(150), isSigned(false)
 {
 }
 
@@ -56,19 +29,19 @@ AForm::AForm(const std::string &name)
 {
 }
 
-AForm::AForm(const std::string &name, const unsigned char &minSignGrade,
-             const unsigned char &minExeGrade) throw(GradeTooHighException,
-                                                     GradeTooLowException)
+AForm::AForm(const std::string &name, unsigned char minSignGrade,
+             unsigned char minExeGrade) throw(GradeTooHighException,
+                                              GradeTooLowException)
     : name(name), minSignGrade(minSignGrade), minExeGrade(minExeGrade),
       isSigned(false)
 {
     if (minSignGrade < 1 || minExeGrade < 1)
     {
-        throw(GradeTooHighException());
+        throw GradeTooHighException();
     }
     else if (minSignGrade > 150 || minExeGrade > 150)
     {
-        throw(GradeTooLowException());
+        throw GradeTooLowException();
     }
 }
 
@@ -79,7 +52,7 @@ AForm::~AForm()
 AForm &AForm::operator=(const AForm &f)
 {
     isSigned = f.isSigned;
-    return (*this);
+    return *this;
 }
 
 const std::string &AForm::getName() const
@@ -102,20 +75,25 @@ const bool &AForm::getIsSigned() const
     return isSigned;
 }
 
-bool AForm::beSigned(const Bureaucrat &b) throw(GradeTooLowException)
+void AForm::setIsSigned(bool isSigned)
+{
+    this->isSigned = isSigned;
+}
+
+void AForm::beSigned(const Bureaucrat &b) throw(GradeTooLowException,
+                                                DoubleSignException)
 {
     if (isSigned)
     {
-        return false;
+        throw DoubleSignException();
     }
     else if (b.getGrade() > minSignGrade)
     {
-        throw(GradeTooLowException());
+        throw GradeTooLowException();
     }
     else
     {
         isSigned = true;
-        return true;
     }
 }
 

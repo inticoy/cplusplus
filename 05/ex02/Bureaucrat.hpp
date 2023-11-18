@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/15 21:54:58 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 18:22:03 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,23 +25,13 @@ class Bureaucrat
   public:
     class GradeTooHighException : public std::exception
     {
-      private:
-        std::string msg;
-
       public:
-        GradeTooHighException();
-        virtual ~GradeTooHighException() throw();
         const char *what() const throw();
     };
 
     class GradeTooLowException : public std::exception
     {
-      private:
-        std::string msg;
-
       public:
-        GradeTooLowException();
-        virtual ~GradeTooLowException() throw();
         const char *what() const throw();
     };
 
@@ -56,6 +46,8 @@ class Bureaucrat
 
     const std::string &getName() const;
     const unsigned char &getGrade() const;
+    void setGrade(unsigned char grade) throw(GradeTooHighException,
+                                             GradeTooLowException);
 
     void incrementGrade() throw(GradeTooHighException);
     void decrementGrade() throw(GradeTooLowException);

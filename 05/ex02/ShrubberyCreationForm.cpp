@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:39:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/16 22:04:41 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 19:24:40 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,27 +37,33 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(
     const ShrubberyCreationForm &scf)
 {
-    target = scf.target;
-    return (*this);
+    if (this != &scf)
+    {
+        this->setIsSigned(scf.getIsSigned());
+        target = scf.target;
+    }
+    return *this;
 }
 
-bool ShrubberyCreationForm::execute(const Bureaucrat &e) const
-    throw(GradeTooLowException)
+void ShrubberyCreationForm::execute(const Bureaucrat &e) const
+    throw(GradeTooLowException, NotSignedException)
 {
     if (!this->getIsSigned())
     {
-        return false;
+        throw NotSignedException();
     }
     else if (e.getGrade() > this->getMinExeGrade())
     {
-        throw(GradeTooLowException());
+        throw GradeTooLowException();
     }
     else
     {
         std::fstream fs;
-
         fs.open(target + "_shrubbery", std::ios::out | std::ios::trunc);
-
+        if (!fs.is_open())
+        {
+            throw FileCreateFailException();
+        }
         fs << "                                            .\n";
         fs << "                                   .         ;\n";
         fs << "      .              .              ;%%     ;;\n";
@@ -87,6 +93,5 @@ bool ShrubberyCreationForm::execute(const Bureaucrat &e) const
         fs << "                   ;%%@@@@%%%%:;;;.\n";
         fs << "               ...;%@@@@@%%:;;;;,..\n";
         fs.close();
-        return true;
     }
 }

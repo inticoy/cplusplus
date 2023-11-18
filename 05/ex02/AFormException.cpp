@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.cpp                                           :+:      :+:    :+:   */
+/*   AFormException.cpp                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/05 20:57:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 18:33:29 by gyoon            ###   ########.fr       */
+/*   Created: 2023/11/18 18:15:22 by gyoon             #+#    #+#             */
+/*   Updated: 2023/11/18 18:34:36 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "AForm.hpp"
-#include "Bureaucrat.hpp"
-#include "ShrubberyCreationForm.hpp"
-#include <exception>
-#include <iostream>
 
-int main()
+const char *AForm::GradeTooHighException::what() const throw()
 {
-    AForm *form = new ShrubberyCreationForm("hi");
-    Bureaucrat man("Kim", 1);
-    Bureaucrat man2("Lee", 150);
+    return "grade is too high";
+}
 
-    man2.executeForm(*form);
-    man.executeForm(*form);
-    man2.signForm(*form);
-    man.signForm(*form);
-    man2.executeForm(*form);
-    man.executeForm(*form);
+const char *AForm::GradeTooLowException::what() const throw()
+{
+    return "grade is too low";
+}
 
-    return 0;
+const char *AForm::DoubleSignException::what() const throw()
+{
+    return "form is already signed";
+}
+
+const char *AForm::NotSignedException::what() const throw()
+{
+    return "form is not signed yet";
 }
