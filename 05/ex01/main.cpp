@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 20:57:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/15 20:28:11 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 18:12:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,15 +21,16 @@ int main()
     Bureaucrat president("Kim", 1);
     Bureaucrat servant("Lee", 150);
 
-    std::cout << form << std::endl;
-
     std::cout << "\n[TEST 1]\n";
+    std::cout << form << std::endl;
     servant.signForm(form);
 
     std::cout << "\n[TEST 2]\n";
+    std::cout << form << std::endl;
     president.signForm(form);
 
     std::cout << "\n[TEST 3]\n";
+    std::cout << form << std::endl;
     president.signForm(form);
 
     std::cout << "\n[TEST 4]\n";

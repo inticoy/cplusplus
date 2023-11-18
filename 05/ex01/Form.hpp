@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/15 21:56:57 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 18:10:01 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,19 @@ class Form
   public:
     class GradeTooHighException : public std::exception
     {
-      private:
-        std::string msg;
-
       public:
-        GradeTooHighException();
-        virtual ~GradeTooHighException() throw();
         const char *what() const throw();
     };
 
     class GradeTooLowException : public std::exception
     {
-      private:
-        std::string msg;
-
       public:
-        GradeTooLowException();
-        virtual ~GradeTooLowException() throw();
+        const char *what() const throw();
+    };
+
+    class DoubleSignException : public std::exception
+    {
+      public:
         const char *what() const throw();
     };
 
@@ -57,7 +53,8 @@ class Form
     const unsigned char &getMinExeGrade() const;
     const bool &getIsSigned() const;
 
-    bool beSigned(const Bureaucrat &b) throw(GradeTooLowException);
+    void beSigned(const Bureaucrat &b) throw(GradeTooLowException,
+                                             DoubleSignException);
 
     friend std::ostream &operator<<(std::ostream &os, const Form &f);
 

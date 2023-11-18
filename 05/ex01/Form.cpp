@@ -6,38 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:51:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/15 21:57:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 18:10:04 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Form.hpp"
 #include "Bureaucrat.hpp"
-
-Form::GradeTooHighException::GradeTooHighException() : msg("grade is too high")
-{
-}
-
-Form::GradeTooHighException::~GradeTooHighException() throw()
-{
-}
-
-const char *Form::GradeTooHighException::what() const throw()
-{
-    return msg.c_str();
-}
-
-Form::GradeTooLowException::GradeTooLowException() : msg("grade is too low")
-{
-}
-
-Form::GradeTooLowException::~GradeTooLowException() throw()
-{
-}
-
-const char *Form::GradeTooLowException::what() const throw()
-{
-    return msg.c_str();
-}
 
 Form::Form()
     : name("default form"), minSignGrade(150), minExeGrade(150), isSigned(false)
@@ -63,11 +37,11 @@ Form::Form(const std::string &name, const unsigned char &minSignGrade,
 {
     if (minSignGrade < 1 || minExeGrade < 1)
     {
-        throw(GradeTooHighException());
+        throw GradeTooHighException();
     }
     else if (minSignGrade > 150 || minExeGrade > 150)
     {
-        throw(GradeTooLowException());
+        throw GradeTooLowException();
     }
 }
 
@@ -78,7 +52,7 @@ Form::~Form()
 Form &Form::operator=(const Form &f)
 {
     isSigned = f.isSigned;
-    return (*this);
+    return *this;
 }
 
 const std::string &Form::getName() const
@@ -101,20 +75,20 @@ const bool &Form::getIsSigned() const
     return isSigned;
 }
 
-bool Form::beSigned(const Bureaucrat &b) throw(GradeTooLowException)
+void Form::beSigned(const Bureaucrat &b) throw(GradeTooLowException,
+                                               DoubleSignException)
 {
     if (isSigned)
     {
-        return false;
+        throw DoubleSignException();
     }
     else if (b.getGrade() > minSignGrade)
     {
-        throw(GradeTooLowException());
+        throw GradeTooLowException();
     }
     else
     {
         isSigned = true;
-        return true;
     }
 }
 
