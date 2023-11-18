@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/11/09 22:37:50 by gyoon            ###   ########.fr        #
+#    Updated: 2023/11/18 17:43:01 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,8 @@ RM			= rm -rf
 # **************************************************************************** #
 
 SRCS		= 	main.cpp \
-				Bureaucrat.cpp
+				Bureaucrat.cpp \
+				BureaucratException.cpp
 OBJS		= 	${SRCS:.cpp=.o}
 INC			= 	./
 

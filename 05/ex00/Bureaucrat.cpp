@@ -6,51 +6,11 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 14:57:25 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 17:43:22 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
-
-Bureaucrat::GradeTooHighException::GradeTooHighException()
-    : msg("grade is too high")
-{
-}
-
-Bureaucrat::GradeTooHighException::GradeTooHighException(
-    const unsigned char &grade)
-    : msg("grade " + std::to_string(static_cast<int>(grade)) + " is too high")
-{
-}
-
-Bureaucrat::GradeTooHighException::~GradeTooHighException() throw()
-{
-}
-
-const char *Bureaucrat::GradeTooHighException::what() const throw()
-{
-    return msg.c_str();
-}
-
-Bureaucrat::GradeTooLowException::GradeTooLowException()
-    : msg("grade is too low")
-{
-}
-
-Bureaucrat::GradeTooLowException::GradeTooLowException(
-    const unsigned char &grade)
-    : msg("grade " + std::to_string(static_cast<int>(grade)) + " is too low")
-{
-}
-
-Bureaucrat::GradeTooLowException::~GradeTooLowException() throw()
-{
-}
-
-const char *Bureaucrat::GradeTooLowException::what() const throw()
-{
-    return msg.c_str();
-}
 
 Bureaucrat::Bureaucrat() : name("Gil-Dong"), grade(150)
 {
@@ -69,18 +29,7 @@ Bureaucrat::Bureaucrat(const std::string &name,
                                                   GradeTooLowException)
     : name(name)
 {
-    if (grade < 1)
-    {
-        throw(GradeTooHighException(grade));
-    }
-    else if (grade > 150)
-    {
-        throw(GradeTooLowException(grade));
-    }
-    else
-    {
-        this->grade = grade;
-    }
+    setGrade(grade);
 }
 
 Bureaucrat::~Bureaucrat()
@@ -103,11 +52,28 @@ const unsigned char &Bureaucrat::getGrade() const
     return grade;
 }
 
+void Bureaucrat::setGrade(unsigned char grade) throw(GradeTooHighException,
+                                                     GradeTooLowException)
+{
+    if (grade < 1)
+    {
+        throw(GradeTooHighException());
+    }
+    else if (grade > 150)
+    {
+        throw(GradeTooLowException());
+    }
+    else
+    {
+        this->grade = grade;
+    }
+}
+
 void Bureaucrat::incrementGrade() throw(GradeTooHighException)
 {
     if (grade == 1)
     {
-        throw(GradeTooHighException(grade));
+        throw(GradeTooHighException());
     }
     else
     {
@@ -119,7 +85,7 @@ void Bureaucrat::decrementGrade() throw(GradeTooLowException)
 {
     if (grade == 150)
     {
-        throw(GradeTooLowException(grade));
+        throw(GradeTooLowException());
     }
     else
     {
