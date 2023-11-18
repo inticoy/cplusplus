@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 18:10:01 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 18:18:13 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,9 +42,9 @@ class Form
     Form();
     Form(const Form &f);
     Form(const std::string &name);
-    Form(const std::string &name, const unsigned char &minSignGrade,
-         const unsigned char &minExeGrade) throw(GradeTooHighException,
-                                                 GradeTooLowException);
+    Form(const std::string &name, unsigned char minSignGrade,
+         unsigned char minExeGrade) throw(GradeTooHighException,
+                                          GradeTooLowException);
     virtual ~Form();
     Form &operator=(const Form &f);
 

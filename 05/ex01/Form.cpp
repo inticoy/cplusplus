@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:51:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 18:10:04 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 18:18:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "Bureaucrat.hpp"
 
 Form::Form()
-    : name("default form"), minSignGrade(150), minExeGrade(150), isSigned(false)
+    : name("default"), minSignGrade(150), minExeGrade(150), isSigned(false)
 {
 }
 
@@ -29,9 +29,9 @@ Form::Form(const std::string &name)
 {
 }
 
-Form::Form(const std::string &name, const unsigned char &minSignGrade,
-           const unsigned char &minExeGrade) throw(GradeTooHighException,
-                                                   GradeTooLowException)
+Form::Form(const std::string &name, unsigned char minSignGrade,
+           unsigned char minExeGrade) throw(GradeTooHighException,
+                                            GradeTooLowException)
     : name(name), minSignGrade(minSignGrade), minExeGrade(minExeGrade),
       isSigned(false)
 {

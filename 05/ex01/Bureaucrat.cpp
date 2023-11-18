@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 18:11:01 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 18:23:40 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void Bureaucrat::incrementGrade() throw(GradeTooHighException)
 {
     if (grade == 1)
     {
-        throw(GradeTooHighException());
+        throw GradeTooHighException();
     }
     else
     {
@@ -85,7 +85,7 @@ void Bureaucrat::decrementGrade() throw(GradeTooLowException)
 {
     if (grade == 150)
     {
-        throw(GradeTooLowException());
+        throw GradeTooLowException();
     }
     else
     {
