@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 18:23:40 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/18 18:32:47 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ void Bureaucrat::signForm(Form &f) const
     }
     catch (const std::exception &e)
     {
-        std::cerr << name << " couldn't sign '" << f.getName() << "' because ";
+        std::cerr << name << " can't sign '" << f.getName() << "' because ";
         std::cerr << e.what() << '\n';
     }
 }
