@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 18:15:22 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 13:58:22 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 15:12:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ const char *AForm::GradeTooLowException::what() const throw()
 }
 
 AForm::DoubleSignException::DoubleSignException() throw()
-    : msg("AForm is already signed")
+    : msg("form is already signed")
 {
 }
 
@@ -70,7 +70,7 @@ const char *AForm::DoubleSignException::what() const throw()
 }
 
 AForm::NotSignedException::NotSignedException() throw()
-    : msg("AForm is not signed")
+    : msg("form is not signed")
 {
 }
 

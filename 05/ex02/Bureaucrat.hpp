@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 13:54:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 15:07:44 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,6 @@ class Bureaucrat
 
     void signForm(AForm &f) const;
     void executeForm(const AForm &f) const;
-
-    friend std::ostream &operator<<(std::ostream &os, const Bureaucrat &b);
 
   private:
     const std::string name;

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:39:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 18:38:36 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 15:13:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,19 @@ class ShrubberyCreationForm : public AForm
     class FileCreateFailException : public std::exception
     {
       public:
+        FileCreateFailException() throw();
+        ~FileCreateFailException() throw();
         const char *what() const throw();
+
+      private:
+        std::string msg;
     };
 
     ShrubberyCreationForm();
-    ShrubberyCreationForm(const ShrubberyCreationForm &scf);
+    ShrubberyCreationForm(const ShrubberyCreationForm &sf);
     ShrubberyCreationForm(const std::string &target);
     virtual ~ShrubberyCreationForm();
-    ShrubberyCreationForm &operator=(const ShrubberyCreationForm &scf);
+    ShrubberyCreationForm &operator=(const ShrubberyCreationForm &sf);
 
     virtual void execute(const Bureaucrat &e) const
         throw(GradeTooLowException, NotSignedException);

@@ -6,12 +6,11 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:04:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 19:54:29 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 16:24:25 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "RobotomyRequestForm.hpp"
-#include <cstdlib>
 #include <ctime>
 
 RobotomyRequestForm::RobotomyRequestForm()
@@ -19,13 +18,13 @@ RobotomyRequestForm::RobotomyRequestForm()
 {
 }
 
-RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &other)
-    : AForm(other.getName(), other.getMinSignGrade(), other.getMinExeGrade()),
-      target(other.target)
+RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm &rf)
+    : AForm(rf.getName(), rf.getMinSignGrade(), rf.getMinExeGrade()),
+      target(rf.target)
 {
 }
 
-RobotomyRequestForm::RobotomyRequestForm(std::string &target)
+RobotomyRequestForm::RobotomyRequestForm(const std::string &target)
     : AForm("Robotomy Request Form", 72, 45), target(target)
 {
 }
@@ -35,12 +34,12 @@ RobotomyRequestForm::~RobotomyRequestForm()
 }
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(
-    const RobotomyRequestForm &other)
+    const RobotomyRequestForm &rf)
 {
-    if (this != &other)
+    if (this != &rf)
     {
-        this->setIsSigned(other.getIsSigned());
-        target = other.target;
+        this->setIsSigned(rf.getIsSigned());
+        target = rf.target;
     }
     return *this;
 }
@@ -48,30 +47,35 @@ RobotomyRequestForm &RobotomyRequestForm::operator=(
 void RobotomyRequestForm::execute(const Bureaucrat &e) const
     throw(GradeTooLowException, NotSignedException)
 {
-    if (!this->getIsSigned())
+    checkRequirements(e);
+    static unsigned int seed = std::time(0);
+    for (int i = 0; i < 3; i++)
     {
-        throw NotSignedException();
+        delay(getRandNum(seed) % 3);
+        std::cout << "Drilling...\n";
     }
-    else if (e.getGrade() > this->getMinExeGrade())
+    if (std::time(0) % 2 == 0)
     {
-        throw GradeTooLowException();
+        std::cout << "'" << target << "'";
+        std::cout << " has been robotomized successfully\n";
     }
     else
     {
-        for (int i = 0; i < 3; i++)
-        {
-            std::cout << "Drilling...\n";
-        }
-        std::srand(static_cast<unsigned int>(std::time(0)));
-        int randNum = std::rand();
-        if (randNum % 2 == 0)
-        {
-            std::cout << "'" << target << "'";
-            std::cout << " has been robotomized successfully\n";
-        }
-        else
-        {
-            std::cout << "Robotomizing '" << target << "' failed\n";
-        }
+        std::cout << "Robotomizing '" << target << "' failed\n";
     }
+}
+
+unsigned int RobotomyRequestForm::getRandNum(unsigned int &seed) const
+{
+    seed = (1664525 * seed) + 1013904223;
+    return seed;
+}
+
+void RobotomyRequestForm::delay(int seconds) const
+{
+    // Convert seconds to clock ticks
+    clock_t start_time = std::clock();
+    clock_t delay_ticks = seconds * CLOCKS_PER_SEC;
+    while (std::clock() < start_time + delay_ticks)
+        continue;
 }

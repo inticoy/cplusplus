@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:43:19 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 19:58:08 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 15:13:21 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@ class PresidentialPardonForm : public AForm
 {
   public:
     PresidentialPardonForm();
-    PresidentialPardonForm(const PresidentialPardonForm &other);
-    PresidentialPardonForm(std::string &target);
+    PresidentialPardonForm(const PresidentialPardonForm &pf);
+    PresidentialPardonForm(const std::string &target);
     virtual ~PresidentialPardonForm();
-    PresidentialPardonForm &operator=(const PresidentialPardonForm &other);
+    PresidentialPardonForm &operator=(const PresidentialPardonForm &pf);
 
     virtual void execute(const Bureaucrat &e) const
         throw(GradeTooLowException, NotSignedException);

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:51:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 13:59:59 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 15:12:24 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,11 @@ const bool &AForm::getIsSigned() const
     return isSigned;
 }
 
+void AForm::setIsSigned(bool isSigned)
+{
+    this->isSigned = isSigned;
+}
+
 void AForm::beSigned(const Bureaucrat &b) throw(GradeTooLowException,
                                                 DoubleSignException)
 {
@@ -99,12 +104,24 @@ void AForm::beSigned(const Bureaucrat &b) throw(GradeTooLowException,
     }
 }
 
+void AForm::checkRequirements(const Bureaucrat &e) const
+    throw(GradeTooLowException, NotSignedException)
+{
+    if (!isSigned)
+    {
+        throw NotSignedException();
+    }
+    else if (e.getGrade() > minExeGrade)
+    {
+        throw GradeTooLowException();
+    }
+}
+
 std::ostream &operator<<(std::ostream &os, const AForm &f)
 {
-    os << "A AForm named '" << f.name;
-    os << (f.isSigned ? "' is signed." : "' is not signed.");
-    os << "\nIt needs grade ";
-    os << static_cast<int>(f.minSignGrade) << " to sign, and grade ";
-    os << static_cast<int>(f.minExeGrade) << " to execute.";
+    os << "A Form named '" << f.getName();
+    os << (f.getIsSigned() ? "' is signed." : "' is not signed.");
+    os << "\nIt needs grade " << f.getMinSignGrade() << " to sign, and grade ";
+    os << f.getMinExeGrade() << " to execute.";
     return (os);
 }

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 13:59:11 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 15:12:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,13 +80,14 @@ class AForm
     const int &getMinSignGrade() const;
     const int &getMinExeGrade() const;
     const bool &getIsSigned() const;
+    void setIsSigned(bool isSigned);
 
     void beSigned(const Bureaucrat &b) throw(GradeTooLowException,
                                              DoubleSignException);
     virtual void execute(const Bureaucrat &e) const
         throw(GradeTooLowException, NotSignedException) = 0;
-
-    friend std::ostream &operator<<(std::ostream &os, const AForm &f);
+    void checkRequirements(const Bureaucrat &e) const
+        throw(GradeTooLowException, NotSignedException);
 
   private:
     const std::string name;
