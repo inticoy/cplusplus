@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 19:19:51 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 13:59:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,44 +21,65 @@ class Bureaucrat;
 class AForm
 {
   public:
+  public:
     class GradeTooHighException : public std::exception
     {
       public:
+        GradeTooHighException() throw();
+        GradeTooHighException(int grade) throw();
+        ~GradeTooHighException() throw();
         const char *what() const throw();
+
+      private:
+        std::string msg;
     };
 
     class GradeTooLowException : public std::exception
     {
       public:
+        GradeTooLowException() throw();
+        GradeTooLowException(int grade) throw();
+        ~GradeTooLowException() throw();
         const char *what() const throw();
+
+      private:
+        std::string msg;
     };
 
     class DoubleSignException : public std::exception
     {
       public:
+        DoubleSignException() throw();
+        ~DoubleSignException() throw();
         const char *what() const throw();
+
+      private:
+        std::string msg;
     };
 
     class NotSignedException : public std::exception
     {
       public:
+        NotSignedException() throw();
+        ~NotSignedException() throw();
         const char *what() const throw();
+
+      private:
+        std::string msg;
     };
 
     AForm();
     AForm(const AForm &f);
     AForm(const std::string &name);
-    AForm(const std::string &name, unsigned char minSignGrade,
-          unsigned char minExeGrade) throw(GradeTooHighException,
-                                           GradeTooLowException);
+    AForm(const std::string &name, int minSignGrade,
+          int minExeGrade) throw(GradeTooHighException, GradeTooLowException);
     virtual ~AForm();
     AForm &operator=(const AForm &f);
 
     const std::string &getName() const;
-    const unsigned char &getMinSignGrade() const;
-    const unsigned char &getMinExeGrade() const;
+    const int &getMinSignGrade() const;
+    const int &getMinExeGrade() const;
     const bool &getIsSigned() const;
-    void setIsSigned(bool isSigned);
 
     void beSigned(const Bureaucrat &b) throw(GradeTooLowException,
                                              DoubleSignException);
@@ -69,8 +90,8 @@ class AForm
 
   private:
     const std::string name;
-    const unsigned char minSignGrade;
-    const unsigned char minExeGrade;
+    const int minSignGrade;
+    const int minExeGrade;
     bool isSigned;
 };
 

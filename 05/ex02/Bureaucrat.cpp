@@ -6,11 +6,12 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 18:32:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 13:55:39 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Bureaucrat.hpp"
+
 Bureaucrat::Bureaucrat() : name("Gil-Dong"), grade(150)
 {
 }
@@ -24,8 +25,8 @@ Bureaucrat::Bureaucrat(const std::string &name) : name(name), grade(150)
 }
 
 Bureaucrat::Bureaucrat(const std::string &name,
-                       unsigned char grade) throw(GradeTooHighException,
-                                                  GradeTooLowException)
+                       int grade) throw(GradeTooHighException,
+                                        GradeTooLowException)
     : name(name)
 {
     setGrade(grade);
@@ -46,21 +47,21 @@ const std::string &Bureaucrat::getName() const
     return name;
 }
 
-const unsigned char &Bureaucrat::getGrade() const
+const int &Bureaucrat::getGrade() const
 {
     return grade;
 }
 
-void Bureaucrat::setGrade(unsigned char grade) throw(GradeTooHighException,
-                                                     GradeTooLowException)
+void Bureaucrat::setGrade(int grade) throw(GradeTooHighException,
+                                           GradeTooLowException)
 {
     if (grade < 1)
     {
-        throw GradeTooHighException();
+        throw GradeTooHighException(grade);
     }
     else if (grade > 150)
     {
-        throw GradeTooLowException();
+        throw GradeTooLowException(grade);
     }
     else
     {
@@ -72,7 +73,7 @@ void Bureaucrat::incrementGrade() throw(GradeTooHighException)
 {
     if (grade == 1)
     {
-        throw GradeTooHighException();
+        throw GradeTooHighException(grade);
     }
     else
     {
@@ -84,7 +85,7 @@ void Bureaucrat::decrementGrade() throw(GradeTooLowException)
 {
     if (grade == 150)
     {
-        throw GradeTooLowException();
+        throw GradeTooLowException(grade);
     }
     else
     {
@@ -122,6 +123,6 @@ void Bureaucrat::executeForm(const AForm &f) const
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &b)
 {
-    os << b.name << ", bureaucrat has grade " << static_cast<int>(b.grade);
+    os << b.name << ", bureaucrat has grade " << b.grade;
     return os;
 }
