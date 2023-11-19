@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:51:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/18 18:18:23 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 13:51:00 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,19 +29,26 @@ Form::Form(const std::string &name)
 {
 }
 
-Form::Form(const std::string &name, unsigned char minSignGrade,
-           unsigned char minExeGrade) throw(GradeTooHighException,
-                                            GradeTooLowException)
+Form::Form(const std::string &name, int minSignGrade,
+           int minExeGrade) throw(GradeTooHighException, GradeTooLowException)
     : name(name), minSignGrade(minSignGrade), minExeGrade(minExeGrade),
       isSigned(false)
 {
-    if (minSignGrade < 1 || minExeGrade < 1)
+    if (minSignGrade < 1)
     {
-        throw GradeTooHighException();
+        throw GradeTooHighException(minSignGrade);
     }
-    else if (minSignGrade > 150 || minExeGrade > 150)
+    else if (minExeGrade < 1)
     {
-        throw GradeTooLowException();
+        throw GradeTooHighException(minExeGrade);
+    }
+    else if (minSignGrade > 150)
+    {
+        throw GradeTooLowException(minSignGrade);
+    }
+    else if (minExeGrade > 150)
+    {
+        throw GradeTooLowException(minExeGrade);
     }
 }
 
@@ -60,12 +67,12 @@ const std::string &Form::getName() const
     return name;
 }
 
-const unsigned char &Form::getMinSignGrade() const
+const int &Form::getMinSignGrade() const
 {
     return minSignGrade;
 }
 
-const unsigned char &Form::getMinExeGrade() const
+const int &Form::getMinExeGrade() const
 {
     return minExeGrade;
 }
@@ -84,7 +91,7 @@ void Form::beSigned(const Bureaucrat &b) throw(GradeTooLowException,
     }
     else if (b.getGrade() > minSignGrade)
     {
-        throw GradeTooLowException();
+        throw GradeTooLowException(b.getGrade());
     }
     else
     {
@@ -96,8 +103,7 @@ std::ostream &operator<<(std::ostream &os, const Form &f)
 {
     os << "A form named '" << f.name;
     os << (f.isSigned ? "' is signed." : "' is not signed.");
-    os << "\nIt needs grade ";
-    os << static_cast<int>(f.minSignGrade) << " to sign, and grade ";
-    os << static_cast<int>(f.minExeGrade) << " to execute.";
+    os << "\nIt needs grade " << f.minSignGrade << " to sign, and grade ";
+    os << f.minExeGrade << " to execute.";
     return (os);
 }
