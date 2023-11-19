@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 13:47:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 15:08:39 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,8 +71,6 @@ class Form
 
     void beSigned(const Bureaucrat &b) throw(GradeTooLowException,
                                              DoubleSignException);
-
-    friend std::ostream &operator<<(std::ostream &os, const Form &f);
 
   private:
     const std::string name;

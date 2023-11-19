@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 13:25:05 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 15:08:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,6 @@ class Bureaucrat
 
     void incrementGrade() throw(GradeTooHighException);
     void decrementGrade() throw(GradeTooLowException);
-
-    friend std::ostream &operator<<(std::ostream &os, const Bureaucrat &b);
 
   private:
     const std::string name;

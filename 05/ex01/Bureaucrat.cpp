@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:04 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 13:37:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 15:08:36 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,6 @@ void Bureaucrat::signForm(Form &f) const
 
 std::ostream &operator<<(std::ostream &os, const Bureaucrat &b)
 {
-    os << b.name << ", bureaucrat has grade " << b.grade;
+    os << b.getName() << ", bureaucrat has grade " << b.getGrade();
     return os;
 }

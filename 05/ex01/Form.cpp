@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:51:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 13:51:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 15:09:08 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,9 +101,9 @@ void Form::beSigned(const Bureaucrat &b) throw(GradeTooLowException,
 
 std::ostream &operator<<(std::ostream &os, const Form &f)
 {
-    os << "A form named '" << f.name;
-    os << (f.isSigned ? "' is signed." : "' is not signed.");
-    os << "\nIt needs grade " << f.minSignGrade << " to sign, and grade ";
-    os << f.minExeGrade << " to execute.";
+    os << "A form named '" << f.getName();
+    os << (f.getIsSigned() ? "' is signed." : "' is not signed.");
+    os << "\nIt needs grade " << f.getMinSignGrade() << " to sign, and grade ";
+    os << f.getMinExeGrade() << " to execute.";
     return (os);
 }
