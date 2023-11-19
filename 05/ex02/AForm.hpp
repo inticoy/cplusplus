@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 15:12:06 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/19 18:35:16 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,10 +84,10 @@ class AForm
 
     void beSigned(const Bureaucrat &b) throw(GradeTooLowException,
                                              DoubleSignException);
-    virtual void execute(const Bureaucrat &e) const
-        throw(GradeTooLowException, NotSignedException) = 0;
     void checkRequirements(const Bureaucrat &e) const
         throw(GradeTooLowException, NotSignedException);
+    virtual void execute(const Bureaucrat &e) const
+        throw(GradeTooLowException, NotSignedException) = 0;
 
   private:
     const std::string name;
