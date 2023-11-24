@@ -6,12 +6,11 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:25:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/24 21:37:00 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/24 21:54:02 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ScalarConverter.hpp"
-#include <cctype>
 
 ScalarConverter::ScalarConverter()
 {
@@ -71,7 +70,11 @@ int ScalarConverter::getScalarType(std::string &str)
 
 bool ScalarConverter::isChar(std::string &str)
 {
-    if (str.size() == 1)
+    if (str.size() != 3)
+    {
+        return false;
+    }
+    else if (str.at(0) == '\'' && str.at(2) == '\'')
     {
         return true;
     }
@@ -197,6 +200,65 @@ bool ScalarConverter::isDouble(std::string &str)
     }
 }
 
-// void ScalarConverter::convert(std::string &literal)
-// {
-// }
+void ScalarConverter::convert(std::string &str)
+{
+    switch (getScalarType(str))
+    {
+    case CHAR:
+        printAsChar(str);
+        break;
+    case INT:
+        printAsInt(str);
+        break;
+    case FLOAT:
+        printAsFloat(str);
+        break;
+    case DOUBLE:
+        printAsDouble(str);
+        break;
+    default:
+        printNotAScalar(str);
+        break;
+    }
+}
+
+void ScalarConverter::printAsChar(std::string &str)
+{
+    std::stringstream ss(str.substr(1, 1));
+    char c;
+    ss >> c;
+    if (std::isprint(c))
+    {
+        std::cout << c << std::endl;
+        std::cout << static_cast<int>(c) << std::endl;
+        std::cout << static_cast<float>(c) << std::endl;
+        std::cout << static_cast<double>(c) << std::endl;
+    }
+    else
+    {
+        std::cout << "Non displayable" << std::endl;
+        std::cout << static_cast<int>(c) << std::endl;
+        std::cout << static_cast<float>(c) << std::endl;
+        std::cout << static_cast<double>(c) << std::endl;
+    }
+}
+
+void ScalarConverter::printAsInt(std::string &str)
+{
+    (void)str;
+}
+
+void ScalarConverter::printAsFloat(std::string &str)
+{
+    (void)str;
+}
+
+void ScalarConverter::printAsDouble(std::string &str)
+{
+    (void)str;
+}
+
+void ScalarConverter::printNotAScalar(std::string &str)
+{
+    (void)str;
+}

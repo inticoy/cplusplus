@@ -6,13 +6,16 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:23:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/24 21:31:13 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/24 21:46:09 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCALARCONVERTER_HPP
 #define SCALARCONVERTER_HPP
 
+#include <cctype>
+#include <iostream>
+#include <sstream>
 #include <string>
 class ScalarConverter
 {
@@ -38,12 +41,13 @@ class ScalarConverter
     static bool isDouble(std::string &str);
 
     static std::string strtolower(const std::string &str);
-    // static void convert(std::string &str);
+    static void convert(std::string &str);
 
-    // static char convertChar(std::string &str);
-    // static int convertInt(std::string &str);
-    // static float convertFloat(std::string &str);
-    // static double convertDouble(std::string &str);
+    static void printAsChar(std::string &str);
+    static void printAsInt(std::string &str);
+    static void printAsFloat(std::string &str);
+    static void printAsDouble(std::string &str);
+    static void printNotAScalar(std::string &str);
 
   private:
 };
