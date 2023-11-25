@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:10:32 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/25 15:43:27 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:50:00 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ class Identifier
       private:
         std::string msg;
     };
+
     Identifier();
     Identifier(const Identifier &other);
     ~Identifier();
@@ -62,6 +63,7 @@ class Identifier
     static Base *generate();
     static void identify(Base *ptr);
     static void identify(Base &ref);
+
     static void identifyA(Base &ref) throw(ClassAException);
     static void identifyB(Base &ref) throw(ClassBException);
     static void identifyC(Base &ref) throw(ClassCException);

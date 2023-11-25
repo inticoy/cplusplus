@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:10:41 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/25 15:45:41 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/25 15:50:49 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,9 @@ void Identifier::identify(Base &ref)
     catch (const std::exception &e)
     {
         std::cout << "Ref is a reference of " << e.what() << std::endl;
+        return;
     }
+    std::cout << "Ref is a reference of base" << std::endl;
 }
 
 void Identifier::identifyA(Base &ref) throw(ClassAException)
