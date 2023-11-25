@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:25:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/24 21:54:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/25 14:32:52 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ std::string ScalarConverter::strtolower(const std::string &str)
     return lower;
 }
 
-int ScalarConverter::getScalarType(std::string &str)
+int ScalarConverter::getScalarType(const std::string &str)
 {
     if (isChar(str))
     {
@@ -68,7 +68,7 @@ int ScalarConverter::getScalarType(std::string &str)
     }
 }
 
-bool ScalarConverter::isChar(std::string &str)
+bool ScalarConverter::isChar(const std::string &str)
 {
     if (str.size() != 3)
     {
@@ -84,7 +84,7 @@ bool ScalarConverter::isChar(std::string &str)
     }
 }
 
-bool ScalarConverter::isInt(std::string &str)
+bool ScalarConverter::isInt(const std::string &str)
 {
     int isSigned = (str.at(0) == '+' || str.at(0) == '-') ? 1 : 0;
     int digits = 0;
@@ -107,10 +107,11 @@ bool ScalarConverter::isInt(std::string &str)
     }
 }
 
-bool ScalarConverter::isFloat(std::string &str)
+bool ScalarConverter::isFloat(const std::string &str)
 {
     if (strtolower(str) == "-inff" || strtolower(str) == "+inff" ||
-        strtolower(str) == "nanf")
+        strtolower(str) == "-nanf" || strtolower(str) == "+nanf" ||
+        strtolower(str) == "inff" || strtolower(str) == "nanf")
     {
         return true;
     }
@@ -156,10 +157,11 @@ bool ScalarConverter::isFloat(std::string &str)
     }
 }
 
-bool ScalarConverter::isDouble(std::string &str)
+bool ScalarConverter::isDouble(const std::string &str)
 {
     if (strtolower(str) == "-inf" || strtolower(str) == "+inf" ||
-        strtolower(str) == "nan")
+        strtolower(str) == "-nan" || strtolower(str) == "+nan" ||
+        strtolower(str) == "inf" || strtolower(str) == "nan")
     {
         return true;
     }
@@ -200,8 +202,9 @@ bool ScalarConverter::isDouble(std::string &str)
     }
 }
 
-void ScalarConverter::convert(std::string &str)
+void ScalarConverter::convert(const std::string &str)
 {
+    std::cout << std::fixed << std::setprecision(1);
     switch (getScalarType(str))
     {
     case CHAR:
@@ -222,43 +225,127 @@ void ScalarConverter::convert(std::string &str)
     }
 }
 
-void ScalarConverter::printAsChar(std::string &str)
+void ScalarConverter::printAsChar(const std::string &str)
 {
     std::stringstream ss(str.substr(1, 1));
     char c;
     ss >> c;
-    if (std::isprint(c))
+    printChar(c);
+    printInt(static_cast<int>(c));
+    printFloat(static_cast<float>(c));
+    printDouble(static_cast<double>(c));
+}
+
+void ScalarConverter::printAsInt(const std::string &str)
+{
+    std::stringstream ss(str);
+    int i;
+    ss >> i;
+
+    if (i > CHAR_MAX || i < CHAR_MIN)
     {
-        std::cout << c << std::endl;
-        std::cout << static_cast<int>(c) << std::endl;
-        std::cout << static_cast<float>(c) << std::endl;
-        std::cout << static_cast<double>(c) << std::endl;
+        std::cout << "char:\timpossible" << std::endl;
     }
     else
     {
-        std::cout << "Non displayable" << std::endl;
-        std::cout << static_cast<int>(c) << std::endl;
-        std::cout << static_cast<float>(c) << std::endl;
-        std::cout << static_cast<double>(c) << std::endl;
+        printChar(static_cast<char>(i));
+    }
+    printInt(i);
+    printFloat(static_cast<float>(i));
+    printDouble(static_cast<double>(i));
+}
+
+void ScalarConverter::printAsFloat(const std::string &str)
+{
+    std::string scalar = str.substr(0, str.size() - 1);
+    size_t decimal = scalar.size() - scalar.find('.') - 1;
+    std::cout << std::fixed;
+    if (decimal > 1)
+    {
+        std::cout << std::setprecision(decimal);
+    }
+    std::stringstream ss(scalar);
+    float f;
+    ss >> f;
+    if (f > CHAR_MAX || f < CHAR_MIN || std::isinf(f) || std::isnan(f))
+    {
+        std::cout << "char:\timpossible" << std::endl;
+    }
+    else
+    {
+        printChar(static_cast<char>(f));
+    }
+    if (f > INT_MAX || f < INT_MIN || std::isinf(f) || std::isnan(f))
+    {
+        std::cout << "int:\timpossible" << std::endl;
+    }
+    else
+    {
+        printInt(static_cast<int>(f));
+    }
+
+    printFloat(f);
+    printDouble(static_cast<double>(f));
+}
+
+void ScalarConverter::printAsDouble(const std::string &str)
+{
+    size_t decimal = str.size() - str.find('.') - 1;
+    std::cout << std::fixed;
+    if (decimal > 1)
+    {
+        std::cout << std::setprecision(decimal);
+    }
+    std::stringstream ss(str);
+    double d;
+    ss >> d;
+    if (d > CHAR_MAX || d < CHAR_MIN || std::isinf(d) || std::isnan(d))
+    {
+        std::cout << "char:\timpossible" << std::endl;
+    }
+    else
+    {
+        printChar(static_cast<char>(d));
+    }
+    if (d > INT_MAX || d < INT_MIN || std::isinf(d) || std::isnan(d))
+    {
+        std::cout << "int:\timpossible" << std::endl;
+    }
+    else
+    {
+        printInt(static_cast<int>(d));
+    }
+    printFloat(static_cast<float>(d));
+    printDouble(d);
+}
+
+void ScalarConverter::printNotAScalar(const std::string &str)
+{
+    (void)str;
+}
+
+void ScalarConverter::printChar(char c)
+{
+    if (std::isprint(c))
+    {
+        std::cout << "char:\t'" << c << "'" << std::endl;
+    }
+    else
+    {
+        std::cout << "char:\tNon displayable" << std::endl;
     }
 }
 
-void ScalarConverter::printAsInt(std::string &str)
+void ScalarConverter::printInt(int i)
 {
-    (void)str;
+    std::cout << "int:\t" << i << std::endl;
 }
 
-void ScalarConverter::printAsFloat(std::string &str)
+void ScalarConverter::printFloat(float f)
 {
-    (void)str;
+    std::cout << "float:\t" << f << "f" << std::endl;
 }
-
-void ScalarConverter::printAsDouble(std::string &str)
+void ScalarConverter::printDouble(double d)
 {
-    (void)str;
-}
-
-void ScalarConverter::printNotAScalar(std::string &str)
-{
-    (void)str;
+    std::cout << "double:\t" << d << std::endl;
 }
