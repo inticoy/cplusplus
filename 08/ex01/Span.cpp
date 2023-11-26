@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:09:51 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/26 16:42:52 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/26 18:15:15 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,21 @@ int Span::shortestSpan() throw(EmptySpanException, SingleSpanException)
     else if (set.size() == 1)
         throw SingleSpanException();
     else
-        return *std::min_element(set.begin(), set.end());
+    {
+        int min = 0;
+        int prev = *set.begin();
+        std::set<int>::iterator it = set.begin();
+        ++it;
+        for (; it != set.end(); ++it)
+        {
+            if (min == 0 || *it - prev < min)
+            {
+                min = *it - prev;
+            }
+            prev = *it;
+        }
+        return min;
+    }
 }
 
 int Span::longestSpan() throw(EmptySpanException, SingleSpanException)
@@ -65,5 +79,8 @@ int Span::longestSpan() throw(EmptySpanException, SingleSpanException)
     else if (set.size() == 1)
         throw SingleSpanException();
     else
-        return *std::max_element(set.begin(), set.end());
+    {
+        int max = *--set.end() - *set.begin();
+        return max;
+    }
 }

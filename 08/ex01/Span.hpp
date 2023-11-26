@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:48:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/26 16:41:44 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/26 18:41:02 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include <algorithm>
 #include <exception>
+#include <iterator>
 #include <set>
 #include <string>
 
@@ -75,9 +76,46 @@ class Span
     int shortestSpan() throw(EmptySpanException, SingleSpanException);
     int longestSpan() throw(EmptySpanException, SingleSpanException);
 
+    template <typename Iterator> bool isExist(Iterator begin, Iterator end)
+    {
+        // need to check itself dup;
+        for (Iterator it = begin; it != end; ++it)
+        {
+            if (set.find(*it) != set.end())
+                return true;
+        }
+        return false;
+    }
+
+    template <typename Iterator>
+    void addNumbers(Iterator begin, Iterator end) throw(FullSpanException,
+                                                        DuplicatedSpanException)
+    {
+        size_t size = 0;
+        for (Iterator it = begin; it != end; ++it)
+        {
+            ++size;
+        }
+        if (set.size() + size > nMax)
+            throw FullSpanException();
+        else if (isExist(begin, end))
+            throw DuplicatedSpanException();
+        else
+            set.insert(begin, end);
+    }
+
   private:
     unsigned int nMax;
     std::set<int> set;
+
+    // template <typename Iterator> bool isDuplicated(Iterator begin, Iterator
+    // end)
+    // {
+    //     for (Iterator i = begin; i != end; ++i)
+    //     {
+    //         for (Iterator j = i;)
+    //     }
+    // }
 };
 
 #endif
