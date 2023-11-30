@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 11:57:07 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 15:07:44 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:34:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,38 +22,38 @@ class AForm;
 
 class Bureaucrat
 {
-  public:
+public:
     class GradeTooHighException : public std::exception
     {
-      public:
+    public:
         GradeTooHighException() throw();
         GradeTooHighException(int grade) throw();
         virtual ~GradeTooHighException() throw();
         const char *what() const throw();
 
-      private:
+    private:
         std::string msg;
     };
 
     class GradeTooLowException : public std::exception
     {
-      public:
+    public:
         GradeTooLowException() throw();
         GradeTooLowException(int grade) throw();
         virtual ~GradeTooLowException() throw();
         const char *what() const throw();
 
-      private:
+    private:
         std::string msg;
     };
 
     Bureaucrat();
-    Bureaucrat(const Bureaucrat &b);
+    Bureaucrat(const Bureaucrat &other);
     Bureaucrat(const std::string &name);
     Bureaucrat(const std::string &name, int grade) throw(GradeTooHighException,
                                                          GradeTooLowException);
     virtual ~Bureaucrat();
-    Bureaucrat &operator=(const Bureaucrat &b);
+    Bureaucrat &operator=(const Bureaucrat &other);
 
     const std::string &getName() const;
     const int &getGrade() const;
@@ -65,7 +65,7 @@ class Bureaucrat
     void signForm(AForm &f) const;
     void executeForm(const AForm &f) const;
 
-  private:
+private:
     const std::string name;
     int grade;
 };

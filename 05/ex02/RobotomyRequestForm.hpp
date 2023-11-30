@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/16 21:03:29 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 16:14:28 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:53:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@
 
 class RobotomyRequestForm : public AForm
 {
-  public:
+public:
     RobotomyRequestForm();
-    RobotomyRequestForm(const RobotomyRequestForm &rf);
+    RobotomyRequestForm(const RobotomyRequestForm &other);
     RobotomyRequestForm(const std::string &target);
     virtual ~RobotomyRequestForm();
-    RobotomyRequestForm &operator=(const RobotomyRequestForm &rf);
+    RobotomyRequestForm &operator=(const RobotomyRequestForm &other);
 
-    virtual void execute(const Bureaucrat &e) const
-        throw(GradeTooLowException, NotSignedException);
+    virtual void execute(const Bureaucrat &executor) const
+        throw(GradeTooLowException, NotSignedException, ExecuteFailException);
     unsigned int getRandNum(unsigned int &seed) const;
-    void delay(int seconds) const;
+    void delayMilliSeconds(int mSeconds) const;
 
-  private:
+private:
     std::string target;
 };
 

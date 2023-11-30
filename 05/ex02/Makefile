@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/11/19 21:35:58 by gyoon            ###   ########.fr        #
+#    Updated: 2023/11/30 16:30:12 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,8 +35,7 @@ SRCS		= 	main.cpp \
 				BureaucratException.cpp \
 				PresidentialPardonForm.cpp \
 				RobotomyRequestForm.cpp \
-				ShrubberyCreationForm.cpp \
-				ShrubberyCreationFormException.cpp
+				ShrubberyCreationForm.cpp
 OBJS		= 	${SRCS:.cpp=.o}
 INC			= 	./
 

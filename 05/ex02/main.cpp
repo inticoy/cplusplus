@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 20:57:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 14:59:26 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 17:05:31 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,52 +21,52 @@
 int main()
 {
     {
-        std::cout << "\nTEST 1\n";
+        std::cout << "TEST 1" << '\n';
         AForm *form = new ShrubberyCreationForm("test");
-        Bureaucrat man("Kim", 1);
-        Bureaucrat man2("Lee", 150);
+        Bureaucrat president("Kim", 1);
+        Bureaucrat servant("Lee", 150);
 
-        man2.executeForm(*form);
-        man.executeForm(*form);
-        man2.signForm(*form);
-        man.signForm(*form);
-        man2.executeForm(*form);
-        man.executeForm(*form);
+        servant.executeForm(*form);
+        president.executeForm(*form);
+        servant.signForm(*form);
+        president.signForm(*form);
+        servant.executeForm(*form);
+        president.executeForm(*form);
 
         delete form;
     }
 
     {
-        std::cout << "\nTEST 2\n";
+        std::cout << '\n' << "TEST 2" << '\n';
         AForm *form = new RobotomyRequestForm("gyoon");
-        Bureaucrat man("Kim", 1);
-        Bureaucrat man2("Lee", 150);
+        Bureaucrat president("Kim", 1);
+        Bureaucrat servant("Lee", 150);
 
-        man2.executeForm(*form);
-        man.executeForm(*form);
-        man2.signForm(*form);
-        man.signForm(*form);
-        man2.executeForm(*form);
-        man.executeForm(*form);
-        man.executeForm(*form);
-        man.executeForm(*form);
-        man.executeForm(*form);
+        servant.executeForm(*form);
+        president.executeForm(*form);
+        servant.signForm(*form);
+        president.signForm(*form);
+        servant.executeForm(*form);
+        for (int i = 0; i < 4; i++)
+        {
+            president.executeForm(*form);
+        }
 
         delete form;
     }
 
     {
-        std::cout << "\nTEST 3\n";
+        std::cout << '\n' << "TEST 3" << '\n';
         AForm *form = new PresidentialPardonForm("gyoon");
-        Bureaucrat man("Kim", 1);
-        Bureaucrat man2("Lee", 150);
+        Bureaucrat president("Kim", 1);
+        Bureaucrat servant("Lee", 150);
 
-        man2.executeForm(*form);
-        man.executeForm(*form);
-        man2.signForm(*form);
-        man.signForm(*form);
-        man2.executeForm(*form);
-        man.executeForm(*form);
+        servant.executeForm(*form);
+        president.executeForm(*form);
+        servant.signForm(*form);
+        president.signForm(*form);
+        servant.executeForm(*form);
+        president.executeForm(*form);
 
         delete form;
     }
