@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/30 16:34:22 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 17:15:18 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ class Bureaucrat;
 
 class AForm
 {
-public:
 public:
     class GradeTooHighException : public std::exception
     {
