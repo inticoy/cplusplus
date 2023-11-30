@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 20:57:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/30 14:50:43 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 15:24:23 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int main()
             std::cout << president << std::endl;
             president.incrementGrade();
         }
-        catch (std::exception &e)
+        catch (const std::exception &e)
         {
             std::cerr << e.what() << '\n';
         }
