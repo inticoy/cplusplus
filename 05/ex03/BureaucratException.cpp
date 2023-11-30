@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 17:42:30 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 13:54:50 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:34:50 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ Bureaucrat::GradeTooHighException::GradeTooHighException(int grade) throw()
     msg = "grade " + ss.str() + " is too high";
 }
 
-Bureaucrat::GradeTooHighException::~GradeTooHighException() throw()
-{
-}
+Bureaucrat::GradeTooHighException::~GradeTooHighException() throw() {}
 
 const char *Bureaucrat::GradeTooHighException::what() const throw()
 {
@@ -46,9 +44,7 @@ Bureaucrat::GradeTooLowException::GradeTooLowException(int grade) throw()
     msg = "grade " + ss.str() + " is too low";
 }
 
-Bureaucrat::GradeTooLowException::~GradeTooLowException() throw()
-{
-}
+Bureaucrat::GradeTooLowException::~GradeTooLowException() throw() {}
 
 const char *Bureaucrat::GradeTooLowException::what() const throw()
 {

@@ -6,28 +6,21 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:44:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 22:09:27 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 17:26:57 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Intern.hpp"
 
-Intern::Intern()
-{
-}
+Intern::Intern() {}
 
-Intern::Intern(const Intern &i)
-{
-    (void)i;
-}
+Intern::Intern(const Intern &other) { (void)other; }
 
-Intern::~Intern()
-{
-}
+Intern::~Intern() {}
 
-Intern &Intern::operator=(const Intern &i)
+Intern &Intern::operator=(const Intern &other)
 {
-    (void)i;
+    (void)other;
     return *this;
 }
 
@@ -70,10 +63,10 @@ AForm *Intern::makeForm(const std::string &formName,
         if (strtolower(formNames[i]) == strtolower(formName))
         {
             AForm *form = (this->*funcs[i])(target);
-            std::cout << "Intern creates " << formName << std::endl;
+            std::cout << "Intern creates " << formName << '\n';
             return form;
         }
     }
-    std::cerr << "Intern failed to create " << formName << std::endl;
+    std::cerr << "Intern failed to create " << formName << '\n';
     return NULL;
 }

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 18:41:18 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 22:09:27 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 17:26:50 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@
 
 class Intern
 {
-  public:
+public:
     Intern();
-    Intern(const Intern &i);
+    Intern(const Intern &other);
     ~Intern();
-    Intern &operator=(const Intern &i);
+    Intern &operator=(const Intern &other);
 
     std::string strtolower(const std::string &str) const;
     AForm *makePresidentialPardonForm(const std::string &target) const;

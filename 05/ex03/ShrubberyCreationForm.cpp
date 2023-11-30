@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/15 20:39:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 15:13:43 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 17:12:49 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,75 +15,72 @@
 #include <iostream>
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-    : AForm("Shrubbery Creation Form", 145, 137), target("temp")
+    : AForm("Shrubbery Creation", 145, 137), target("noname")
 {
 }
 
-ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &sf)
-    : AForm(sf.getName(), sf.getMinSignGrade(), sf.getMinExeGrade()),
-      target(sf.target)
+ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm &other)
+    : AForm(other.getName(), other.getMinSignGrade(), other.getMinExeGrade()),
+      target(other.target)
 {
 }
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string &target)
-    : AForm("Shrubbery Creation Form", 145, 137), target(target)
+    : AForm("Shrubbery Creation", 145, 137), target(target)
 {
 }
 
-ShrubberyCreationForm::~ShrubberyCreationForm()
-{
-}
+ShrubberyCreationForm::~ShrubberyCreationForm() {}
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(
-    const ShrubberyCreationForm &sf)
+    const ShrubberyCreationForm &other)
 {
-    if (this != &sf)
+    if (this != &other)
     {
-        this->setIsSigned(sf.getIsSigned());
-        target = sf.target;
+        this->setIsSigned(other.getIsSigned());
+        target = other.target;
     }
     return *this;
 }
 
-void ShrubberyCreationForm::execute(const Bureaucrat &e) const
-    throw(GradeTooLowException, NotSignedException)
+void ShrubberyCreationForm::execute(const Bureaucrat &executor) const
+    throw(GradeTooLowException, NotSignedException, ExecuteFailException)
 {
-    checkRequirements(e);
-    std::string filename;
-    filename = target + "_shrubbery";
+    checkRequirements(executor);
+    std::string filename(target + "_shrubbery");
     std::fstream fs;
     fs.open(filename.c_str(), std::ios::out | std::ios::trunc);
     if (!fs.is_open())
     {
-        throw FileCreateFailException();
+        throw ExecuteFailException("failed to create file");
     }
-    fs << "                                            .\n";
-    fs << "                                   .         ;\n";
-    fs << "      .              .              ;%%     ;;\n";
-    fs << "        ,           ,                :;%%  %%;\n";
-    fs << "         :         ;                   :;%%;'     .,\n";
-    fs << ",.        %%;     %%;            ;        %%;'    ,;\n";
-    fs << "  ;       ;%%;  %%%%;        ,     %%;    ;%%;    ,%%'\n";
-    fs << "   %%;       %%;%%;      ,  ;       %%;  ;%%;   ,%%;'\n";
-    fs << "    ;%%;      %%;        ;%%;        %% ;%%;  ,%%;'\n";
-    fs << "     `%%;.     ;%%;     %%;'         `;%%%%;.%%;'\n";
-    fs << "      `:;%%.    ;%%%%. %%@;        %%; ;@%%;%%'\n";
-    fs << "         `:%%;.  :;bd%%;          %%;@%%;'\n";
-    fs << "           `@%%:.  :;%%.         ;@@%%;'\n";
-    fs << "             `@%%.  `;@%%.      ;@@%%;\n";
-    fs << "               `@%%%%. `@%%%%    ;@@%%;\n";
-    fs << "                 ;@%%. :@%%%%  %%@@%%;\n";
-    fs << "                   %%@bd%%%%%%bd%%%%:;\n";
-    fs << "                     #@%%%%%%%%%%:;;\n";
-    fs << "                     %%@@%%%%%%::;\n";
-    fs << "                     %%@@@%%(o);  . '\n";
-    fs << "                     %%@@@o%%;:(.,'\n";
-    fs << "                 `.. %%@@@o%%::;\n";
-    fs << "                    `)@@@o%%::;\n";
-    fs << "                     %%@@(o)::;\n";
-    fs << "                    .%%@@@@%%::;\n";
-    fs << "                    ;%%@@@@%%::;.\n";
-    fs << "                   ;%%@@@@%%%%:;;;.\n";
-    fs << "               ...;%@@@@@%%:;;;;,..\n";
+    fs << "                                            ." << '\n';
+    fs << "                                   .         ;" << '\n';
+    fs << "      .              .              ;%%     ;;" << '\n';
+    fs << "        ,           ,                :;%%  %%;" << '\n';
+    fs << "         :         ;                   :;%%;'     .," << '\n';
+    fs << ",.        %%;     %%;            ;        %%;'    ,;" << '\n';
+    fs << "  ;       ;%%;  %%%%;        ,     %%;    ;%%;    ,%%'" << '\n';
+    fs << "   %%;       %%;%%;      ,  ;       %%;  ;%%;   ,%%;'" << '\n';
+    fs << "    ;%%;      %%;        ;%%;        %% ;%%;  ,%%;'" << '\n';
+    fs << "     `%%;.     ;%%;     %%;'         `;%%%%;.%%;'" << '\n';
+    fs << "      `:;%%.    ;%%%%. %%@;        %%; ;@%%;%%'" << '\n';
+    fs << "         `:%%;.  :;bd%%;          %%;@%%;'" << '\n';
+    fs << "           `@%%:.  :;%%.         ;@@%%;'" << '\n';
+    fs << "             `@%%.  `;@%%.      ;@@%%;" << '\n';
+    fs << "               `@%%%%. `@%%%%    ;@@%%;" << '\n';
+    fs << "                 ;@%%. :@%%%%  %%@@%%;" << '\n';
+    fs << "                   %%@bd%%%%%%bd%%%%:;" << '\n';
+    fs << "                     #@%%%%%%%%%%:;;" << '\n';
+    fs << "  ''                  %%@@%%%%%%::;" << '\n';
+    fs << "   %;     ''         %%@@@%%(o);  . '" << '\n';
+    fs << "  ;%   % %'          %%@@@o%%;:(.,'" << '\n';
+    fs << "  :%%   %;       `.. %%@@@o%%::;" << '\n';
+    fs << "   ;%% %:;          `)@@@o%%::;" << '\n';
+    fs << "     %@::            %%@@(o)::;" << '\n';
+    fs << "     %@             .%%@@@@%%::;" << '\n';
+    fs << "     %@%            ;%%@@@@%%::;." << '\n';
+    fs << "    ;%@%;          ;%%@@@@%%%%:;;;." << '\n';
+    fs << " ..;%@@%;.     ...;%@@@@@%%:;;;;,.." << '\n';
     fs.close();
 }
