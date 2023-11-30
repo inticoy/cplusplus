@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/18 17:48:09 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 13:43:47 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 15:40:30 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,7 @@ Form::GradeTooHighException::GradeTooHighException(int grade) throw()
     msg = "grade " + ss.str() + " is too high";
 }
 
-Form::GradeTooHighException::~GradeTooHighException() throw()
-{
-}
+Form::GradeTooHighException::~GradeTooHighException() throw() {}
 
 const char *Form::GradeTooHighException::what() const throw()
 {
@@ -46,9 +44,7 @@ Form::GradeTooLowException::GradeTooLowException(int grade) throw()
     msg = "grade " + ss.str() + " is too low";
 }
 
-Form::GradeTooLowException::~GradeTooLowException() throw()
-{
-}
+Form::GradeTooLowException::~GradeTooLowException() throw() {}
 
 const char *Form::GradeTooLowException::what() const throw()
 {
@@ -56,13 +52,11 @@ const char *Form::GradeTooLowException::what() const throw()
 }
 
 Form::DoubleSignException::DoubleSignException() throw()
-    : msg("form is already signed")
+    : msg("a form is already signed")
 {
 }
 
-Form::DoubleSignException::~DoubleSignException() throw()
-{
-}
+Form::DoubleSignException::~DoubleSignException() throw() {}
 
 const char *Form::DoubleSignException::what() const throw()
 {

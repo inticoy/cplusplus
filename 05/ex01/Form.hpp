@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/19 15:08:39 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 15:33:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,49 +20,49 @@ class Bureaucrat;
 
 class Form
 {
-  public:
+public:
     class GradeTooHighException : public std::exception
     {
-      public:
+    public:
         GradeTooHighException() throw();
         GradeTooHighException(int grade) throw();
         ~GradeTooHighException() throw();
         const char *what() const throw();
 
-      private:
+    private:
         std::string msg;
     };
 
     class GradeTooLowException : public std::exception
     {
-      public:
+    public:
         GradeTooLowException() throw();
         GradeTooLowException(int grade) throw();
         ~GradeTooLowException() throw();
         const char *what() const throw();
 
-      private:
+    private:
         std::string msg;
     };
 
     class DoubleSignException : public std::exception
     {
-      public:
+    public:
         DoubleSignException() throw();
         ~DoubleSignException() throw();
         const char *what() const throw();
 
-      private:
+    private:
         std::string msg;
     };
 
     Form();
-    Form(const Form &f);
+    Form(const Form &other);
     Form(const std::string &name);
     Form(const std::string &name, int minSignGrade,
          int minExeGrade) throw(GradeTooHighException, GradeTooLowException);
     virtual ~Form();
-    Form &operator=(const Form &f);
+    Form &operator=(const Form &other);
 
     const std::string &getName() const;
     const int &getMinSignGrade() const;
@@ -72,7 +72,7 @@ class Form
     void beSigned(const Bureaucrat &b) throw(GradeTooLowException,
                                              DoubleSignException);
 
-  private:
+private:
     const std::string name;
     const int minSignGrade;
     const int minExeGrade;
