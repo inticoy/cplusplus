@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:51:57 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/30 15:48:15 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:08:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,13 +61,13 @@ const int &Form::getMinExeGrade() const { return minExeGrade; }
 
 const bool &Form::getIsSigned() const { return isSigned; }
 
-void Form::beSigned(const Bureaucrat &b) throw(GradeTooLowException,
-                                               DoubleSignException)
+void Form::beSigned(const Bureaucrat &signer) throw(GradeTooLowException,
+                                                    DoubleSignException)
 {
     if (isSigned)
         throw DoubleSignException();
-    else if (b.getGrade() > minSignGrade)
-        throw GradeTooLowException(b.getGrade());
+    else if (signer.getGrade() > minSignGrade)
+        throw GradeTooLowException(signer.getGrade());
     else
         isSigned = true;
 }

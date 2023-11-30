@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/09 22:45:28 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/30 15:33:38 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 16:07:58 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ public:
     const int &getMinExeGrade() const;
     const bool &getIsSigned() const;
 
-    void beSigned(const Bureaucrat &b) throw(GradeTooLowException,
-                                             DoubleSignException);
+    void beSigned(const Bureaucrat &signer) throw(GradeTooLowException,
+                                                  DoubleSignException);
 
 private:
     const std::string name;
