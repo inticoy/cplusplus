@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/05 20:57:46 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/30 15:24:23 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/11/30 15:46:39 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 int main()
 {
     {
-        std::cout << "[TEST 1]\n";
+        std::cout << "[TEST 1]" << '\n';
 
         try
         {
             Bureaucrat president("Gyoon", 1);
-            std::cout << president << std::endl;
+            std::cout << president << '\n';
             president.decrementGrade();
-            std::cout << president << std::endl;
+            std::cout << president << '\n';
             president.incrementGrade();
-            std::cout << president << std::endl;
+            std::cout << president << '\n';
             president.incrementGrade();
         }
         catch (const std::exception &e)
@@ -36,18 +36,18 @@ int main()
     }
 
     {
-        std::cout << "\n[TEST 2]\n";
+        std::cout << '\n' << "[TEST 2]" << '\n';
 
         try
         {
             Bureaucrat servant("Gyoon", 150);
-            std::cout << servant << std::endl;
+            std::cout << servant << '\n';
             servant.incrementGrade();
-            std::cout << servant << std::endl;
+            std::cout << servant << '\n';
             servant.decrementGrade();
-            std::cout << servant << std::endl;
+            std::cout << servant << '\n';
             servant.decrementGrade();
-            std::cout << servant << std::endl;
+            std::cout << servant << '\n';
         }
         catch (const std::exception &e)
         {
@@ -63,7 +63,7 @@ int main()
             Bureaucrat high("Gyoon", 10);
             for (;;)
             {
-                std::cout << high << std::endl;
+                std::cout << high << '\n';
                 high.incrementGrade();
             }
         }
@@ -80,7 +80,7 @@ int main()
             Bureaucrat low("Gyoon", 140);
             for (;;)
             {
-                std::cout << low << std::endl;
+                std::cout << low << '\n';
                 low.decrementGrade();
             }
         }
