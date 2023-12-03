@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:57:32 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/25 15:06:05 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/03 22:05:43 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,28 @@
 int main()
 {
     {
-        Data *data = new Data(42);
-        uintptr_t ptr = Serializer::serialize(data);
-        Data *dptr = Serializer::deserialize(ptr);
+        std::cout << "[SERIALIZATION]\n";
 
-        std::cout << "original:\t" << data << std::endl;
-        std::cout << "serialized:\t" << ptr << std::endl;
-        std::cout << "deserialized:\t" << dptr << std::endl;
+        // 2023->0111 11100111, 12->1100, 3->0011
+        Data *data = new Data(2023, 12, 3);
+        std::cout << "original addr:\t\t" << data << '\n';
+        std::cout << "original data:\t\t" << *data << '\n' << '\n';
+
+        uintptr_t ptr = Serializer::serialize(data);
+        std::cout << "serialized addr:\t" << reinterpret_cast<void *>(ptr);
+        std::cout << "\nserialized data :\t";
+        char *temp = reinterpret_cast<char *>(ptr);
+        for (size_t i = 0; i < sizeof(Data); i++)
+            std::cout << (int)temp[i] << ' ';
+        std::cout << '\n' << '\n';
+
+        Data *dptr = Serializer::deserialize(ptr);
+        std::cout << "deserialized address:\t" << dptr << '\n';
+        std::cout << "deserialized data:\t" << *dptr << '\n';
 
         delete data;
+        delete reinterpret_cast<char *>(ptr);
+        delete dptr;
     }
 
     return 0;
