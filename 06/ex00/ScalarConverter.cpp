@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/19 22:25:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/03 17:10:36 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/03 22:45:40 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,16 @@
 
 void ScalarConverter::convert(const std::string &str)
 {
+    bool isValid = true;
     std::cout << std::fixed << std::setprecision(1);
     switch (Scalar::getScalarType(str))
     {
     case Scalar::CHAR: {
         char c = str.at(1);
-        Scalar::printChar(c);
-        Scalar::printInt(static_cast<int>(c));
-        Scalar::printFloat(static_cast<float>(c));
-        Scalar::printDouble(static_cast<double>(c));
+        Scalar::printChar(c, isValid);
+        Scalar::printInt(static_cast<int>(c), isValid);
+        Scalar::printFloat(static_cast<float>(c), isValid);
+        Scalar::printDouble(static_cast<double>(c), isValid);
         break;
     }
     case Scalar::INT: {
@@ -30,22 +31,16 @@ void ScalarConverter::convert(const std::string &str)
         int i;
         ss >> i;
         if (ss.fail() || ss.bad() || !ss.eof())
-        {
-            std::cout << "char:\timpossible\n";
-            std::cout << "int:\toverflow\n";
-            std::cout << "float:\timpossible\n";
-            std::cout << "double:\timpossible\n";
-        }
+            isValid = false;
+
+        if (i > std::numeric_limits<char>::max() ||
+            i < std::numeric_limits<char>::min())
+            Scalar::printChar(static_cast<char>(i), false);
         else
-        {
-            if (i > CHAR_MAX || i < CHAR_MIN)
-                std::cout << "char:\timpossible\n";
-            else
-                Scalar::printChar(static_cast<char>(i));
-            Scalar::printInt(i);
-            Scalar::printFloat(static_cast<float>(i));
-            Scalar::printDouble(static_cast<double>(i));
-        }
+            Scalar::printChar(static_cast<char>(i), isValid);
+        Scalar::printInt(i, isValid);
+        Scalar::printFloat(static_cast<float>(i), isValid);
+        Scalar::printDouble(static_cast<double>(i), isValid);
         break;
     }
     case Scalar::FLOAT: {
@@ -58,25 +53,21 @@ void ScalarConverter::convert(const std::string &str)
         float f;
         ss >> f;
         if (ss.fail() || ss.bad() || !ss.eof())
-        {
-            std::cout << "char:\timpossible\n";
-            std::cout << "int:\timpossible\n";
-            std::cout << "float:\toverflow\n";
-            std::cout << "double:\timpossible\n";
-        }
+            isValid = false;
+
+        if (f > std::numeric_limits<char>::max() || std::isinf(f) ||
+            f < std::numeric_limits<char>::min() || std::isnan(f))
+            Scalar::printChar(static_cast<char>(f), false);
         else
-        {
-            if (f > CHAR_MAX || f < CHAR_MIN || std::isinf(f) || std::isnan(f))
-                std::cout << "char:\timpossible" << std::endl;
-            else
-                Scalar::printChar(static_cast<char>(f));
-            if (f > INT_MAX || f < INT_MIN || std::isinf(f) || std::isnan(f))
-                std::cout << "int:\timpossible" << std::endl;
-            else
-                Scalar::printInt(static_cast<int>(f));
-            Scalar::printFloat(f);
-            Scalar::printDouble(static_cast<double>(f));
-        }
+            Scalar::printChar(static_cast<char>(f), isValid);
+
+        if (f > std::numeric_limits<int>::max() || std::isinf(f) ||
+            f < std::numeric_limits<int>::min() || std::isnan(f))
+            Scalar::printInt(static_cast<int>(f), false);
+        else
+            Scalar::printInt(static_cast<int>(f), isValid);
+        Scalar::printFloat(f, isValid);
+        Scalar::printDouble(static_cast<double>(f), isValid);
         break;
     }
     case Scalar::DOUBLE: {
@@ -88,28 +79,24 @@ void ScalarConverter::convert(const std::string &str)
         double d;
         ss >> d;
         if (ss.fail() || ss.bad() || !ss.eof())
-        {
-            std::cout << "char:\timpossible\n";
-            std::cout << "int:\timpossible\n";
-            std::cout << "float:\timpossible\n";
-            std::cout << "double:\tovefflow\n";
-        }
+            isValid = false;
+
+        if (d > std::numeric_limits<char>::max() || std::isinf(d) ||
+            d < std::numeric_limits<char>::min() || std::isnan(d))
+            Scalar::printChar(static_cast<char>(d), false);
         else
-        {
-            if (d > CHAR_MAX || d < CHAR_MIN || std::isinf(d) || std::isnan(d))
-                std::cout << "char:\timpossible" << std::endl;
-            else
-                Scalar::printChar(static_cast<char>(d));
-            if (d > INT_MAX || d < INT_MIN || std::isinf(d) || std::isnan(d))
-                std::cout << "int:\timpossible" << std::endl;
-            else
-                Scalar::printInt(static_cast<int>(d));
-            Scalar::printFloat(static_cast<float>(d));
-            Scalar::printDouble(d);
-        }
+            Scalar::printChar(static_cast<char>(d), isValid);
+        if (d > std::numeric_limits<int>::max() || std::isinf(d) ||
+            d < std::numeric_limits<int>::min() || std::isnan(d))
+            Scalar::printInt(static_cast<int>(d), false);
+        else
+            Scalar::printInt(static_cast<int>(d), isValid);
+        Scalar::printFloat(static_cast<float>(d), isValid);
+        Scalar::printDouble(d, isValid);
         break;
     }
     default:
+        std::cout << str << " is a not scalar\n";
         break;
     }
 }

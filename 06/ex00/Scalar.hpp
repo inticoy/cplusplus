@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 16:20:08 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/03 17:14:45 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/03 22:26:35 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,10 +37,10 @@ public:
     static bool isFloat(const std::string &str);
     static bool isDouble(const std::string &str);
 
-    static void printChar(char c);
-    static void printInt(int i);
-    static void printFloat(float f);
-    static void printDouble(double d);
+    static void printChar(char c, bool isValid);
+    static void printInt(int i, bool isValid);
+    static void printFloat(float f, bool isValid);
+    static void printDouble(double d, bool isValid);
 
 protected:
     Scalar();

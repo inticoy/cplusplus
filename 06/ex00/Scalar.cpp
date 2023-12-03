@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 16:21:20 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/03 17:03:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/03 22:31:40 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ bool Scalar::isInt(const std::string &str)
 bool Scalar::isFloat(const std::string &str)
 {
     // scalar float needs 'f' at last
-    size_t floatIdx = str.find('f');
+    size_t floatIdx = str.rfind('f');
     bool fNotFound = (floatIdx == std::string::npos);
     bool fNotEndChar = (floatIdx != str.length() - 1);
     if (fNotFound || fNotEndChar)
@@ -94,16 +94,39 @@ bool Scalar::isDouble(const std::string &str)
         return true;
 }
 
-void Scalar::printChar(char c)
+void Scalar::printChar(char c, bool isValid)
 {
-    if (std::isprint(c))
+    if (!isValid)
+        std::cout << "char:\timpossible\n";
+    else if (std::isprint(c))
         std::cout << "char:\t'" << c << "'" << '\n';
     else
         std::cout << "char:\tNon displayable" << '\n';
 }
-void Scalar::printInt(int i) { std::cout << "int:\t" << i << '\n'; }
-void Scalar::printFloat(float f) { std::cout << "float:\t" << f << "f\n"; }
-void Scalar::printDouble(double d) { std::cout << "double:\t" << d << '\n'; }
+
+void Scalar::printInt(int i, bool isValid)
+{
+    if (isValid)
+        std::cout << "int:\t" << i << '\n';
+    else
+        std::cout << "int:\timpossible\n";
+}
+
+void Scalar::printFloat(float f, bool isValid)
+{
+    if (isValid)
+        std::cout << "float:\t" << f << "f\n";
+    else
+        std::cout << "float:\timpossible\n";
+}
+
+void Scalar::printDouble(double d, bool isValid)
+{
+    if (isValid)
+        std::cout << "double:\t" << d << '\n';
+    else
+        std::cout << "double:\timpossible\n";
+}
 
 std::string Scalar::strtolower(const std::string &str)
 {
