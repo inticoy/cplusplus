@@ -6,13 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/03 16:20:08 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/03 22:26:35 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/03 23:00:01 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SCALAR_HPP
 #define SCALAR_HPP
 
+#include <cmath> // isnan && isinf
 #include <iostream>
 #include <limits>
 #include <string>

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:46:55 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/03 21:11:55 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/03 23:00:54 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 #define SERIALIZER_HPP
 
 #include "Data.hpp"
-#include <cstdint>
 #include <iostream>
+#include <stdint.h> // cstdint is for c++11
 
 class Serializer
 {
