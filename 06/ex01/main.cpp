@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:57:32 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/03 22:05:43 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/03 22:15:35 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int main()
         std::cout << "original data:\t\t" << *data << '\n' << '\n';
 
         uintptr_t ptr = Serializer::serialize(data);
-        std::cout << "serialized addr:\t" << reinterpret_cast<void *>(ptr);
+        std::cout << "serialized addr:\t" << ptr;
         std::cout << "\nserialized data :\t";
         char *temp = reinterpret_cast<char *>(ptr);
         for (size_t i = 0; i < sizeof(Data); i++)
@@ -37,8 +37,6 @@ int main()
         std::cout << "deserialized data:\t" << *dptr << '\n';
 
         delete data;
-        delete reinterpret_cast<char *>(ptr);
-        delete dptr;
     }
 
     return 0;
