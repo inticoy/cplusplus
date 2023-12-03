@@ -6,33 +6,11 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:10:41 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/25 15:50:49 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/03 22:50:15 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Identifier.hpp"
-
-Identifier::Identifier()
-{
-}
-
-Identifier::Identifier(const Identifier &other)
-{
-    (void)other;
-}
-
-Identifier::~Identifier()
-{
-}
-
-Identifier &Identifier::operator=(const Identifier &other)
-{
-    if (this != &other)
-    {
-        (void)other;
-    }
-    return *this;
-}
 
 Base *Identifier::generate()
 {
@@ -56,21 +34,13 @@ Base *Identifier::generate()
 void Identifier::identify(Base *ptr)
 {
     if (dynamic_cast<A *>(ptr))
-    {
         std::cout << ptr << " is a pointer of class A" << std::endl;
-    }
     else if (dynamic_cast<B *>(ptr))
-    {
         std::cout << ptr << " is a pointer of class B" << std::endl;
-    }
     else if (dynamic_cast<C *>(ptr))
-    {
         std::cout << ptr << " is a pointer of class C" << std::endl;
-    }
     else
-    {
         std::cout << ptr << " is a pointer of class Base" << std::endl;
-    }
 }
 
 void Identifier::identify(Base &ref)
@@ -95,6 +65,7 @@ void Identifier::identifyA(Base &ref) throw(ClassAException)
     {
         A a = dynamic_cast<A &>(ref);
     }
+
     catch (const std::exception &e)
     {
         return;
@@ -126,4 +97,14 @@ void Identifier::identifyC(Base &ref) throw(ClassCException)
         return;
     }
     throw ClassCException();
+}
+
+Identifier::Identifier() {}
+Identifier::Identifier(const Identifier &other) { (void)other; }
+Identifier::~Identifier() {}
+Identifier &Identifier::operator=(const Identifier &other)
+{
+    if (this != &other)
+        (void)other;
+    return *this;
 }

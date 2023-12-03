@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:07:49 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/25 15:13:38 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/03 22:08:07 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,19 +17,19 @@
 
 class A : public Base
 {
-  public:
+public:
     virtual ~A(){};
 };
 
 class B : public Base
 {
-  public:
+public:
     virtual ~B(){};
 };
 
 class C : public Base
 {
-  public:
+public:
     virtual ~C(){};
 };
 
