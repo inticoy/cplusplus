@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 15:10:41 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/03 22:50:15 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/03 23:04:42 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,13 +18,13 @@ Base *Identifier::generate()
     switch (time % 3)
     {
     case 0:
-        std::cout << "A generated" << std::endl;
+        std::cout << "A generated\n";
         return new A();
     case 1:
-        std::cout << "B generated" << std::endl;
+        std::cout << "B generated\n";
         return new B();
     case 2:
-        std::cout << "C generated" << std::endl;
+        std::cout << "C generated\n";
         return new C();
     default:
         return NULL;
@@ -34,13 +34,13 @@ Base *Identifier::generate()
 void Identifier::identify(Base *ptr)
 {
     if (dynamic_cast<A *>(ptr))
-        std::cout << ptr << " is a pointer of class A" << std::endl;
+        std::cout << ptr << " is a pointer of class A\n";
     else if (dynamic_cast<B *>(ptr))
-        std::cout << ptr << " is a pointer of class B" << std::endl;
+        std::cout << ptr << " is a pointer of class B\n";
     else if (dynamic_cast<C *>(ptr))
-        std::cout << ptr << " is a pointer of class C" << std::endl;
+        std::cout << ptr << " is a pointer of class C\n";
     else
-        std::cout << ptr << " is a pointer of class Base" << std::endl;
+        std::cout << ptr << " is a pointer of class Base\n";
 }
 
 void Identifier::identify(Base &ref)
@@ -53,10 +53,10 @@ void Identifier::identify(Base &ref)
     }
     catch (const std::exception &e)
     {
-        std::cout << "Ref is a reference of " << e.what() << std::endl;
+        std::cout << "Ref is a reference of " << e.what() << '\n';
         return;
     }
-    std::cout << "Ref is a reference of base" << std::endl;
+    std::cout << "Ref is a reference of base\n";
 }
 
 void Identifier::identifyA(Base &ref) throw(ClassAException)
