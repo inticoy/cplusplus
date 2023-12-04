@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:48:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/26 18:41:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/04 15:42:44 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,54 +15,55 @@
 
 #include <algorithm>
 #include <exception>
+#include <iostream>
 #include <iterator>
 #include <set>
 #include <string>
 
 class Span
 {
-  public:
-    class DuplicatedSpanException : public std::exception
+public:
+    class DuplicatedElementException : public std::exception
     {
-      public:
-        DuplicatedSpanException();
-        virtual ~DuplicatedSpanException() throw();
+    public:
+        DuplicatedElementException();
+        virtual ~DuplicatedElementException() throw();
         const char *what() const throw();
 
-      private:
+    private:
         std::string msg;
     };
 
-    class FullSpanException : public std::exception
+    class FullContainerException : public std::exception
     {
-      public:
-        FullSpanException();
-        virtual ~FullSpanException() throw();
+    public:
+        FullContainerException();
+        virtual ~FullContainerException() throw();
         const char *what() const throw();
 
-      private:
+    private:
         std::string msg;
     };
 
-    class EmptySpanException : public std::exception
+    class EmptyContainerException : public std::exception
     {
-      public:
-        EmptySpanException();
-        virtual ~EmptySpanException() throw();
+    public:
+        EmptyContainerException();
+        virtual ~EmptyContainerException() throw();
         const char *what() const throw();
 
-      private:
+    private:
         std::string msg;
     };
 
-    class SingleSpanException : public std::exception
+    class SingleElementException : public std::exception
     {
-      public:
-        SingleSpanException();
-        virtual ~SingleSpanException() throw();
+    public:
+        SingleElementException();
+        virtual ~SingleElementException() throw();
         const char *what() const throw();
 
-      private:
+    private:
         std::string msg;
     };
 
@@ -72,13 +73,37 @@ class Span
     ~Span();
     Span &operator=(const Span &other);
 
-    void addNumber(int n) throw(FullSpanException, DuplicatedSpanException);
-    int shortestSpan() throw(EmptySpanException, SingleSpanException);
-    int longestSpan() throw(EmptySpanException, SingleSpanException);
+    size_t getSize() const;
+    void addNumber(int n) throw(FullContainerException,
+                                DuplicatedElementException);
+    int shortestSpan() const
+        throw(EmptyContainerException, SingleElementException);
+    int longestSpan() const
+        throw(EmptyContainerException, SingleElementException);
+    void printElements() const;
 
-    template <typename Iterator> bool isExist(Iterator begin, Iterator end)
+    template <typename Iterator>
+    void addNumbers(Iterator begin,
+                    Iterator end) throw(FullContainerException,
+                                        DuplicatedElementException)
     {
-        // need to check itself dup;
+        if (isDuplicated(begin, end))
+            throw DuplicatedElementException();
+        else if (set.size() + (end - begin) > nMax)
+            throw FullContainerException();
+        else if (isExist(begin, end))
+            throw DuplicatedElementException();
+        else
+            set.insert(begin, end);
+    }
+
+private:
+    unsigned int nMax;
+    std::set<int> set;
+
+    template <typename Iterator>
+    bool isExist(Iterator begin, Iterator end) const
+    {
         for (Iterator it = begin; it != end; ++it)
         {
             if (set.find(*it) != set.end())
@@ -88,34 +113,15 @@ class Span
     }
 
     template <typename Iterator>
-    void addNumbers(Iterator begin, Iterator end) throw(FullSpanException,
-                                                        DuplicatedSpanException)
+    bool isDuplicated(Iterator begin, Iterator end) const
     {
-        size_t size = 0;
-        for (Iterator it = begin; it != end; ++it)
-        {
-            ++size;
-        }
-        if (set.size() + size > nMax)
-            throw FullSpanException();
-        else if (isExist(begin, end))
-            throw DuplicatedSpanException();
-        else
-            set.insert(begin, end);
+        Iterator beforeEnd = end - 1;
+        for (Iterator i = begin; i != beforeEnd; ++i)
+            for (Iterator j = i + 1; j != end; ++j)
+                if (*i == *j)
+                    return true;
+        return false;
     }
-
-  private:
-    unsigned int nMax;
-    std::set<int> set;
-
-    // template <typename Iterator> bool isDuplicated(Iterator begin, Iterator
-    // end)
-    // {
-    //     for (Iterator i = begin; i != end; ++i)
-    //     {
-    //         for (Iterator j = i;)
-    //     }
-    // }
 };
 
 #endif
