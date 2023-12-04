@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 14:47:24 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/03 22:13:20 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/04 13:50:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@ uintptr_t Serializer::serialize(Data *ptr)
 Data *Serializer::deserialize(uintptr_t raw)
 {
     return reinterpret_cast<Data *>(raw);
+}
+
+Serializer::Serializer() {}
+Serializer::Serializer(const Serializer &other) { (void)other; }
+Serializer::~Serializer() {}
+Serializer &Serializer::operator=(const Serializer &other)
+{
+    if (this != &other)
+        (void)other;
+    return *this;
 }
 
 // /* real serializer */
@@ -44,13 +54,3 @@ Data *Serializer::deserialize(uintptr_t raw)
 //         dataInByte[i] = serialized[i];
 //     return deserialized;
 // }
-
-Serializer::Serializer() {}
-Serializer::Serializer(const Serializer &other) { (void)other; }
-Serializer::~Serializer() {}
-Serializer &Serializer::operator=(const Serializer &other)
-{
-    if (this != &other)
-        (void)other;
-    return *this;
-}
