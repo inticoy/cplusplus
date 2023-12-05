@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 16:43:12 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/04 15:42:07 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/05 14:27:43 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,7 @@ int main()
         try
         {
             sp.addNumber(1);
-            sp.addNumbers(vec.begin(), vec.end());
+            sp.addNumbers(vec.end(), vec.begin());
 
             sp.printElements();
             std::cout << "shortest span : " << sp.shortestSpan() << std::endl;

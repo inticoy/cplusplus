@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:48:10 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/04 15:42:44 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/05 14:22:03 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,17 @@ public:
         std::string msg;
     };
 
+    class WrongUsageException : public std::exception
+    {
+    public:
+        WrongUsageException();
+        virtual ~WrongUsageException() throw();
+        const char *what() const throw();
+
+    private:
+        std::string msg;
+    };
+
     Span();
     Span(unsigned int N);
     Span(const Span &other);
@@ -85,9 +96,12 @@ public:
     template <typename Iterator>
     void addNumbers(Iterator begin,
                     Iterator end) throw(FullContainerException,
-                                        DuplicatedElementException)
+                                        DuplicatedElementException,
+                                        WrongUsageException)
     {
-        if (isDuplicated(begin, end))
+        if (end - begin < 0)
+            throw WrongUsageException();
+        else if (isDuplicated(begin, end))
             throw DuplicatedElementException();
         else if (set.size() + (end - begin) > nMax)
             throw FullContainerException();

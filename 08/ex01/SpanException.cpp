@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 14:53:29 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/04 15:42:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/05 14:21:53 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,13 @@ Span::SingleElementException::SingleElementException() : msg("only one element")
 }
 Span::SingleElementException::~SingleElementException() throw() {}
 const char *Span::SingleElementException::what() const throw()
+{
+    return msg.c_str();
+}
+
+Span::WrongUsageException::WrongUsageException() : msg("wrong usage") {}
+Span::WrongUsageException::~WrongUsageException() throw() {}
+const char *Span::WrongUsageException::what() const throw()
 {
     return msg.c_str();
 }
