@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 15:48:23 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/05 15:33:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/05 15:38:57 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int main()
     {
         std::cout << "TEST FOR MUTANT STACK" << std::endl;
         MutantStack<int> mstack;
+        MutantStack<int> hi;
 
         mstack.push(5);
         mstack.push(17);

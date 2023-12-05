@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/04 16:00:27 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/05 15:26:02 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/05 15:39:17 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,46 +52,5 @@ public:
     const_reverse_iterator rbegin() const { return this->c.rbegin(); }
     const_reverse_iterator rend() const { return this->c.rend(); }
 };
-
-// template <typename T, typename Container>
-// bool operator==(const MutantStack<T, Container> &lhs,
-//                 const MutantStack<T, Container> &rhs)
-// {
-//     return true;
-// }
-
-// template <typename T, typename Container>
-// bool operator!=(const MutantStack<T, Container> &lhs,
-//                 const MutantStack<T, Container> &rhs)
-// {
-//     return true;
-// }
-
-// template <typename T, typename Container>
-// bool operator<(const MutantStack<T, Container> &lhs,
-//                const MutantStack<T, Container> &rhs)
-// {
-//     return true;
-// }
-// template <typename T, typename Container>
-// bool operator<=(const MutantStack<T, Container> &lhs,
-//                 const MutantStack<T, Container> &rhs)
-// {
-//     return true;
-// }
-
-// template <typename T, typename Container>
-// bool operator>(const MutantStack<T, Container> &lhs,
-//                const MutantStack<T, Container> &rhs)
-// {
-//     return true;
-// }
-
-// template <typename T, typename Container>
-// bool operator>=(const MutantStack<T, Container> &lhs,
-//                 const MutantStack<T, Container> &rhs)
-// {
-//     return true;
-// }
 
 #endif
