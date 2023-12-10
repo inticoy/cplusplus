@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/25 17:22:34 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/04 14:29:04 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/10 13:41:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,12 +42,10 @@ public:
         return *this;
     }
 
-    T &operator[](long long idx) throw(std::exception)
+    T &operator[](size_t idx) throw(std::exception)
     {
-        if (len == 0)
+        if (idx < 0 || idx >= len)
             throw std::out_of_range("out of range");
-        else if (idx == -1)
-            return arr[len - 1];
         else
             return arr[idx];
     }
