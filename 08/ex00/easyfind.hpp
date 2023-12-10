@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/26 13:05:29 by gyoon             #+#    #+#             */
-/*   Updated: 2023/11/26 14:40:04 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/10 15:32:48 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,8 @@
 
 #include <algorithm>
 
-template <typename T> typename T::iterator easyfind(T &container, int val)
+template <typename T>
+typename T::iterator easyfind(T &container, int val)
 {
     return std::find(container.begin(), container.end(), val);
 }
