@@ -78,6 +78,7 @@
 		"__tree": "cpp",
 		"list": "cpp",
 		"set": "cpp",
-		"version": "cpp"
+		"version": "cpp",
+		"map": "cpp"
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:54:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/12 23:41:26 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/13 00:17:35 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@ public:
         BadInputException();
         BadInputException(const std::string &detail);
         ~BadInputException() throw();
+        const char *what() const throw();
+
+    private:
+        std::string msg;
+    };
+
+    class NoDataException : public std::exception
+    {
+    public:
+        NoDataException();
+        NoDataException(const std::string &detail);
+        ~NoDataException() throw();
         const char *what() const throw();
 
     private:

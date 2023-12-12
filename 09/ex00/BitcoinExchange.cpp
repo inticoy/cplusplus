@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:20:01 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/13 00:13:03 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/13 00:20:32 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void BitcoinExchange::setDatabase(const std::string &filename) throw(
 
 void BitcoinExchange::printDatabase() const
 {
-    // std::cout << database << std::endl;
+    // std::cout << (*--database.upper_bound(Date("2009-01-01"))).second
+    //           << std::endl;
 }
 
 void BitcoinExchange::exchangeBitcoinByFile(const std::string &filename) throw(
@@ -92,15 +93,15 @@ void BitcoinExchange::exchangeBitcoinByFile(const std::string &filename) throw(
             Date d(date);
             float v = stof(value);
 
-            if (v < 0)
+            if (d < (*database.begin()).first)
+                throw NoDataException(date);
+            else if (v < 0)
                 throw NegativeNumberException();
             else if (v > 1000)
                 throw LargeNumberException();
 
-            std::map<Date, float>::iterator it = database.upper_bound(d);
-
-            std::cout << date << " | " << value << " = "
-                      << (*(--it)).second * v;
+            std::cout << date << " | " << value << " = ";
+            std::cout << (*(--database.upper_bound(d))).second * v;
             std::cout << std::endl;
         }
         catch (const std::exception &e)
