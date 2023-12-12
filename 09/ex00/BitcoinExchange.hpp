@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:54:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/12 21:33:37 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/12 23:41:26 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include "Date.hpp"
 #include <exception>
 #include <fstream>
+#include <iostream>
 #include <map>
 #include <string>
 
@@ -33,11 +34,34 @@ public:
         std::string msg;
     };
 
-    class WrongFormatException : public std::exception
+    class BadInputException : public std::exception
     {
     public:
-        WrongFormatException();
-        ~WrongFormatException() throw();
+        BadInputException();
+        BadInputException(const std::string &detail);
+        ~BadInputException() throw();
+        const char *what() const throw();
+
+    private:
+        std::string msg;
+    };
+
+    class NegativeNumberException : public std::exception
+    {
+    public:
+        NegativeNumberException();
+        ~NegativeNumberException() throw();
+        const char *what() const throw();
+
+    private:
+        std::string msg;
+    };
+
+    class LargeNumberException : public std::exception
+    {
+    public:
+        LargeNumberException();
+        ~LargeNumberException() throw();
         const char *what() const throw();
 
     private:
@@ -49,14 +73,17 @@ public:
     ~BitcoinExchange();
     BitcoinExchange &operator=(const BitcoinExchange &other);
 
-    void setDatabase() throw(FileNotFoundException, WrongFormatException);
-    void setDatabase(const std::string &filename) throw(FileNotFoundException,
-                                                        WrongFormatException);
-    void exchangeBitcoinByFile(const std::string &filename) const
-        throw(FileNotFoundException, WrongFormatException);
+    void setDatabase() throw(FileNotFoundException);
+    void setDatabase(const std::string &filename) throw(FileNotFoundException);
+    void printDatabase() const;
+    void exchangeBitcoinByFile(const std::string &filename) throw(
+        FileNotFoundException, BadInputException);
 
 private:
-    std::map<Date, int> database;
+    std::map<Date, float> database;
+
+    int stoi(const std::string &s);
+    float stof(const std::string &s);
 };
 
 #endif

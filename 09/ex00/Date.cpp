@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:04:54 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/12 16:01:28 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/12 23:36:16 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,17 +22,28 @@ Date::Date(const Date &other)
 {
 }
 
-Date::Date(unsigned int year, unsigned int month, unsigned day)
-    : year(year), month(month), day(day)
+#include <iostream>
+Date::Date(const std::string &date) throw(WrongFormatException)
 {
-    unsigned int isLeap = static_cast<unsigned int>(isLeapYear(year));
+    if (std::count(date.begin(), date.end(), '-') != 2)
+        throw WrongFormatException();
 
-    if (year == 0 || month == 0 || month > 12 || day == 0)
+    std::stringstream ss(date);
+    std::string y, m, d;
+    unsigned int year, month, day;
+    std::getline(ss, y, '-');
+    std::getline(ss, m, '-');
+    std::getline(ss, d, '-');
+    year = stoui(y);
+    month = stoui(m);
+    day = stoui(d);
+
+    if (!isValidDate(year, month, day))
         throw WrongFormatException();
-    else if (month == 2 && day > daysInMonth[2] + isLeap)
-        throw WrongFormatException();
-    else if (day > daysInMonth[month])
-        throw WrongFormatException();
+
+    this->year = year;
+    this->month = month;
+    this->day = day;
 }
 
 Date::~Date() {}
@@ -56,7 +67,7 @@ bool Date::operator<(const Date &rhs) const
         return month < rhs.month;
     else if (day != rhs.day)
         return day < rhs.day;
-    return true;
+    return false;
 }
 
 bool Date::isLeapYear(unsigned int year)
@@ -69,4 +80,28 @@ bool Date::isLeapYear(unsigned int year)
         return true;
     else
         return false;
+}
+
+bool Date::isValidDate(unsigned int year, unsigned int month, unsigned day)
+{
+    unsigned int isLeap = static_cast<unsigned int>(isLeapYear(year));
+
+    if (year == 0 || month == 0 || month > 12 || day == 0)
+        return false;
+    else if (month == 2 && day > daysInMonth[2] + isLeap)
+        return false;
+    if (day > daysInMonth[month - 1])
+        return false;
+    else
+        return true;
+}
+
+unsigned int Date::stoui(const std::string &s) throw(WrongFormatException)
+{
+    std::stringstream ss(s);
+    unsigned int ui;
+    ss >> ui;
+    // if (ss.fail() || ss.bad() || !ss.eof())
+    //     throw WrongFormatException();
+    return ui;
 }

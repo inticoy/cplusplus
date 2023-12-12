@@ -6,16 +6,16 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:20:01 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/12 21:47:19 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/13 00:13:03 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "BitcoinExchange.hpp"
 
-BitcoinExchange::BitcoinExchange() : database(std::map<Date, int>()) {}
+BitcoinExchange::BitcoinExchange() : database(std::map<Date, float>()) {}
 
 BitcoinExchange::BitcoinExchange(const BitcoinExchange &other)
-    : database(std::map<Date, int>(other.database))
+    : database(std::map<Date, float>(other.database))
 {
 }
 
@@ -31,15 +31,13 @@ BitcoinExchange &BitcoinExchange::operator=(const BitcoinExchange &other)
     return *this;
 }
 
-void BitcoinExchange::setDatabase() throw(FileNotFoundException,
-                                          WrongFormatException)
+void BitcoinExchange::setDatabase() throw(FileNotFoundException)
 {
     setDatabase("data.csv");
 }
 
-// #include <iostream>
 void BitcoinExchange::setDatabase(const std::string &filename) throw(
-    FileNotFoundException, WrongFormatException)
+    FileNotFoundException)
 {
     std::fstream fs;
     fs.open(filename.c_str(), std::ios::in);
@@ -48,23 +46,86 @@ void BitcoinExchange::setDatabase(const std::string &filename) throw(
 
     std::string line;
     std::getline(fs, line);
-    // size_t delimIdx = line.find(',');
-    // if (!(line.substr(0, line.find(',')) == "date") ||
-    //     !(line.substr(line.find(',') + 1, line.size() - line.find(',')) ==
-    //       "exchange_rate"))
-    //     throw WrongFormatException();
 
     while (std::getline(fs, line))
     {
-        // check;
+        std::stringstream ss(line);
+        std::string date, exchangeRate;
+        std::getline(ss, date, ',');
+        std::getline(ss, exchangeRate, ',');
+
+        Date d(date);
+
+        float rate = stof(exchangeRate);
+
+        database.insert(std::pair<Date, float>(d, rate));
     }
 }
 
-void BitcoinExchange::exchangeBitcoinByFile(const std::string &filename) const
-    throw(FileNotFoundException, WrongFormatException)
+void BitcoinExchange::printDatabase() const
+{
+    // std::cout << database << std::endl;
+}
+
+void BitcoinExchange::exchangeBitcoinByFile(const std::string &filename) throw(
+    FileNotFoundException, BadInputException)
 {
     std::fstream fs;
     fs.open(filename.c_str(), std::ios::in);
     if (!fs.is_open())
         throw FileNotFoundException();
+
+    std::string line;
+    std::getline(fs, line);
+
+    while (std::getline(fs, line))
+    {
+        try
+        {
+            if (std::count(line.begin(), line.end(), '|') != 1)
+                throw BadInputException(line);
+
+            std::stringstream ss(line);
+            std::string date, value;
+            std::getline(ss, date, '|');
+            std::getline(ss, value, '|');
+            Date d(date);
+            float v = stof(value);
+
+            if (v < 0)
+                throw NegativeNumberException();
+            else if (v > 1000)
+                throw LargeNumberException();
+
+            std::map<Date, float>::iterator it = database.upper_bound(d);
+
+            std::cout << date << " | " << value << " = "
+                      << (*(--it)).second * v;
+            std::cout << std::endl;
+        }
+        catch (const std::exception &e)
+        {
+            std::cout << "Error: " << e.what() << '\n';
+        }
+    }
+}
+
+int BitcoinExchange::stoi(const std::string &s)
+{
+    std::stringstream ss(s);
+    int i;
+    ss >> i;
+    // if (ss.fail() || ss.bad() || !ss.eof())
+    //     throw WrongFormatException();
+    return i;
+}
+
+float BitcoinExchange::stof(const std::string &s)
+{
+    std::stringstream ss(s);
+    float f;
+    ss >> f;
+    // if (ss.fail() || ss.bad() || !ss.eof())
+    //     throw WrongFormatException();
+    return f;
 }
