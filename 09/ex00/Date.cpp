@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:04:54 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/12 23:36:16 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/13 00:28:06 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,16 +84,13 @@ bool Date::isLeapYear(unsigned int year)
 
 bool Date::isValidDate(unsigned int year, unsigned int month, unsigned day)
 {
-    unsigned int isLeap = static_cast<unsigned int>(isLeapYear(year));
-
     if (year == 0 || month == 0 || month > 12 || day == 0)
         return false;
-    else if (month == 2 && day > daysInMonth[2] + isLeap)
-        return false;
-    if (day > daysInMonth[month - 1])
-        return false;
-    else
+    else if (isLeapYear(year) && month == 2 && day <= daysInMonth[1] + 1)
         return true;
+    else if (day > daysInMonth[month - 1])
+        return false;
+    return true;
 }
 
 unsigned int Date::stoui(const std::string &s) throw(WrongFormatException)
