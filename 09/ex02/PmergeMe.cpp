@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:23:26 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/15 15:23:56 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/15 15:56:10 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -184,40 +184,37 @@ void PmergeMe::deleteVector(std::vector<Element *> &vec)
         delete vec.at(i);
 }
 
-///////////////////////// list
+///////////////////////// deque
 
-void PmergeMe::analyzeSortByList()
+void PmergeMe::analyzeSortByDeque()
 {
-    std::vector<value_t> sorted(values, values + size);
+    std::deque<value_t> sorted(values, values + size);
     std::sort(sorted.begin(), sorted.end());
 
-    std::list<Element *> lst;
+    std::deque<Element *> deq;
     for (size_t i = 0; i < size; ++i)
-        lst.push_back(newElement(values[i]));
+        deq.push_back(newElement(values[i]));
 
     clock_t before = std::clock();
-    sortByList(lst);
+    sortByDeque(deq);
     clock_t after = std::clock();
+    std::cout << before << " " << after << std::endl;
 
-    for (size_t i = 0; i < lst.size(); ++i)
+    for (size_t i = 0; i < deq.size(); ++i)
     {
-        if ((*std::next(lst.begin(), i))->largest != (sorted.at(i)))
-        {
-            std::cout << "lst: " << (*std::next(lst.begin(), i))->largest;
-            std::cout << " sort: " << sorted.at(i) << std::endl;
+        if (deq.at(i)->largest != sorted.at(i))
             return;
-        }
     }
 
     double time = static_cast<double>(after - before) / CLOCKS_PER_SEC * 1000;
     std::cout << "Time to process a range of " << size << " ";
-    std::cout << "elements with std::list : " << time << "ms";
+    std::cout << "elements with std::deque : " << time << "ms";
     std::cout << std::endl;
-    deleteList(lst);
+    deleteDeque(deq);
 }
 
-void PmergeMe::insertInList(std::list<Element *> &lst, size_t len,
-                            Element *toInsert)
+void PmergeMe::insertInDeque(std::deque<Element *> &deq, size_t len,
+                             Element *toInsert)
 {
 
     int start = 0, end = len - 1;
@@ -227,73 +224,70 @@ void PmergeMe::insertInList(std::list<Element *> &lst, size_t len,
     while (start <= end)
     {
         mid = (start + end) / 2;
-        midValue = (*std::next(lst.begin(), mid))->largest;
+        midValue = (*std::next(deq.begin(), mid))->largest;
         if (midValue > toInsert->largest)
             end = mid - 1;
         else if (midValue < toInsert->largest)
             start = mid + 1;
         else
         {
-            lst.insert(std::next(lst.begin(), mid), toInsert);
+            deq.insert(deq.begin() + mid, toInsert);
             return;
         }
     }
-    lst.insert(std::next(lst.begin(), start), toInsert);
+    deq.insert(deq.begin() + start, toInsert);
 }
 
-void PmergeMe::sortByList(std::list<Element *> &lst) // in ascending order
+void PmergeMe::sortByDeque(std::deque<Element *> &deq) // in ascending order
 {
     // std::cout << std::endl << "sorting : ";
     // for (size_t i = 0; i < vec.size(); ++i)
     //     std::cout << vec.at(i)->largest << " ";
     // std::cout << std::endl;
 
-    if (lst.size() == 1)
+    if (deq.size() == 1)
         return;
 
-    std::list<Element *> paired;
-    for (size_t i = 1; i < lst.size(); i += 2)
+    std::deque<Element *> paired;
+    for (size_t i = 1; i < deq.size(); i += 2)
     {
         Element *pair = new Element;
-        if ((*std::next(lst.begin(), i - 1))->largest >
-            (*std::next(lst.begin(), i))->largest)
+        if (deq.at(i - 1)->largest > deq.at(i)->largest)
         {
-            pair->largest = (*std::next(lst.begin(), i - 1))->largest;
-            pair->big = (*std::next(lst.begin(), i - 1));
-            pair->small = (*std::next(lst.begin(), i));
+            pair->largest = deq.at(i - 1)->largest;
+            pair->big = deq.at(i - 1);
+            pair->small = deq.at(i);
         }
         else
         {
-            pair->largest = (*std::next(lst.begin(), i))->largest;
-            pair->big = (*std::next(lst.begin(), i));
-            pair->small = (*std::next(lst.begin(), i - 1));
+            pair->largest = deq.at(i)->largest;
+            pair->big = deq.at(i);
+            pair->small = deq.at(i - 1);
         }
         paired.push_back(pair);
     };
 
-    sortByList(paired);
+    sortByDeque(paired);
 
-    std::list<Element *> sorted;
+    std::deque<Element *> sorted;
 
-    sorted.push_back((*std::next(paired.begin(), 0))->small);
+    sorted.push_back(paired.at(0)->small);
     for (size_t i = 0; i < paired.size(); ++i)
-        sorted.push_back((*std::next(paired.begin(), i))->big);
+        sorted.push_back(paired.at(i)->big);
 
     for (size_t i = 1; i < paired.size(); ++i)
-        insertInList(sorted, sorted.size(),
-                     (*std::next(paired.begin(), i))->small);
+        insertInDeque(sorted, sorted.size(), paired.at(i)->small);
 
-    if (lst.size() % 2 == 1)
-        insertInList(sorted, sorted.size(),
-                     (*std::next(lst.begin(), lst.size() - 1)));
+    if (deq.size() % 2 == 1)
+        insertInDeque(sorted, sorted.size(), deq.at(deq.size() - 1));
 
-    deleteList(paired);
-    lst = sorted;
+    deleteDeque(paired);
+    deq = sorted;
     // n_half;
 }
 
-void PmergeMe::deleteList(std::list<Element *> &lst)
+void PmergeMe::deleteDeque(std::deque<Element *> &deq)
 {
-    for (size_t i = 0; i < lst.size(); ++i)
-        delete *std::next(lst.begin(), i);
+    for (size_t i = 0; i < deq.size(); ++i)
+        delete deq.at(i);
 }

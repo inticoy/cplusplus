@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:54:47 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/15 15:03:30 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/15 15:46:50 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
         std::cout << std::endl;
 
         pMergeMe.analyzeSortByVector();
-        pMergeMe.analyzeSortByList();
+        pMergeMe.analyzeSortByDeque();
 
         return 0;
     }
