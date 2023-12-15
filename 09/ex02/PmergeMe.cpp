@@ -6,17 +6,19 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:23:26 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/15 15:56:10 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:53:46 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
-PmergeMe::PmergeMe() : values(0), size(0) {}
-PmergeMe::PmergeMe(size_t size) : values(new value_t[size]), size(size) {}
+PmergeMe::PmergeMe() : values(NULL), size(0) {}
+PmergeMe::PmergeMe(size_t size) : values(new int[size]), size(size) {}
 PmergeMe::PmergeMe(const PmergeMe &other)
-    : values(new value_t[other.size]), size(other.size)
+    : values(new int[other.size]), size(other.size)
 {
+    for (size_t i = 0; i < other.size; ++i)
+        values[i] = other.values[i];
 }
 PmergeMe::~PmergeMe() { delete[] values; }
 PmergeMe &PmergeMe::operator=(const PmergeMe &other)
@@ -24,7 +26,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
     if (this != &other)
     {
         delete[] values;
-        values = new value_t[other.size];
+        values = new int[other.size];
         for (size_t i = 0; i < other.size; ++i)
             values[i] = other.values[i];
         size = other.size;
@@ -34,7 +36,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 
 bool PmergeMe::addValue(const std::string &str)
 {
-    value_t value = stoui(str);
+    int value = stoi(str);
     for (size_t i = 0; i < size; ++i)
     {
         if (values[i] == 0)
@@ -60,66 +62,98 @@ void PmergeMe::printSortedValues() const
         std::cout << vec.at(i) << " ";
 }
 
-unsigned int PmergeMe::stoui(const std::string &str)
+int PmergeMe::stoi(const std::string &str)
 {
-    unsigned int ui;
+    int i;
     std::stringstream ss(str);
-    ss >> ui;
+    ss >> i;
     // TODO: exception like ss.fail();
-    return ui;
+    return i;
 }
 
-PmergeMe::Element *PmergeMe::newElement(value_t value)
+PmergeMe::Element *PmergeMe::newElement(int max, Element *big, Element *small)
 {
     Element *element = new Element();
-    element->largest = value;
-    element->big = NULL;
-    element->small = NULL;
+    element->max = max;
+    element->big = big;
+    element->small = small;
     return element;
 }
 
-void PmergeMe::analyzeSortByVector()
+void PmergeMe::deleteElement(Element *ptr) { delete ptr; }
+
+void PmergeMe::analyzeSortingByVector()
 {
-    std::vector<value_t> sorted(values, values + size);
+    std::vector<int> sorted(values, values + size);
     std::sort(sorted.begin(), sorted.end());
 
     std::vector<Element *> vec;
     for (size_t i = 0; i < size; ++i)
-        vec.push_back(newElement(values[i]));
+        vec.push_back(newElement(values[i], NULL, NULL));
 
     clock_t before = std::clock();
-    sortByVector(vec);
+
+    sort(vec);
+
     clock_t after = std::clock();
-    std::cout << before << " " << after << std::endl;
 
     for (size_t i = 0; i < vec.size(); ++i)
-    {
-        if (vec.at(i)->largest != sorted.at(i))
+        if (vec.at(i)->max != sorted.at(i))
             return;
-    }
 
     double time = static_cast<double>(after - before) / CLOCKS_PER_SEC * 1000;
+
     std::cout << "Time to process a range of " << size << " ";
     std::cout << "elements with std::vector : " << time << "ms";
     std::cout << std::endl;
-    deleteVector(vec);
+
+    std::for_each(vec.begin(), vec.end(), deleteElement);
 }
 
-void PmergeMe::insertInVector(std::vector<Element *> &vec, size_t len,
-                              Element *toInsert)
+void PmergeMe::analyzeSortingByDeque()
 {
+    std::deque<int> sorted(values, values + size);
+    std::sort(sorted.begin(), sorted.end());
 
-    int start = 0, end = len - 1;
-    int mid;
-    value_t midValue;
+    std::deque<Element *> deq;
+    for (size_t i = 0; i < size; ++i)
+        deq.push_back(newElement(values[i], NULL, NULL));
+
+    clock_t before = std::clock();
+
+    sort(deq);
+
+    clock_t after = std::clock();
+
+    for (size_t i = 0; i < deq.size(); ++i)
+        if (deq.at(i)->max != sorted.at(i))
+            return;
+
+    double time = static_cast<double>(after - before) / CLOCKS_PER_SEC * 1000;
+
+    std::cout << "Time to process a range of " << size << " ";
+    std::cout << "elements with std::deque : " << time << "ms";
+    std::cout << std::endl;
+
+    std::for_each(deq.begin(), deq.end(), deleteElement);
+}
+
+void PmergeMe::insert(std::vector<Element *> &vec, size_t len,
+                      Element *toInsert)
+{
+    int start, end, mid, midValue;
+
+    start = 0;
+    end = len - 1;
 
     while (start <= end)
     {
         mid = (start + end) / 2;
-        midValue = (*std::next(vec.begin(), mid))->largest;
-        if (midValue > toInsert->largest)
+        midValue = vec.at(mid)->max;
+
+        if (midValue > toInsert->max)
             end = mid - 1;
-        else if (midValue < toInsert->largest)
+        else if (midValue < toInsert->max)
             start = mid + 1;
         else
         {
@@ -130,104 +164,21 @@ void PmergeMe::insertInVector(std::vector<Element *> &vec, size_t len,
     vec.insert(vec.begin() + start, toInsert);
 }
 
-void PmergeMe::sortByVector(std::vector<Element *> &vec) // in ascending order
+void PmergeMe::insert(std::deque<Element *> &deq, size_t len, Element *toInsert)
 {
-    // std::cout << std::endl << "sorting : ";
-    // for (size_t i = 0; i < vec.size(); ++i)
-    //     std::cout << vec.at(i)->largest << " ";
-    // std::cout << std::endl;
+    int start, end, mid, midValue;
 
-    if (vec.size() == 1)
-        return;
-
-    std::vector<Element *> paired;
-    for (size_t i = 1; i < vec.size(); i += 2)
-    {
-        Element *pair = new Element;
-        if (vec.at(i - 1)->largest > vec.at(i)->largest)
-        {
-            pair->largest = vec.at(i - 1)->largest;
-            pair->big = vec.at(i - 1);
-            pair->small = vec.at(i);
-        }
-        else
-        {
-            pair->largest = vec.at(i)->largest;
-            pair->big = vec.at(i);
-            pair->small = vec.at(i - 1);
-        }
-        paired.push_back(pair);
-    };
-
-    sortByVector(paired);
-
-    std::vector<Element *> sorted;
-
-    sorted.push_back(paired.at(0)->small);
-    for (size_t i = 0; i < paired.size(); ++i)
-        sorted.push_back(paired.at(i)->big);
-
-    for (size_t i = 1; i < paired.size(); ++i)
-        insertInVector(sorted, sorted.size(), paired.at(i)->small);
-
-    if (vec.size() % 2 == 1)
-        insertInVector(sorted, sorted.size(), vec.at(vec.size() - 1));
-
-    deleteVector(paired);
-    vec = sorted;
-    // n_half;
-}
-
-void PmergeMe::deleteVector(std::vector<Element *> &vec)
-{
-    for (size_t i = 0; i < vec.size(); ++i)
-        delete vec.at(i);
-}
-
-///////////////////////// deque
-
-void PmergeMe::analyzeSortByDeque()
-{
-    std::deque<value_t> sorted(values, values + size);
-    std::sort(sorted.begin(), sorted.end());
-
-    std::deque<Element *> deq;
-    for (size_t i = 0; i < size; ++i)
-        deq.push_back(newElement(values[i]));
-
-    clock_t before = std::clock();
-    sortByDeque(deq);
-    clock_t after = std::clock();
-    std::cout << before << " " << after << std::endl;
-
-    for (size_t i = 0; i < deq.size(); ++i)
-    {
-        if (deq.at(i)->largest != sorted.at(i))
-            return;
-    }
-
-    double time = static_cast<double>(after - before) / CLOCKS_PER_SEC * 1000;
-    std::cout << "Time to process a range of " << size << " ";
-    std::cout << "elements with std::deque : " << time << "ms";
-    std::cout << std::endl;
-    deleteDeque(deq);
-}
-
-void PmergeMe::insertInDeque(std::deque<Element *> &deq, size_t len,
-                             Element *toInsert)
-{
-
-    int start = 0, end = len - 1;
-    int mid;
-    value_t midValue;
+    start = 0;
+    end = len - 1;
 
     while (start <= end)
     {
         mid = (start + end) / 2;
-        midValue = (*std::next(deq.begin(), mid))->largest;
-        if (midValue > toInsert->largest)
+        midValue = deq.at(mid)->max;
+
+        if (midValue > toInsert->max)
             end = mid - 1;
-        else if (midValue < toInsert->largest)
+        else if (midValue < toInsert->max)
             start = mid + 1;
         else
         {
@@ -238,56 +189,78 @@ void PmergeMe::insertInDeque(std::deque<Element *> &deq, size_t len,
     deq.insert(deq.begin() + start, toInsert);
 }
 
-void PmergeMe::sortByDeque(std::deque<Element *> &deq) // in ascending order
+void PmergeMe::sort(std::vector<Element *> &vec)
 {
-    // std::cout << std::endl << "sorting : ";
-    // for (size_t i = 0; i < vec.size(); ++i)
-    //     std::cout << vec.at(i)->largest << " ";
-    // std::cout << std::endl;
-
-    if (deq.size() == 1)
+    // 0. FOR RECURSIVE
+    if (vec.size() == 1)
         return;
 
-    std::deque<Element *> paired;
-    for (size_t i = 1; i < deq.size(); i += 2)
+    // 1. MAKE PAIR
+    std::vector<Element *> paired;
+    Element *pair;
+    for (size_t i = 1; i < vec.size(); i += 2)
     {
-        Element *pair = new Element;
-        if (deq.at(i - 1)->largest > deq.at(i)->largest)
-        {
-            pair->largest = deq.at(i - 1)->largest;
-            pair->big = deq.at(i - 1);
-            pair->small = deq.at(i);
-        }
+        if (vec.at(i - 1)->max > vec.at(i)->max)
+            pair = newElement(vec.at(i - 1)->max, vec.at(i - 1), vec.at(i));
         else
-        {
-            pair->largest = deq.at(i)->largest;
-            pair->big = deq.at(i);
-            pair->small = deq.at(i - 1);
-        }
+            pair = newElement(vec.at(i)->max, vec.at(i), vec.at(i - 1));
         paired.push_back(pair);
     };
 
-    sortByDeque(paired);
+    // 2. SORT PAIRS RECURSIVELY
+    sort(paired);
 
-    std::deque<Element *> sorted;
-
-    sorted.push_back(paired.at(0)->small);
+    // 3. INIT MAIN CHAIN
+    std::vector<Element *> sort;
+    sort.push_back(paired.at(0)->small);
     for (size_t i = 0; i < paired.size(); ++i)
-        sorted.push_back(paired.at(i)->big);
+        sort.push_back(paired.at(i)->big);
 
+    // 4. SORT THE REST
     for (size_t i = 1; i < paired.size(); ++i)
-        insertInDeque(sorted, sorted.size(), paired.at(i)->small);
+        insert(sort, sort.size(), paired.at(i)->small);
+    if (vec.size() % 2 == 1)
+        insert(sort, sort.size(), vec.at(vec.size() - 1));
 
-    if (deq.size() % 2 == 1)
-        insertInDeque(sorted, sorted.size(), deq.at(deq.size() - 1));
-
-    deleteDeque(paired);
-    deq = sorted;
-    // n_half;
+    // 4. DELETE PAIR MEMORIES
+    std::for_each(paired.begin(), paired.end(), deleteElement);
+    vec = sort;
 }
 
-void PmergeMe::deleteDeque(std::deque<Element *> &deq)
+void PmergeMe::sort(std::deque<Element *> &deq) // in ascending order
 {
-    for (size_t i = 0; i < deq.size(); ++i)
-        delete deq.at(i);
+    // 0. FOR RECURSIVE
+    if (deq.size() == 1)
+        return;
+
+    // 1. MAKE PAIR
+    std::deque<Element *> paired;
+    Element *pair;
+    for (size_t i = 1; i < deq.size(); i += 2)
+    {
+        if (deq.at(i - 1)->max > deq.at(i)->max)
+            pair = newElement(deq.at(i - 1)->max, deq.at(i - 1), deq.at(i));
+        else
+            pair = newElement(deq.at(i)->max, deq.at(i), deq.at(i - 1));
+        paired.push_back(pair);
+    };
+
+    // 2. SORT PAIRS RECURSIVELY
+    sort(paired);
+
+    // 3. INIT MAIN CHAIN
+    std::deque<Element *> sort;
+    sort.push_back(paired.at(0)->small);
+    for (size_t i = 0; i < paired.size(); ++i)
+        sort.push_back(paired.at(i)->big);
+
+    // 4. SORT THE REST
+    for (size_t i = 1; i < paired.size(); ++i)
+        insert(sort, sort.size(), paired.at(i)->small);
+    if (deq.size() % 2 == 1)
+        insert(sort, sort.size(), deq.at(deq.size() - 1));
+
+    // 4. DELETE PAIR MEMORIES
+    std::for_each(paired.begin(), paired.end(), deleteElement);
+    deq = sort;
 }

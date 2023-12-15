@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:08:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/15 15:55:21 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:51:33 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@
 class PmergeMe
 {
 public:
-    typedef int value_t;
-    // struct Element;
-    // typedef std::vector<Element *>::iterator vecIter;
-
     struct Element
     {
-        value_t largest;
+        int max;
         Element *big;
         Element *small;
     };
+
+    static int stoi(const std::string &str);
+    static Element *newElement(int max, Element *big, Element *small);
+    static void deleteElement(Element *ptr);
 
     PmergeMe();
     PmergeMe(size_t size);
@@ -45,27 +45,17 @@ public:
     bool addValue(const std::string &str);
     void printValues() const;
     void printSortedValues() const;
-    Element *newElement(value_t);
 
-    /* sort using std::vector */
-    void analyzeSortByVector();
-    void sortByVector(std::vector<Element *> &vec);
-    void insertInVector(std::vector<Element *> &vec, size_t len,
-                        Element *toInsert);
-    void deleteVector(std::vector<Element *> &vec);
-
-    /* sort using std::deque */
-    void analyzeSortByDeque();
-    void sortByDeque(std::deque<Element *> &lst);
-    void insertInDeque(std::deque<Element *> &lst, size_t len,
-                       Element *toInsert);
-    void deleteDeque(std::deque<Element *> &lst);
+    void analyzeSortingByVector();
+    void analyzeSortingByDeque();
+    void sort(std::vector<Element *> &vec);
+    void sort(std::deque<Element *> &deq);
+    void insert(std::vector<Element *> &vec, size_t len, Element *toInsert);
+    void insert(std::deque<Element *> &deq, size_t len, Element *toInsert);
 
 private:
-    value_t *values;
+    int *values;
     size_t size;
-
-    static unsigned int stoui(const std::string &str);
 };
 
 #endif
