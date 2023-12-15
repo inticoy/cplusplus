@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:23:26 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/15 16:53:46 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/15 16:54:55 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -227,7 +227,7 @@ void PmergeMe::sort(std::vector<Element *> &vec)
     vec = sort;
 }
 
-void PmergeMe::sort(std::deque<Element *> &deq) // in ascending order
+void PmergeMe::sort(std::deque<Element *> &deq)
 {
     // 0. FOR RECURSIVE
     if (deq.size() == 1)
