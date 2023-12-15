@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:23:26 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/15 14:11:42 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/15 14:26:11 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,8 +101,9 @@ void PmergeMe::analyzeSortByVector()
 void PmergeMe::insertInVector(std::vector<Element *> &vec, size_t len,
                               Element *toInsert)
 {
-    size_t start = 0, end = len - 1;
-    size_t mid;
+
+    int start = 0, end = len - 1;
+    int mid;
     value_t midValue;
 
     while (start <= end)
@@ -153,24 +154,18 @@ void PmergeMe::sortByVector(std::vector<Element *> &vec) // in ascending order
 
     sortByVector(paired);
 
-    std::cout << "finish sorting paired" << std::endl;
-
     std::vector<Element *> sorted;
 
-    std::cout << "<1>";
     sorted.push_back(paired.at(0)->small);
     for (size_t i = 0; i < paired.size(); ++i)
         sorted.push_back(paired.at(i)->big);
 
-    std::cout << "<2>";
     for (size_t i = 1; i < paired.size(); ++i)
         insertInVector(sorted, sorted.size(), paired.at(i)->small);
 
-    std::cout << "<3>";
     if (vec.size() % 2 == 1)
         insertInVector(sorted, sorted.size(), vec.at(vec.size() - 1));
 
-    std::cout << "<4>";
     deleteVector(paired);
     vec = sorted;
     // n_half;
