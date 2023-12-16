@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:08:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/15 16:51:33 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/15 21:42:32 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 class PmergeMe
 {
 public:
+    static const int jacobsthalNumbers[];
+
     struct Element
     {
         int max;

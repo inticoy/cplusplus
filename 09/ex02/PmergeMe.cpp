@@ -6,11 +6,18 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:23:26 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/15 16:54:55 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/16 13:45:32 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+
+const int PmergeMe::jacobsthalNumbers[] = {
+    1,         3,         5,         11,       21,       43,       85,
+    171,       341,       683,       1365,     2731,     5461,     10923,
+    21845,     43691,     87381,     174763,   349525,   699051,   1398101,
+    2796203,   5592405,   11184811,  22369621, 44739243, 89478485, 178956971,
+    357913941, 715827883, 1431655765}; //, 2863311531, 5726623061};
 
 PmergeMe::PmergeMe() : values(NULL), size(0) {}
 PmergeMe::PmergeMe(size_t size) : values(new int[size]), size(size) {}
@@ -94,6 +101,9 @@ void PmergeMe::analyzeSortingByVector()
     clock_t before = std::clock();
 
     sort(vec);
+    // for (size_t i = 0; i < vec.size(); i++)
+    //     std::cout << vec.at(i)->max << " ";
+    // std::cout << std::endl;
 
     clock_t after = std::clock();
 
@@ -217,12 +227,36 @@ void PmergeMe::sort(std::vector<Element *> &vec)
         sort.push_back(paired.at(i)->big);
 
     // 4. SORT THE REST
-    for (size_t i = 1; i < paired.size(); ++i)
-        insert(sort, sort.size(), paired.at(i)->small);
+
+    // 4.1 FIND MATCHING JACOBSTHAL NUMBER
+    size_t jacobIdx = 0;
+    int restNumbers = paired.size() - 1 + vec.size() % 2;
+    for (; jacobIdx < 33; ++jacobIdx)
+        if (restNumbers <= jacobsthalNumbers[jacobIdx] - 1)
+            break;
+
+    // 4.2 INSERT FROM JACOBSTHAL NUMBERS
+    int first, last;
+    for (size_t idx = 1; idx < jacobIdx; ++idx)
+    {
+        // if (idx == 1 && paired.size() == 2)
+        last = jacobsthalNumbers[idx - 1];
+        first = jacobsthalNumbers[idx] - 1;
+        for (int i = first; i >= last; i--)
+            insert(sort, sort.size(), paired.at(i)->small);
+    }
+
+    // 4.3 INSERT LAST ONE IF VEC IS ODD
     if (vec.size() % 2 == 1)
         insert(sort, sort.size(), vec.at(vec.size() - 1));
 
-    // 4. DELETE PAIR MEMORIES
+    // 4.4. INSERT LAST SECTION OF PAIRED
+    first = paired.size() - 1;
+    last = jacobsthalNumbers[jacobIdx - 1];
+    for (int i = first; i >= last; i--)
+        insert(sort, sort.size(), paired.at(i)->small);
+
+    // 5. DELETE PAIR MEMORIES
     std::for_each(paired.begin(), paired.end(), deleteElement);
     vec = sort;
 }
