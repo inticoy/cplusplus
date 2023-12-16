@@ -6,31 +6,32 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:48:26 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/13 20:38:22 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/16 19:54:38 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef RPN_HPP
 #define RPN_HPP
 
+#include <algorithm>
 #include <exception>
+#include <list>
 #include <sstream>
 #include <stack>
 #include <string>
-#include <vector>
 
 class RPN
 {
 public:
     typedef enum tokenType
     {
-        UNEXPECTED = 0x000,
-        NUM = 0x011,
-        OPERATOR = 0x100,
-        ADD = 0x102,
-        SUB = 0x104,
-        MUL = 0x106,
-        DIV = 0x108,
+        UNEXPECTED = 0x00,
+        NUM = 0x01,
+        OPERATOR = 0x10,
+        ADD = 0x12,
+        SUB = 0x14,
+        MUL = 0x16,
+        DIV = 0x18,
     } tokenType_t;
 
     class Token
@@ -63,15 +64,35 @@ public:
         int number;
     };
 
+    class EmptyStackException : public std::exception
+    {
+    public:
+        EmptyStackException();
+        virtual ~EmptyStackException() throw();
+        const char *what() const throw();
+
+    private:
+        std::string msg;
+    };
+
+    class TooManyNumbersException : public std::exception
+    {
+    public:
+        TooManyNumbersException();
+        virtual ~TooManyNumbersException() throw();
+        const char *what() const throw();
+
+    private:
+        std::string msg;
+    };
+
     RPN();
     RPN(const RPN &other);
-    ~RPN();
+    virtual ~RPN();
     RPN &operator=(const RPN &other);
 
     static int calculate(const std::string &expr) throw(std::exception);
-
-private:
-    static std::vector<std::string> split(const std::string &str);
+    static std::list<std::string> split(const std::string &str);
 };
 
 #endif

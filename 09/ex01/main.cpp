@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:54:47 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/13 20:36:58 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/16 20:01:27 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,19 @@ int main(int argc, char *argv[])
 {
     if (argc != 2)
     {
-        std::cerr << "usage: RPN [reverse polish notation]" << '\n';
+        std::cerr << "usage: RPN \"reverse polish notation\"" << '\n';
         return 1;
     }
     else
     {
-        std::string input(argv[1]);
         try
         {
+            std::string input(argv[1]);
             std::cout << RPN::calculate(input) << std::endl;
         }
         catch (std::exception &e)
         {
             std::cerr << "Error: " << e.what() << '\n';
-        }
-        catch (...)
-        {
-            std::cerr << "Error: 1" << '\n';
         }
     }
     return 0;

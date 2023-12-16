@@ -6,7 +6,7 @@
 #    By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/16 16:53:40 by gyoon             #+#    #+#              #
-#    Updated: 2023/12/13 20:37:54 by gyoon            ###   ########.fr        #
+#    Updated: 2023/12/16 16:16:05 by gyoon            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,8 +30,7 @@ RM			= rm -rf
 
 SRCS		= 	main.cpp \
 				RPN.cpp \
-				Token.cpp \
-				TokenException.cpp
+				Token.cpp
 OBJS		= 	${SRCS:.cpp=.o}
 INC			= 	./
 
