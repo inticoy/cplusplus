@@ -6,21 +6,21 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:08:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/15 21:42:32 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/16 14:53:34 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
-#include <algorithm> // std::sort
-#include <ctime>     // std::clock
-#include <deque>     // std::deque
-#include <iostream>  // std::cout
-#include <sstream>   // std::stringstream
-#include <string>    // std::string
-#include <vector>    // std::vector
-// #include <iterator>  // std::distance
+#include <algorithm>
+#include <ctime>
+#include <deque>
+#include <exception>
+#include <iostream>
+#include <sstream>
+#include <string>
+#include <vector>
 
 class PmergeMe
 {
@@ -34,7 +34,18 @@ public:
         Element *small;
     };
 
-    static int stoi(const std::string &str);
+    class UnexpectedValueException : public std::exception
+    {
+    public:
+        UnexpectedValueException();
+        virtual ~UnexpectedValueException() throw();
+        const char *what() const throw();
+
+    private:
+        std::string msg;
+    };
+
+    static int stoi(const std::string &str) throw(UnexpectedValueException);
     static Element *newElement(int max, Element *big, Element *small);
     static void deleteElement(Element *ptr);
 
@@ -44,7 +55,7 @@ public:
     virtual ~PmergeMe();
     PmergeMe &operator=(const PmergeMe &other);
 
-    bool addValue(const std::string &str);
+    void addValue(const std::string &str) throw(UnexpectedValueException);
     void printValues() const;
     void printSortedValues() const;
 
