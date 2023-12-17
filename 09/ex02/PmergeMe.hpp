@@ -6,14 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:08:40 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/16 14:53:34 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 13:22:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PMERGEME_HPP
 #define PMERGEME_HPP
 
-#include <algorithm>
+#include <algorithm> // std::for_each
 #include <ctime>
 #include <deque>
 #include <exception>
@@ -25,8 +25,6 @@
 class PmergeMe
 {
 public:
-    static const int jacobsthalNumbers[];
-
     struct Element
     {
         int max;
@@ -59,16 +57,20 @@ public:
     void printValues() const;
     void printSortedValues() const;
 
-    void analyzeSortingByVector();
-    void analyzeSortingByDeque();
-    void sort(std::vector<Element *> &vec);
-    void sort(std::deque<Element *> &deq);
-    void insert(std::vector<Element *> &vec, size_t len, Element *toInsert);
-    void insert(std::deque<Element *> &deq, size_t len, Element *toInsert);
+    void analyzeSortingByVector() const;
+    void analyzeSortingByDeque() const;
+    void sort(std::vector<Element *> &vec) const;
+    void sort(std::deque<Element *> &deq) const;
+    void insert(std::vector<Element *> &vec, size_t len,
+                Element *toInsert) const;
+    void insert(std::deque<Element *> &deq, size_t len,
+                Element *toInsert) const;
 
 private:
     int *values;
     size_t size;
+
+    static const int jacobsthalNumbers[];
 };
 
 #endif

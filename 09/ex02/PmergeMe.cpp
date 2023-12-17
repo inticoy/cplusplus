@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/14 17:23:26 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/16 14:55:23 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 13:19:44 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ PmergeMe &PmergeMe::operator=(const PmergeMe &other)
 void PmergeMe::addValue(const std::string &str) throw(UnexpectedValueException)
 {
     int value = stoi(str);
-    if (value < 0)
+    if (value <= 0)
         throw UnexpectedValueException();
     for (size_t i = 0; i < size; ++i)
     {
@@ -65,35 +65,22 @@ void PmergeMe::addValue(const std::string &str) throw(UnexpectedValueException)
 
 void PmergeMe::printValues() const
 {
-    if (size <= 5)
-    {
-        for (size_t i = 0; i < size; ++i)
-            std::cout << values[i] << " ";
-    }
-    else
-    {
-        for (size_t i = 0; i < 4 && i < size; ++i)
-            std::cout << values[i] << " ";
-        std::cout << "[...]";
-    }
+    for (size_t i = 0; i < size; ++i)
+        std::cout << values[i] << " ";
 }
 
 void PmergeMe::printSortedValues() const
 {
-    std::vector<int> vec(values, values + size);
-    std::sort(vec.begin(), vec.end());
+    std::vector<Element *> vec;
+    for (size_t i = 0; i < size; ++i)
+        vec.push_back(newElement(values[i], NULL, NULL));
 
-    if (size <= 5)
-    {
-        for (size_t i = 0; i < size; ++i)
-            std::cout << vec.at(i) << " ";
-    }
-    else
-    {
-        for (size_t i = 0; i < 4 && i < size; ++i)
-            std::cout << vec.at(i) << " ";
-        std::cout << "[...]";
-    }
+    sort(vec);
+
+    for (size_t i = 0; i < size; ++i)
+        std::cout << vec.at(i)->max << " ";
+
+    std::for_each(vec.begin(), vec.end(), deleteElement);
 }
 
 int PmergeMe::stoi(const std::string &str) throw(UnexpectedValueException)
@@ -117,11 +104,8 @@ PmergeMe::Element *PmergeMe::newElement(int max, Element *big, Element *small)
 
 void PmergeMe::deleteElement(Element *ptr) { delete ptr; }
 
-void PmergeMe::analyzeSortingByVector()
+void PmergeMe::analyzeSortingByVector() const
 {
-    std::vector<int> sorted(values, values + size);
-    std::sort(sorted.begin(), sorted.end());
-
     std::vector<Element *> vec;
     for (size_t i = 0; i < size; ++i)
         vec.push_back(newElement(values[i], NULL, NULL));
@@ -132,9 +116,14 @@ void PmergeMe::analyzeSortingByVector()
 
     clock_t after = std::clock();
 
-    for (size_t i = 0; i < vec.size(); ++i)
-        if (vec.at(i)->max != sorted.at(i))
+    for (size_t i = 0; i < vec.size() - 1; ++i)
+    {
+        if (vec.at(i)->max > vec.at(i + 1)->max)
+        {
+            std::for_each(vec.begin(), vec.end(), deleteElement);
             return;
+        }
+    }
 
     double time = static_cast<double>(after - before) / CLOCKS_PER_SEC * 1000;
 
@@ -145,11 +134,8 @@ void PmergeMe::analyzeSortingByVector()
     std::for_each(vec.begin(), vec.end(), deleteElement);
 }
 
-void PmergeMe::analyzeSortingByDeque()
+void PmergeMe::analyzeSortingByDeque() const
 {
-    std::deque<int> sorted(values, values + size);
-    std::sort(sorted.begin(), sorted.end());
-
     std::deque<Element *> deq;
     for (size_t i = 0; i < size; ++i)
         deq.push_back(newElement(values[i], NULL, NULL));
@@ -160,9 +146,14 @@ void PmergeMe::analyzeSortingByDeque()
 
     clock_t after = std::clock();
 
-    for (size_t i = 0; i < deq.size(); ++i)
-        if (deq.at(i)->max != sorted.at(i))
+    for (size_t i = 0; i < deq.size() - 1; ++i)
+    {
+        if (deq.at(i)->max > deq.at(i + 1)->max)
+        {
+            std::for_each(deq.begin(), deq.end(), deleteElement);
             return;
+        }
+    }
 
     double time = static_cast<double>(after - before) / CLOCKS_PER_SEC * 1000;
 
@@ -174,7 +165,7 @@ void PmergeMe::analyzeSortingByDeque()
 }
 
 void PmergeMe::insert(std::vector<Element *> &vec, size_t len,
-                      Element *toInsert)
+                      Element *toInsert) const
 {
     int start, end, mid, midValue;
 
@@ -199,7 +190,8 @@ void PmergeMe::insert(std::vector<Element *> &vec, size_t len,
     vec.insert(vec.begin() + start, toInsert);
 }
 
-void PmergeMe::insert(std::deque<Element *> &deq, size_t len, Element *toInsert)
+void PmergeMe::insert(std::deque<Element *> &deq, size_t len,
+                      Element *toInsert) const
 {
     int start, end, mid, midValue;
 
@@ -224,7 +216,7 @@ void PmergeMe::insert(std::deque<Element *> &deq, size_t len, Element *toInsert)
     deq.insert(deq.begin() + start, toInsert);
 }
 
-void PmergeMe::sort(std::vector<Element *> &vec)
+void PmergeMe::sort(std::vector<Element *> &vec) const
 {
     // 0. FOR RECURSIVE
     if (vec.size() == 1)
@@ -285,7 +277,7 @@ void PmergeMe::sort(std::vector<Element *> &vec)
     vec = sort;
 }
 
-void PmergeMe::sort(std::deque<Element *> &deq)
+void PmergeMe::sort(std::deque<Element *> &deq) const
 {
     // 0. FOR RECURSIVE
     if (deq.size() == 1)

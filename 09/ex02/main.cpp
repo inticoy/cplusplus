@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:54:47 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/16 15:01:57 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 13:14:04 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <iostream>
 
 // void leaks() { system("leaks PmergeMe"); }
-// atexit(leaks);
+//     atexit(leaks);
 
 int main(int argc, char *argv[])
 {
