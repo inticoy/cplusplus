@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 21:09:09 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/13 14:42:16 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 11:02:41 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ const char *BitcoinExchange::FileNotFoundException::what() const throw()
 }
 
 BitcoinExchange::BadDatabaseException::BadDatabaseException()
-    : msg("file not found")
+    : msg("bad database")
 {
 }
 BitcoinExchange::BadDatabaseException::~BadDatabaseException() throw() {}
@@ -33,7 +33,7 @@ const char *BitcoinExchange::BadDatabaseException::what() const throw()
 }
 
 BitcoinExchange::FloatWrongFormatException::FloatWrongFormatException()
-    : msg("file not found")
+    : msg("float wrong format")
 {
 }
 BitcoinExchange::FloatWrongFormatException::~FloatWrongFormatException() throw()

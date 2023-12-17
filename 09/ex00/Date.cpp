@@ -6,14 +6,14 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:04:54 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/13 00:28:06 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 10:57:09 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Date.hpp"
 
-const unsigned int Date::daysInMonth[12] = {31, 28, 31, 30, 31, 30,
-                                            31, 31, 30, 31, 30, 31};
+const unsigned int Date::daysInMonth[] = {31, 28, 31, 30, 31, 30,
+                                          31, 31, 30, 31, 30, 31};
 
 Date::Date() : year(1900), month(1), day(1) {}
 
@@ -70,6 +70,16 @@ bool Date::operator<(const Date &rhs) const
     return false;
 }
 
+unsigned int Date::stoui(const std::string &s) throw(WrongFormatException)
+{
+    std::stringstream ss(s);
+    unsigned int ui;
+    ss >> ui;
+    if (ss.fail() || ss.bad() || !ss.eof())
+        throw WrongFormatException();
+    return ui;
+}
+
 bool Date::isLeapYear(unsigned int year)
 {
     if (year % 400 == 0)
@@ -91,14 +101,4 @@ bool Date::isValidDate(unsigned int year, unsigned int month, unsigned day)
     else if (day > daysInMonth[month - 1])
         return false;
     return true;
-}
-
-unsigned int Date::stoui(const std::string &s) throw(WrongFormatException)
-{
-    std::stringstream ss(s);
-    unsigned int ui;
-    ss >> ui;
-    // if (ss.fail() || ss.bad() || !ss.eof())
-    //     throw WrongFormatException();
-    return ui;
 }

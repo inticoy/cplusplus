@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 14:54:36 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/13 14:44:45 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 13:04:34 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@
 #include <iostream>
 #include <map>
 #include <string>
-#include <vector>
 
 class BitcoinExchange
 {
@@ -102,6 +101,8 @@ public:
     ~BitcoinExchange();
     BitcoinExchange &operator=(const BitcoinExchange &other);
 
+    static float stof(const std::string &s);
+
     void setDatabase() throw(FileNotFoundException, BadDatabaseException);
     void setDatabase(const std::string &filename) throw(FileNotFoundException,
                                                         BadDatabaseException);
@@ -110,9 +111,6 @@ public:
 
 private:
     std::map<Date, float> database;
-
-    float stof(const std::string &s);
-    std::vector<std::string> split(const std::string &str, char delimiter);
 };
 
 #endif

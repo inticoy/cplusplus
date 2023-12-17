@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:18:59 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/12 22:40:33 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 10:57:01 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ public:
     Date &operator=(const Date &other);
     bool operator<(const Date &rhs) const;
 
+    static unsigned int stoui(const std::string &s) throw(WrongFormatException);
     static bool isLeapYear(unsigned int year);
     static bool isValidDate(unsigned int year, unsigned int month,
                             unsigned day);
@@ -48,9 +49,7 @@ private:
     unsigned int month;
     unsigned int day;
 
-    static const unsigned int daysInMonth[12];
-
-    unsigned int stoui(const std::string &s) throw(WrongFormatException);
+    static const unsigned int daysInMonth[];
 };
 
 #endif
