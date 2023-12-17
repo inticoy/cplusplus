@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/12 15:04:54 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/17 10:57:09 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 21:27:21 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ Date::Date(const Date &other)
 {
 }
 
-#include <iostream>
 Date::Date(const std::string &date) throw(WrongFormatException)
 {
     if (std::count(date.begin(), date.end(), '-') != 2)
