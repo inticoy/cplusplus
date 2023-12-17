@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:50:18 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/16 19:59:16 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 10:49:12 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,16 @@ int RPN::calculate(const std::string &expr) throw(std::exception)
     while (it != splitList.end())
         tokenList.push_back(Token(*it++));
 
+    Token curr;
+    int left, right;
     std::stack<int> memory;
     std::list<Token>::iterator iter = tokenList.begin();
     while (iter != tokenList.end())
     {
-        Token curr = *iter;
-        int left, right;
-        if (curr.getType() & RPN::NUM)
+        curr = *iter;
+        if (curr.getType() & NUM)
             memory.push(curr.getNumber());
-        else if (curr.getType() & RPN::OPERATOR)
+        else if (curr.getType() & OPERATOR)
         {
             if (memory.empty())
                 throw EmptyStackException();
@@ -67,19 +68,20 @@ int RPN::calculate(const std::string &expr) throw(std::exception)
             left = memory.top();
             memory.pop();
 
-            if (curr.getType() == RPN::ADD)
+            if (curr.getType() == ADD)
                 memory.push(left + right);
-            else if (curr.getType() == RPN::SUB)
+            else if (curr.getType() == SUB)
                 memory.push(left - right);
-            else if (curr.getType() == RPN::MUL)
+            else if (curr.getType() == MUL)
                 memory.push(left * right);
-            else if (curr.getType() == RPN::DIV)
+            else if (curr.getType() == DIV)
                 memory.push(left / right);
         }
         iter++;
     }
     if (memory.size() != 1)
         throw TooManyNumbersException();
+
     return memory.top();
 }
 

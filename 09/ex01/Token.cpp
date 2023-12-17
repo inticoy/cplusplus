@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 16:48:39 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/16 19:58:25 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 10:46:04 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,21 +22,21 @@ const char *RPN::Token::UnexpectedTokenException::what() const throw()
     return msg.c_str();
 }
 
-RPN::Token::Token() : type(RPN::UNEXPECTED), number(0) {}
+RPN::Token::Token() : type(UNEXPECTED), number(0) {}
 RPN::Token::Token(const std::string &str) throw(UnexpectedTokenException)
 {
     number = 0;
     if (str == "+")
-        type = RPN::ADD;
+        type = ADD;
     else if (str == "-")
-        type = RPN::SUB;
+        type = SUB;
     else if (str == "*")
-        type = RPN::MUL;
+        type = MUL;
     else if (str == "/")
-        type = RPN::DIV;
+        type = DIV;
     else
     {
-        type = RPN::NUM;
+        type = NUM;
         number = stoi(str);
         if (number < 0 || number > 9)
             throw UnexpectedTokenException();
