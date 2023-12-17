@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:50:18 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/17 13:36:30 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 13:40:35 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,8 @@ RPN &RPN::operator=(const RPN &other)
 
 int RPN::calculate(const std::string &expr) throw(std::exception)
 {
+    if (expr.empty())
+        throw std::logic_error("missing expression");
     std::list<std::string> splitList = split(expr);
     std::list<std::string>::iterator it = splitList.begin();
 
