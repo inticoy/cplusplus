@@ -6,7 +6,7 @@
 /*   By: gyoon <gyoon@student.42seoul.kr>           +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/13 14:50:18 by gyoon             #+#    #+#             */
-/*   Updated: 2023/12/17 10:49:12 by gyoon            ###   ########.fr       */
+/*   Updated: 2023/12/17 13:36:30 by gyoon            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,11 @@ int RPN::calculate(const std::string &expr) throw(std::exception)
             else if (curr.getType() == MUL)
                 memory.push(left * right);
             else if (curr.getType() == DIV)
+            {
+                if (right == 0)
+                    throw std::overflow_error("divide by zero");
                 memory.push(left / right);
+            }
         }
         iter++;
     }
